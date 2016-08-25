@@ -1,0 +1,101 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>在斗鱼中配置分享</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="index.share">Home</a>
+        </li>
+        <li class="active">
+            <strong>Douyu</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[0]"></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div global-alert></div>
+            <p>配置分享数据。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">// ########### 要分享出去的数据 ########### //
+var douyu_shareObj = {
+    "from": 'douyu',
+    "name": __share_title,
+    "proname": __share_title,
+    "content": __share_desc,
+    "url": __share_img,
+    "srcid": __share_img,
+    "link": __share_url,
+    "platform": 0 //分享的平台  {0：所有，1：微信，2：朋友圈，4：微博，5：QQ}
+};
+// ########### 调用APP功能分享(初始化页面时候主动发送分享的数据给APP) ########### //
+// IOS
+window.getShareData = function() {
+    if (window.WebViewJavascriptBridge) {
+        WebViewJavascriptBridge.send(JSON.stringify(douyu_shareObj));
+    } else {
+        document.addEventListener('WebViewJavascriptBridgeReady', function() {
+            WebViewJavascriptBridge.send(JSON.stringify(douyu_shareObj));
+        }, false);
+    }
+    return 1;
+};
+
+// Android
+if (_browser.isDyAndroid) {
+    window.Command.setShareContent(JSON.stringify(douyu_shareObj));
+}</ui-codemirror>
+            <p class="m-t-sm">在分享按钮的Click/Tap事件中，触发内置的分享浮层。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">// IOS
+if (_browser.isDyIOS) {
+    if (window.WebViewJavascriptBridge) {
+        WebViewJavascriptBridge.send(JSON.stringify(douyu_shareObj));
+    } else {
+        document.addEventListener('WebViewJavascriptBridgeReady', function() {
+            WebViewJavascriptBridge.send(JSON.stringify(douyu_shareObj));
+        }, false);
+    }
+    return;
+}
+
+// Android
+if (_browser.isDyAndroid) {
+    window.Command.share(JSON.stringify(douyu_shareObj));
+    return;
+}</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var _browser = {
+    isDyAndroid: window.navigator.userAgent.match(/Douyu_Android/i) == 'douyu_android', //在斗鱼Android客户端打开
+    isDyIOS: window.navigator.userAgent.match(/Douyu_IOS/i) == 'douyu_ios' //在斗鱼IOS客户端打开
+};</ui-codemirror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

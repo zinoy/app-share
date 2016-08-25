@@ -1,0 +1,67 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>在手机QQ中配置分享</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="index.share">Home</a>
+        </li>
+        <li class="active">
+            <strong>QQ</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[2]"></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div global-alert></div>
+            <p>定义微信分享配置的回调方法。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
+    config.swapTitleInWX = true; // 是否标题内容互换（仅朋友圈，因朋友圈内只显示标题）
+    setShareInfo({
+        title: __share_title, // 分享标题
+        summary: __share_desc, // 分享内容
+        pic: __share_img, // 分享图片
+        url: __share_url, // 分享链接
+        // 微信权限验证配置信息，若不在微信传播，可忽略
+        WXconfig: config
+    });
+}</ui-codemirror>
+            <p class="m-t-sm">通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里。下面代码以别克为例，不同的客户需使用各自的签名接口URL。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">$.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
+    signurl: window.location.href.replace(/#.*$/ig, "")
+}, 'json').done(wxConfig);</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isQQ = window.navigator.userAgent.match(/QQ\/([\d\.]+)/);</ui-codemirror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

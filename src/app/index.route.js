@@ -6,16 +6,16 @@
     .config(routerConfig);
 
   /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider) {
+  function routerConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
 
       .state('index', {
         abstract: true,
-        url: "/index",
+        url: "/",
         templateUrl: "app/components/common/content.html"
       })
       .state('index.share', {
-        url: "/app-share",
+        url: "",
         templateUrl: "app/share/share.html",
         data: { pageTitle: 'APP分享代码' }
       })
@@ -24,13 +24,20 @@
         url: "/share",
         templateUrl: "app/components/common/content.html"
       })
+      .state('share.global', {
+        url: "/global",
+        templateUrl: "app/share/global.html",
+        data: { pageTitle: '全局变量' }
+      })
       .state('share.current', {
         url: "/current",
-        templateUrl: "app/share/wechat.html",
+        templateUrl: "app/share/kuwo.html",
         data: { pageTitle: 'APP分享代码' }
       });
 
-    $urlRouterProvider.otherwise('/index/app-share');
+    $urlRouterProvider.otherwise('/');
+
+    $locationProvider.html5Mode(true);
   }
 
 })();

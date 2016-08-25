@@ -1,0 +1,32 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>在豆瓣中配置分享</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="index.share">Home</a>
+        </li>
+        <li class="active">
+            <strong>Douban</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div no-dynamic></div>
+            <p>通过在<code>&lt;head&gt;</code>标签中的<code>meta</code>元素来定义分享内容，示例如下：</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[3]"></ui-codemirror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

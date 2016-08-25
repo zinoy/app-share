@@ -1,0 +1,71 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>在陌陌中配置分享</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="index.share">Home</a>
+        </li>
+        <li class="active">
+            <strong>Momo</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[1]"></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div global-alert></div>
+            <p>该配置代码可置于HTML文件内也可以放在ready事件中执行。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">// 分享设置: 图片， 链接， 文字
+// 默认分享地址不包括留言板
+var shareConfig = {
+    title: __share_title,
+    pic: __share_img,
+    url: __share_url,
+    text: __share_desc,
+    callback:''
+};
+setTimeout( function (){
+    $('.pageall , body , html').height($(window).height());
+    mm.init( { 
+        enable:{share:1},
+        share: shareConfig, 
+        ui_btn: {title:'', dropdown:0, buttons: [ {text:'分享', action:1, param:shareConfig}]}
+    });
+}, 1000);</ui-codemirror>
+
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">// 可用来检查是否在陌陌中
+var is_momo_webview = /momoWebView/.test(window.navigator.userAgent);</ui-codemirror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
