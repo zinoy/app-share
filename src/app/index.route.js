@@ -38,6 +38,9 @@
     $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
+
+    window.$stateProviderRef = $stateProvider;
+    window.$urlRouterProviderRef = $urlRouterProvider;
   }
 
 })();

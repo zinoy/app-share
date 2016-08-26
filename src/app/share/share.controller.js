@@ -4,16 +4,15 @@ angular.module('inspinia')
 .directive('globalAlert', function globalAlert() {
     return {
         restrict: 'A',
-        template: '<p class="alert alert-warning"><strong>注意！</strong>使用下面的代码前请确认已经定义了所需的<a ui-sref="share.global">全局变量</a>。</p>'
+        template: '<p class="alert alert-warning"><strong>注意！</strong>使用下面的代码前请确认已经定义了所需的<a class="alert-link" ui-sref="share.global">全局变量</a>。</p>'
     };
 })
-.directive('noDynamic', function globalAlert() {
+.directive('staticOnly', function globalAlert() {
     return {
         restrict: 'A',
         template: '<p class="alert alert-info">此配置方式无法动态修改分享内容。</p>'
     };
 })
-
 .controller('ShareController', [function() {
     var vm = this;
     vm.jsOptions = {
