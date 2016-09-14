@@ -1,0 +1,101 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>在UC浏览器中配置分享</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="index.share">Home</a>
+        </li>
+        <li class="active">
+            <strong>Uc</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>引用JS</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <i class="fa fa-warning"></i> 注意
+              </div>
+              <div class="panel-body">
+                <p>目前UC提供的文档及DEMO均无法使用，请参照本页面示例进行开发。</p>
+              </div>
+            </div>
+            <p>可将以下代码保存为独立的js文件（<code>jssdk_cn-1.8.6.js</code>）然后在HTML中引用。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//created:  2016-09-03 11:58:31   ./release/jssdk_cn-1.8.6.js
+(function (context) {
+var require,define;
+(function(){function f(b){var d=b.factory;b.exports={};delete b.factory;d(function(g){var c=g;"."===g.charAt(0)&&(c=b.id.slice(0,b.id.lastIndexOf("."))+"."+g.slice(2));return require(c)},b.exports,b);return b.exports}var d={},l=[],k={};require=function(b){if(!d[b])throw"module "+b+" not found";if(b in k)throw"Cycle in require graph: "+(l.slice(k[b]).join("->")+"->"+b);if(d[b].factory)try{return k[b]=l.length,l.push(b),f(d[b])}finally{delete k[b],l.pop()}return d[b].exports};define=function(b,h){if(d[b])throw"module "+
+b+" already defined";d[b]={id:b,factory:h}};define.remove=function(b){delete d[b]};define.moduleMap=d})();define("util",function(f,d,l){function k(c){var a,e=c,m;if(c&&((m=c instanceof Array)||c instanceof Object))for(a in e=m?[]:{},c)c.hasOwnProperty(a)&&(e[a]=k(c[a]));return e}var b=f("constant"),h=Object.prototype.toString,g={getTop:function(c){var a=c.offsetTop;null!=c.offsetParent&&(a+=g.getTop(c.offsetParent));return a},getLeft:function(c){var a=c.offsetLeft;null!=c.offsetParent&&(a+=g.getLeft(c.offsetParent));return a},getCss3offsetTop:function(c){var a=getComputedStyle(c,null).webkitTransform,
+a="none"==a?0:parseInt(a.split(",")[5].replace(")",""));"BODY"!=c.parentNode.tagName&&(a+=g.getCss3offsetTop(c.parentNode));return a},getCss3offsetLeft:function(c){var a=getComputedStyle(c,null).webkitTransform,a="none"==a?0:parseInt(a.split(",")[4]);"BODY"!=c.parentNode.tagName&&(a+=g.getCss3offsetLeft(c.parentNode));return a},getNodePosById:function(c){return(c=document.getElementById(c))?[g.getLeft(c)+g.getCss3offsetLeft(c),g.getTop(c)+g.getCss3offsetTop(c),c.offsetWidth,c.offsetHeight]:""}};d.getPlatform=
+function(){return window.UCShellJava?b.platform.ANDROID:window.__BrowserJSBridgeObj?b.platform.IPHONE:b.platform.OTHERS};d.isString=function(c){return"[object String]"===h.call(c)};d.isFunction=function(c){return"[object Function]"===h.call(c)};d.isArray=function(c){return"[object Array]"===h.call(c)};d.isEmptyObj=function(c){for(var a in c)if(c.hasOwnProperty(a))return!1;return!0};d.clone=k;d.getNodePosById=g.getNodePosById;d.debugLog=function(c){if(ucapi&&ucapi.debug){console.log(c);var a=navigator.userAgent;
+(a.match(/(Android)\s+([\d.]+)/)||a.match(/(iPhone\sOS)\s([\d_]+)/))&&alert(c)}};d.log=function(c,a){encodeURIComponent(location.href)}});define("constant",function(f,d,l){d.platform={ALL:"all",ANDROID:"android",IPHONE:"iphone",OTHERS:"others"};d.debug=!1;d.callbackStatus={OK:0,ACCESS_DENY:1,INVALID_METHOD:2,INVALID_PARAM:3,UNKNOWN_ERROR:4};d.callbackStatusMessage=["OK","ACCESS_DENY","INVALID_METHOD","INVALID_PARAMS","UNKNOWN_ERROR"]});define("bridge",function(f,d,l){function k(e){e=e.replace("+","%20");return decodeURIComponent(e)}function b(e){if(ucapi.invoke)return!0;e&&e.fail&&e.fail.call(this,{errCode:c.callbackStatus.INVALID_METHOD,errMsg:"ucapi.invoke not exsit, should load in UCBrowser !"})}function h(e,a,c){e&&e.call(this,{errCode:a,errMsg:c})}var g=f("util"),c=f("constant"),a={};d.exec=function(e,a,d){g.log(e,"invoke");if(b(a)){var f=g.getPlatform();if(d!==c.platform.ALL&&f!==d)a&&a.fail&&h(a.fail,c.callbackStatus.INVALID_METHOD,
+"this api not supported this platform");else{if(a&&a.fail){var k=a.fail;a.fail=function(a){g.log(e,"fail");a.errMsg=c.callbackStatusMessage[a.errCode];k.call(this,a)}}ucapi.invoke(e,a)}}};d.subscribeEvent=function(a,c,g){if(b(c)&&a&&c.success)ucapi.on(a,c.success)};d.onEvent=function(e,d,b){g.log(e,"invoke");d&&(g.getPlatform()!=c.platform.ANDROID||"biz.onShare"!=e||!d.screenshotHtmlNodeId||""==d.screenshotHtmlNodeId||d.screenshotRect&&""!=d.screenshotRect||(b=g.getNodePosById(d.screenshotHtmlNodeId),
+""!=b&&(b=b.join(",")),d.screenshotRect=b),a[e]=d)};d.triggerEvent=function(e){if(e&&e.method)if(a[e.method]){var d=a[e.method];if(g.getPlatform()==c.platform.ANDROID){if(e.channel&&"invokeJs"==e.channel){var b="";d.trigger&&(b=d.trigger(e.data));void 0==b?(e=g.clone(d),e.success&&delete e.success,e.fail&&delete e.fail,e.trigger&&delete e.trigger):e=b}else b={},b.method=e.method,e.callbackId&&(b.callbackId=e.callbackId),b.args=d,ucapi.base.triggerEventCallback(b),e=void 0;return e}((b=d.trigger&&
+d.trigger(e.data))&&"object"==typeof b||e.callbackId)&&ucapi.base.triggerEventCallback({method:e.method,callbackId:e.callbackId,args:d,trigger_result:b})}else g.getPlatform()!==c.platform.ANDROID&&e.callbackId&&e.method&&"biz.onShare"!=e.method&&ucapi.base.triggerEventCallback({method:e.method,callbackId:e.callbackId})};d.invokeJs=function(a){if(a.js&&a.callbackId){var c=k(a.js);a={result:"",callbackId:a.callbackId};eval(c);if(void 0!=ucapi.base.injectInvokeJs)try{g.log("base.injectInvokeJs","inject");
+var b=ucapi.base.injectInvokeJs();b||(b="");a.result=b}catch(d){g.log("base.injectInvokeJs","error")}ucapi.base.invokeJsCallback(a)}}});define("apidef",function(f,d,l){var k=f("constant").platform,b=f("apiCompatibleImpl"),h=f("bridge");d.ucapi={base:{checkAPI:function(b){h.exec("base.checkAPI",b,k.ALL)},getVersion:function(b){h.exec("base.getVersion",b,k.ALL)},triggerEvent:function(b){return h.triggerEvent(b)},triggerEventCallback:function(b){h.exec("base.triggerEventCallback",b,k.ALL)},invokeJs:function(b){h.invokeJs(b)},invokeJsCallback:function(b){h.exec("base.invokeJsCallback",b,k.ANDROID)}},biz:{share:function(d){b.exec("biz.share",
+d,k.ALL)},onShare:function(b){h.onEvent("biz.onShare",b,k.ALL)}}}});define("apiCompatibleImpl",function(f,d,l){function k(b,a,d){b&&b.call(this,{errCode:a,errMsg:d})}var b=f("constant"),h=f("util"),g=f("bridge");d.exec=function(c,a,d){h.log(c,"apiCompatibleImpl exec");var f;ucapi.invoke?f=!0:(k(a.fail,b.callbackStatus.INVALID_METHOD,"ucapi.invoke not exsit, should load in UCBrowser !"),f=!1);f?(f=h.getPlatform(),d!==b.platform.ALL&&f!==d?a&&a.fail&&k(a.fail,b.callbackStatus.INVALID_METHOD,"this api not supported this platform"):("biz.share"===c?(h.getPlatform()==
+b.platform.ANDROID?(a.sourceUrl?(a.url=a.sourceUrl,delete a.sourceUrl):a.screenshotHtmlNodeId&&(""!=a.screenshotHtmlNodeId?(f=h.getNodePosById(a.screenshotHtmlNodeId),""!=f&&(f=f.join(",")),a.share_rect=f):a.disableTarget&&(a.visible_platforms=a.disableTarget,delete a.disableTarget),delete a.screenshotHtmlNodeId),window.ucweb.startRequest("shell.share",[JSON.stringify(a)])):(a.screenshotHtmlNodeId?(a.htmlNode=a.screenshotHtmlNodeId,delete a.screenshotHtmlNodeId):a.target&&(f=hareTarget[a.target],
+void 0!==f&&""!==f&&(a.target=f)),ucbrowser.web_shareEX(JSON.stringify(a))),f=!0):f=!1,f||g.exec(c,a,d))):h.log(c,"should load in UCBrowser")}});var apiDef=require("apidef"),util=require("util");window.ucapi&&window.ucapi.debug&&(window.onerror=function(f){util.debugLog("onerror:"+f)});window.ucapi?extenducapi():window.ucapi=apiDef.ucapi;function extenducapi(){var f=apiDef.ucapi,d;for(d in f)window.ucapi[d]=f[d]};
+}(window));</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>在页面中引用上面的代码。</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[6]"></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div global-alert></div>
+            <p>在页面中添加配置代码。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isUC = window.UCShellJava || window.__BrowserJSBridgeObj || false;
+if (isUC) {
+    var uc_share = {
+        title: __share_title,
+        content: __share_desc,
+        sourceUrl: __share_url,
+        imageUrl: __share_img,
+        target: "",
+        trigger: function(data) {
+            // alert("trigger:" + JSON.stringify(data));
+        }
+    };
+    // ucapi.biz.share(uc_share);
+    ucapi.biz.onShare(uc_share);
+}</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isUC = window.UCShellJava || window.__BrowserJSBridgeObj || false;</ui-codemirror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

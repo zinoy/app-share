@@ -34,5 +34,9 @@
     "qzone": {
         "name": "QQ空间",
         "title": "Qzone"
+    },
+    "uc": {
+        "name": "UC浏览器",
+        "title": "UC"
     }
 }

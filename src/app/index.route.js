@@ -31,7 +31,7 @@
       })
       .state('share.current', {
         url: "/current",
-        templateUrl: "app/share/kuwo.html",
+        templateUrl: "app/share/uc.html",
         data: { pageTitle: 'APP分享代码' }
       });
 
