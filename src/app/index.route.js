@@ -6,7 +6,7 @@
     .config(routerConfig);
 
   /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+  function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
 
       .state('index', {
@@ -36,8 +36,6 @@
       });
 
     $urlRouterProvider.otherwise('/');
-
-    $locationProvider.html5Mode(true);
 
     window.$stateProviderRef = $stateProvider;
     window.$urlRouterProviderRef = $urlRouterProvider;
