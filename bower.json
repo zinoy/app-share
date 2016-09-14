@@ -20,7 +20,6 @@
     "metisMenu": "~2.0.2",
     "angular-ui-codemirror": "~0.3.0",
     "fontawesome": "~4.5.0",
-    "switchery": "^0.8.1",
     "NgSwitchery": "https://github.com/servergrove/NgSwitchery.git"
   },
   "devDependencies": {
