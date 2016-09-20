@@ -72,10 +72,10 @@ void 0!==f&&""!==f&&(a.target=f)),ucbrowser.web_shareEX(JSON.stringify(a))),f=!0
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var isUC = window.UCShellJava || window.__BrowserJSBridgeObj || false;
 if (isUC) {
     var uc_share = {
-        title: __share_title,
-        content: __share_desc,
-        sourceUrl: __share_url,
-        imageUrl: __share_img,
+        title: __sharDef.title,
+        content: __sharDef.desc,
+        sourceUrl: __sharDef.url,
+        imageUrl: __sharDef.img,
         target: "",
         trigger: function(data) {
             // alert("trigger:" + JSON.stringify(data));

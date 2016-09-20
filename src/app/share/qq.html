@@ -38,10 +38,10 @@
             <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
     config.swapTitleInWX = true; // 是否标题内容互换（仅朋友圈，因朋友圈内只显示标题）
     setShareInfo({
-        title: __share_title, // 分享标题
-        summary: __share_desc, // 分享内容
-        pic: __share_img, // 分享图片
-        url: __share_url, // 分享链接
+        title: __sharDef.title, // 分享标题
+        summary: __sharDef.desc, // 分享内容
+        pic: __sharDef.img, // 分享图片
+        url: __sharDef.url, // 分享链接
         // 微信权限验证配置信息，若不在微信传播，可忽略
         WXconfig: config
     });
