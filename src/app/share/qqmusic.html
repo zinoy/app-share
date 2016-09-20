@@ -27,12 +27,12 @@
             <div global-alert></div>
             <p>首先初始化APP内置桥接对象，代码可放置在jQuery/Zepto的ready事件里。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">if (/qqmusic/i.test(navigator.userAgent)) {
-    window.g_brige = null;
-    // 桥对象
+    window.g_brige = null;// 桥对象
+    
     var QQMusicBridgeReady = function() {
         window.g_brige = WebViewJavascriptBridge;
-        window.g_brige.init();
-        // 自定义初始化
+        window.g_brige.init();// 自定义初始化
+        
     };
 
     if ( typeof WebViewJavascriptBridge == 'object') {
@@ -47,14 +47,10 @@
             <ui-codemirror ui-codemirror-opts="share.jsOptions">if (window.g_inQQmusic && window.g_brige) {
     //分享数据
     var data = {
-        // 分享带出去的图片
-        "img_url": __share_img,
-        // 分享带出去的页面地址
-        "link": __share_url,
-        // 分享带出去的描述
-        "desc": __share_desc,
-        // 分享带出去的title
-        "title": __share_title
+        "img_url": __sharDef.img,
+        "link": __sharDef.url,
+        "desc": __sharDef.desc,
+        "title": __sharDef.title
     };
     // alert('页面调用callshare并传送数据 ： '+JSON.stringify(data)+' 给客户端');
     g_brige.callHandler('callshare', data, function(ret) {

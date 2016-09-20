@@ -38,5 +38,9 @@
     "uc": {
         "name": "UC浏览器",
         "title": "UC"
+    },
+    "baidu": {
+        "name": "百度手机浏览器",
+        "title": "Baidu"
     }
 }

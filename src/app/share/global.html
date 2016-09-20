@@ -22,11 +22,11 @@
           </div>
           <div class="ibox-content">
             <p>这里定义了4个全局变量，并使用当前的URL进行赋值，开发中可根据实际需要进行修改。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">var base_url = window.location.href.match(/http[\w:\.\/-]+\w\//)[0];
-var __share_title = "", // 分享标题
-    __share_desc = "", // 分享描述
-    __share_img = base_url + "img/share.jpg", // 分享图标
-    __share_url = base_url || ""; // 分享链接</ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">window.__shareDef = {base_url:window.location.href.match(/http[\w:\.\/-]+\w\//)[0]};
+__shareDef.title  = ""; // 分享标题
+__shareDef.desc   = ""; // 分享描述
+__shareDef.img    = __shareDef.base_url + "img/share.jpg"; // 分享图标
+__shareDef.url    = "" || __shareDef.base_url; // 分享链接</ui-codemirror>
 
           </div>
         </div>

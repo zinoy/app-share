@@ -36,10 +36,10 @@
             <div global-alert></div>
             <p class="m-t-sm">在分享按钮的Click/Tap事件中，触发内置的分享浮层。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">kwShare({
-    url: __share_url, // 分享链接
-    msg: __share_desc, // 分享描述
-    imgUrl: __share_img, // 分享图标
-    title: __share_title // 分享标题
+    url: __sharDef.url, // 分享链接
+    msg: __sharDef.desc, // 分享描述
+    imgUrl: __sharDef.img, // 分享图标
+    title: __sharDef.title // 分享标题
 });</ui-codemirror>
           </div>
         </div>
@@ -49,7 +49,7 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isKuwo = window.KuwoInterface && true;</ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isKuwo = !!window.KuwoInterface;</ui-codemirror>
           </div>
         </div>
       </div>

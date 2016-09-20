@@ -52,10 +52,10 @@
     // 可添加定制化分享文案代码，如加入比分、排名等信息
 
     wx.onMenuShareTimeline({
-        title: __share_title, // 分享标题
-        desc: __share_title, // 分享描述
-        link: __share_url, // 分享链接
-        imgUrl: __share_img, // 分享图标
+        title: __sharDef.title, // 分享标题
+        desc: __sharDef.title, // 分享描述
+        link: __sharDef.url, // 分享链接
+        imgUrl: __sharDef.img, // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function() {
@@ -66,10 +66,10 @@
         }
     });
     wx.onMenuShareAppMessage({
-        title: __share_title, // 分享标题
-        desc: __share_desc, // 分享描述
-        link: __share_url, // 分享链接
-        imgUrl: __share_img, // 分享图标
+        title: __sharDef.title, // 分享标题
+        desc: __sharDef.desc, // 分享描述
+        link: __sharDef.url, // 分享链接
+        imgUrl: __sharDef.img, // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function() {
@@ -81,9 +81,11 @@
     });
 }</ui-codemirror>
             <p class="m-t-sm">最后，通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里。下面代码以别克为例，不同的客户需使用各自的签名接口URL。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">$.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
-    signurl: window.location.href.replace(/#.*$/ig, "")
-}, 'json').done(wxConfig);</ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">if(window.wx){//如果wx对象存在
+    $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
+        signurl: window.location.href.replace(/#.*$/ig, "")
+    }, 'json').done(wxConfig);
+}</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -107,10 +109,10 @@
 
 function wxShare() {
     wx.onMenuShareTimeline({
-        title: __share_title,
-        desc: __share_title,
-        link: __share_url,
-        imgUrl: __share_img,
+        title: __sharDef.title,
+        desc: __sharDef.title,
+        link: __sharDef.url,
+        imgUrl: __sharDef.img,
         type: '',
         dataUrl: '',
         success: function() {
@@ -118,10 +120,10 @@ function wxShare() {
         }
     });
     wx.onMenuShareAppMessage({
-        title: __share_title,
-        desc: __share_desc,
-        link: __share_url,
-        imgUrl: __share_img,
+        title: __sharDef.title,
+        desc: __sharDef.desc,
+        link: __sharDef.url,
+        imgUrl: __sharDef.img,
         type: '',
         dataUrl: '',
         success: function() {
@@ -130,11 +132,12 @@ function wxShare() {
     });
 }
 
-$(function() {
+if(window.wx){//如果wx对象存在
     $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
         signurl: window.location.href.replace(/#.*$/ig, "")
     }, 'json').done(wxConfig);
-});</ui-codemirror>
+}
+</ui-codemirror>
           </div>
         </div>
         <div class="ibox">

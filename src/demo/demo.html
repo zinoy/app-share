@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>app share code demo</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<script>document.write('<script src="http://libs.baidu.com/jquery/'+(window.addEventListener||(document.documentMode>=9)?'2.1.4':'1.12.3')+'/jquery.min.js"><\/script>')</script>
+
+</head>
+<body>
+百度testpp
+<button >update</button>
+<script type="text/javascript">
+alert(window.BD_MMS)
+////////定义全局分享内容
+window.__shareDef = {base_url:window.location.href.match(/http[\w:\.\/-]+\w\//)[0]};
+__shareDef.title  = "这是自定义分享的标题"; // 分享标题
+__shareDef.desc   = "这里是自定义分享的描述"; // 分享描述
+__shareDef.img    = __shareDef.base_url + "img/share.jpg"; // 分享图标
+__shareDef.url    = "" || __shareDef.base_url; // 分享链接
+
+window.BoxShareData = {
+  "successcallback": "success",//回调函数名，基本没用
+  "errorcallback": "error",//回调函数名，基本没用
+  "options": {
+    "type": __shareDef.url,
+    "mediaType": "all",
+    "linkUrl": __shareDef.url,
+    "title": __shareDef.title,
+    "content": __shareDef.desc,
+    "iconUrl": __shareDef.img,
+    "imageUrl": __shareDef.img
+  }
+};
+
+
+$("button").on("click", function () {
+	BoxShareData = {
+    "successcallback": "success",//回调函数名，基本没用
+    "errorcallback": "error",//回调函数名，基本没用
+    "options": {
+        "type": urlTicket+'?promotion_name=weixin',
+        "mediaType": "all",
+        "linkUrl": urlTicket+'?promotion_name=weixin',
+        "title": "拍下雪佛兰LOGO，"+new Date(),
+        "content": "雪佛兰"+new Date(),
+        "iconUrl": urlTicket+'images/wxshare.jpg',
+        "imageUrl": urlTicket+'images/wxshare.jpg'
+    }
+};
+})
+</script>
+</body>
+</html>

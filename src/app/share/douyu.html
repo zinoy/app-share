@@ -29,12 +29,12 @@
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// ########### 要分享出去的数据 ########### //
 var douyu_shareObj = {
     "from": 'douyu',
-    "name": __share_title,
-    "proname": __share_title,
-    "content": __share_desc,
-    "url": __share_img,
-    "srcid": __share_img,
-    "link": __share_url,
+    "name": __shareDef.title,
+    "proname": __shareDef.title,
+    "content": __shareDef.desc,
+    "url": __shareDef.img,
+    "srcid": __shareDef.img,
+    "link": __shareDef.url,
     "platform": 0 //分享的平台  {0：所有，1：微信，2：朋友圈，4：微博，5：QQ}
 };
 // ########### 调用APP功能分享(初始化页面时候主动发送分享的数据给APP) ########### //
