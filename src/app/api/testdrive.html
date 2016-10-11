@@ -1,0 +1,155 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ApiController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>在微信中配置分享</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="api.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>Wechat</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[0]"></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div global-alert></div>
+            <p>首先定义配置的回调方法，需要注意的是，示例中只请求了两个接口，如果项目需要调用<a href="http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E9.99.84.E5.BD.952-.E6.89.80.E6.9C.89JS.E6.8E.A5.E5.8F.A3.E5.88.97.E8.A1.A8" target="_blank">更多接口</a>（如：扫描二维码、录音等），则需要修改<code>jsApiList</code>参数以获得对应的权限。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
+    config.debug = false;
+    config.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
+    wx.config(config);
+    wx.ready(function() {
+        console.info('wx_ok');
+        wxShare(); // 配置默认分享内容
+    });
+    wx.error(function(res) {
+        console.error("wx err: " + res.errMsg);
+    });
+}</ui-codemirror>
+            <p class="m-t-sm">然后定义分享方法，如需要临时改变分享内容（如分享游戏结果）时可重复调用。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxShare() {
+    // 可添加定制化分享文案代码，如加入比分、排名等信息
+
+    wx.onMenuShareTimeline({
+        title: __sharDef.title, // 分享标题
+        desc: __sharDef.title, // 分享描述
+        link: __sharDef.url, // 分享链接
+        imgUrl: __sharDef.img, // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function() {
+            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
+        },
+        cancel: function() {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+    wx.onMenuShareAppMessage({
+        title: __sharDef.title, // 分享标题
+        desc: __sharDef.desc, // 分享描述
+        link: __sharDef.url, // 分享链接
+        imgUrl: __sharDef.img, // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function() {
+            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
+        },
+        cancel: function() {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+}</ui-codemirror>
+            <p class="m-t-sm">最后，通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里。下面代码以别克为例，不同的客户需使用各自的签名接口URL。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">if(window.wx){//如果wx对象存在
+    $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
+        signurl: window.location.href.replace(/#.*$/ig, "")
+    }, 'json').done(wxConfig);
+}</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>完整代码示例（以别克为例）</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
+    config.debug = false;
+    config.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
+    wx.config(config);
+    wx.ready(function() {
+        console.info('wx_ok');
+        wxShare();
+    });
+    wx.error(function(res) {
+        console.error("wx err: " + res.errMsg);
+    });
+}
+
+function wxShare() {
+    wx.onMenuShareTimeline({
+        title: __sharDef.title,
+        desc: __sharDef.title,
+        link: __sharDef.url,
+        imgUrl: __sharDef.img,
+        type: '',
+        dataUrl: '',
+        success: function() {
+            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
+        }
+    });
+    wx.onMenuShareAppMessage({
+        title: __sharDef.title,
+        desc: __sharDef.desc,
+        link: __sharDef.url,
+        imgUrl: __sharDef.img,
+        type: '',
+        dataUrl: '',
+        success: function() {
+            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
+        }
+    });
+}
+
+if(window.wx){//如果wx对象存在
+    $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
+        signurl: window.location.href.replace(/#.*$/ig, "")
+    }, 'json').done(wxConfig);
+}
+</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isWechat = /MicroMessenger/i.test(window.navigator.userAgent);</ui-codemirror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
