@@ -4,7 +4,7 @@ angular.module('inspinia')
 .directive('globalAlert', function globalAlert() {
     return {
         restrict: 'A',
-        template: '<p class="alert alert-warning"><strong>注意！</strong>使用下面的代码前请确认已经定义了所需的<a class="alert-link" ui-sref="share.global">全局变量</a>。</p>'
+        templateUrl: 'app/share/global.html'
     };
 })
 .directive('staticOnly', function globalAlert() {
@@ -13,7 +13,7 @@ angular.module('inspinia')
         template: '<p class="alert alert-info">此配置方式无法动态修改分享内容。</p>'
     };
 })
-.controller('ShareController', [function() {
+.controller('ShareController', ["$scope", function($scope) {
     var vm = this;
     vm.jsOptions = {
         mode: "javascript",
@@ -29,6 +29,9 @@ angular.module('inspinia')
         readOnly: true,
         styleActiveLine: true
     };
+    /*setTimeout(function(){
+        $scope.iboxTools.showhide();
+    }, 100)*/
     
 
     vm.iboxTools = {
