@@ -4,7 +4,7 @@
       <h2>在饿了么中配置分享</h2>
       <ol class="breadcrumb">
         <li>
-          <a ui-sref="index.share">Home</a>
+          <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
             <strong>Eleme</strong>
@@ -23,7 +23,11 @@
           <div class="ibox-content">
             <div static-only></div>
             <p>通过在<code>&lt;head&gt;</code>标签中的<code>meta</code>元素来定义分享内容，示例如下：</p>
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[4]"></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中直接配置饿了么分享内容 -->
+&lt;meta name='eleme-share'/>
+&lt;meta name='eleme-share:title' content='分享的标题'/>
+&lt;meta name='eleme-share:description' content='分享的内容, 如:李东渊不敢相信那个传言。虽然所有人都信誓旦旦言之凿凿，但那听起来太像一个笑话了。'/>
+&lt;meta name='eleme-share:image' content='https://img1.doubanio.com/view/note/large/public/p32616267.jpg'/></ui-codemirror>
           </div>
         </div>
       </div>

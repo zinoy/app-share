@@ -84,6 +84,11 @@
         url: "/share",
         templateUrl: "app/components/common/content.html"
       })
+      .state('share.index', {
+        url: "",
+        templateUrl: "app/share/share.html",
+        data: { pageTitle: 'APP 分享代码' }
+      })
       .state('share.global', {
         url: "/global",
         templateUrl: "app/share/global.html",

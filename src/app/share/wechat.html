@@ -4,7 +4,7 @@
       <h2>在微信中配置分享</h2>
       <ol class="breadcrumb">
         <li>
-          <a ui-sref="index.share">Home</a>
+          <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
             <strong>Wechat</strong>
@@ -21,7 +21,8 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[0]"></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用微信JS -->
+&lt;script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">

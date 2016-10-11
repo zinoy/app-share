@@ -4,7 +4,7 @@
       <h2>在陌陌中配置分享</h2>
       <ol class="breadcrumb">
         <li>
-          <a ui-sref="index.share">Home</a>
+          <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
             <strong>Momo</strong>
@@ -21,7 +21,8 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[1]"></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用陌陌JS -->
+&lt;script src="//cdnst.immomo.com/momofes/js/mobile/momo_bridge.2.0.4.min.js">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
