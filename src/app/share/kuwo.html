@@ -4,7 +4,7 @@
       <h2>在酷我音乐盒中配置分享</h2>
       <ol class="breadcrumb">
         <li>
-          <a ui-sref="index.share">Home</a>
+          <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
             <strong>Kuwo</strong>
@@ -15,13 +15,17 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="wrapper wrapper-content">
+        <div class="ibox" global-alert>
+          <!-- include app/share/global.html-->
+        </div>
         <div class="ibox">
           <div class="ibox-title">
             <h5>HTML</h5>
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[5]"></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用酷我音乐盒JS -->
+&lt;script src="http://js.kuwo.cn/sale/common/kuwo_share.min.js">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -33,7 +37,7 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <div global-alert></div>
+            
             <p class="m-t-sm">在分享按钮的Click/Tap事件中，触发内置的分享浮层。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">kwShare({
     url: __sharDef.url, // 分享链接

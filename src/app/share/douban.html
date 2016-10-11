@@ -4,7 +4,7 @@
       <h2>在豆瓣中配置分享</h2>
       <ol class="breadcrumb">
         <li>
-          <a ui-sref="index.share">Home</a>
+          <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
             <strong>Douban</strong>
@@ -23,7 +23,22 @@
           <div class="ibox-content">
             <div static-only></div>
             <p>通过在<code>&lt;head&gt;</code>标签中的<code>meta</code>元素来定义分享内容，示例如下：</p>
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[3]"></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中直接配置豆瓣分享内容 -->
+&lt;meta property="og:title" content="都市爱情怪谈之『同学会艳遇』" />
+&lt;meta property="og:site_name" content="豆瓣"/>
+&lt;meta property="og:url" content="https://www.douban.com/note/546696546/" />
+&lt;meta property="og:type" content="article" />
+&lt;meta property="og:description" content="李东渊不敢相信那个传言。虽然所有人都信誓旦旦言之凿凿，但那听起来太像一个笑话了。 他们说，汪珊珊把好几个老同学给睡了。挑的还是那几个从小就帅气爱玩毫不正经的男同学。 李东渊因此更要去参加今年的同学..." />
+&lt;meta property="og:image" content="https://img1.doubanio.com/view/note/large/public/p32616267.jpg" /></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//TODO</ui-codemirror>
           </div>
         </div>
       </div>

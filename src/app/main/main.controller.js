@@ -8,6 +8,7 @@ angular.module('inspinia')
     vm.clearData = function() {
         vm.data = {};
     };
-    vm.data = window.$appJsonRef;
+    vm.data = window.$appShareJsonRef;
+    vm.dataApi = window.$apiJsonRef;
    
 }]);
