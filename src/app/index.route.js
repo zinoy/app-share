@@ -48,6 +48,10 @@
               "ideat": {
                   "name": "IDEAT理想家",
                   "title": "Ideat"
+              },
+              "yidian": {
+                  "name": "一点资讯媒体",
+                  "title": "Yidian"
               }
           };
 
