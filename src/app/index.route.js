@@ -56,6 +56,10 @@
                   "name": "别克&雪佛兰 - 预约试驾",
                   "title": "别克&雪佛兰-试驾接口"
               },
+              "mz-ga-tracking": {
+                  "name": "别克&雪佛兰 - 监测方法",
+                  "title": "别克&雪佛兰 - 监测方法"
+              },
               "youku-video": {
                   "name": "别克&雪佛兰 - Youku视频",
                   "title": "别克&雪佛兰-Youku视频"

@@ -22,11 +22,11 @@
           </div>
           <div class="ibox-content">
             <p>移动端与PC端都引用同一个js文件，不做区分。</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 别克 试驾接口JS -->
+&lt;script type="text/javascript" src="//www.buick.com.cn/buick-api/testdrive.js">&lt;/script></ui-codemirror><br/>
             <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 雪佛兰 试驾接口JS -->
 &lt;script type="text/javascript" src="//www.chevrolet.com.cn/chevy-api/testdrive.js">&lt;/script></ui-codemirror>
-            <br/>
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 别克 试驾接口JS -->
-&lt;script type="text/javascript" src="//www.buick.com.cn/buick-api/testdrive.js">&lt;/script></ui-codemirror>
+            
           </div>
         </div>
         <div class="ibox api-spec">
@@ -38,7 +38,12 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.testdrive(cbFunc, name, mobile, car)</li>
+              <li>hylink.testdrive(cbFunc, name, mobile, car, buyPlan)</li>
+              <li>hylink.testdrive(cbFunc, name, mobile, car, buyPlan, dealerCode)</li>
+              <li>hylink.testdrive(cbFunc, name, mobile, car, buyPlan, exObj)</li>
+            </ul>
           <section>
             <div>
               <h2 >hylink.testdrive(cbFunc, name, mobile, [car, buyPlan, exObj])</h2>
@@ -91,15 +96,16 @@ hylink.testdrive(function(obj){
             <h4>exObj参数: {"isdown","email", "dealer", "province", "city", "source", "campaign", "medium", "term", "content"}</h4>
                 <ul>
                   <li><code>isdown</code> 是否下发到CCC, 1:是, 0:否, 默认为1 </li>
-                  <li><code>email</code> 用户邮箱地址</li>
+                  <li><code>email</code> 用户邮箱地址, 只有<mark>雪佛兰</mark>的接口有此参数</li>
+                  <li><code>channelsource</code> 只有<mark>别克</mark>的接口有此参数</li>
                   <li><code>dealer</code> 经销商code, 如:<span class="text-muted"> "CH1101"</span> </li>
                   <li><code>province</code> 经销商所在省份 </li>
                   <li><code>city</code> 经销商所在城市 </li>
-                  <li><code>source</code> <mark title="Google Analytics 监测">ga</mark>utm参数, 来源 </li>
-                  <li><code>campaign</code> <mark title="Google Analytics 监测">ga</mark>utm参数, 活动名称 </li>
-                  <li><code>medium</code> <mark title="Google Analytics 监测">ga</mark>utm参数, 媒介 </li>
-                  <li><code>term</code> <mark title="Google Analytics 监测">ga</mark>utm参数, 关键字 </li>
-                  <li><code>content</code> <mark title="Google Analytics 监测">ga</mark>utm参数, 内容 </li>
+                  <li><code>source</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 来源 </li>
+                  <li><code>campaign</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 活动名称 </li>
+                  <li><code>medium</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 媒介 </li>
+                  <li><code>term</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 关键字 </li>
+                  <li><code>content</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 内容 </li>
                 </ul>
                 <p><mark>注: </mark>非exObj规定的指定参数不会提交到后台程序, 如有特殊要求, 请参照<code>testdrive</code>高级调用方式(调用方式五)</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//调用方式四: {名字, 手机, 车型名称, 意向购车时间, 其它参数}
@@ -145,7 +151,12 @@ hylink.testdrive(callbackFnObj, "申请者名字", "19461041344", "创酷");</ui
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.checkMobile(mobile)</li>
+              <li>hylink.setTestdriveClickEvent(mzClickName, gaCatalog, gaAction, gaLabel)</li>
+              <li>hylink.setTestdriveSuccessPV(mzSuccessPv)</li>
+              <li>hylink.setTestdriveApiPath(path, [filename])</li>
+            </ul>
           <section>
             <div>
               <h2>hylink.checkMobile(mobile)</h2>
@@ -169,14 +180,14 @@ if(!hylink.checkMobile("19461041344")){
             <div>
               <h2>hylink.setTestdriveClickEvent(mzClickName, gaCatalog, gaAction, gaLabel)</h2>
               
-              <p>预定义点击试驾<code>Button</code>时触发的<mark title="MiaoZhen 秒针监测">mz</mark>与<mark title="Google Analytics 监测">ga</mark>点击事件, 此方法可以不用定义在<code>click</code>事件内, 只需要<code>click</code>事件外定义一次既可。<br/>
+              <p>预定义点击试驾<code>Button</code>时触发的<abbr title="MiaoZhen 秒针监测">mz</abbr>与<abbr title="Google Analytics 监测">ga</abbr>点击事件, 此方法可以不用定义在<code>click</code>事件内, 只需要<code>click</code>事件外定义一次既可。<br/>
               <span class="bg-primary">TIPS:</span> 如果一个页面有多个试驾<code>Button</code>, 且不同的试驾<code>Button</code>对应不一样的点击事件名称, 则需要把此方法定义到<code>click</code>事件内。</p>
               <h4>参数:</h4>
                 <ul>
-                  <li><code>mzClickName: String</code> <mark title="MiaoZhen 秒针监测">mz</mark>点击事件名称, 如: <span class="text-muted">威朗GS X 理想家H5-难不倒-视频页-提交试驾</span></li>
-                  <li><code>gaCatalog: String</code> <mark title="Google Analytics 监测">ga</mark>点击事件类别名称, 如:<span class="text-muted"> 难不倒</span></li>
-                  <li><code>gaAction: String</code> <mark title="Google Analytics 监测">ga</mark>点击事件动作名称, 如:<span class="text-muted"> 点击</span></li>
-                  <li><code>gaLabel: String</code> <mark title="Google Analytics 监测">ga</mark>点击事件标签名称, 一般为按键名称, 如:<span class="text-muted"> 提交试驾</span></li>
+                  <li><code>mzClickName: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>点击事件名称, 如: <span class="text-muted">威朗GS X 理想家H5-难不倒-视频页-提交试驾</span></li>
+                  <li><code>gaCatalog: String</code> <abbr title="Google Analytics 监测">ga</abbr>点击事件类别名称, 如:<span class="text-muted"> 难不倒</span></li>
+                  <li><code>gaAction: String</code> <abbr title="Google Analytics 监测">ga</abbr>点击事件动作名称, 如:<span class="text-muted"> 点击</span></li>
+                  <li><code>gaLabel: String</code> <abbr title="Google Analytics 监测">ga</abbr>点击事件标签名称, 一般为按键名称, 如:<span class="text-muted"> 提交试驾</span></li>
                 </ul>
               <h4>返回:</h4>
               无
@@ -189,11 +200,11 @@ hylink.setTestdriveClickEvent("威朗GS X 理想家H5-难不倒-视频页-提交
             <div>
               <h2>hylink.setTestdriveSuccessPV(mzSuccessPv)</h2>
               
-              <p>预定义用户试驾成功后触发的<mark title="MiaoZhen 秒针监测">mz</mark>成功PV, <mark title="Google Analytics 监测">ga</mark>成功PV被默认定义为<code>/testdrive-success</code><br/>
+              <p>预定义用户试驾成功后触发的<abbr title="MiaoZhen 秒针监测">mz</abbr>成功PV, <abbr title="Google Analytics 监测">ga</abbr>成功PV被默认定义为<code>/testdrive-success</code><br/>
               <span class="bg-primary">TIPS:</span> 如果一个页面有多个试驾<code>Button</code>, 且不同的试驾成功PV名称不一样, 则需要把此方法定义到<code>click</code>事件内。</p>
               <h4>参数:</h4>
                 <ul>
-                  <li><code>mzSuccessPv: String</code> <mark title="MiaoZhen 秒针监测">mz</mark>试驾成功后触发的成功PV, 如:<span class="text-muted"> 威朗GS X 理想家H5-难不倒-视频页-提交试驾-成功浮层</span></li>
+                  <li><code>mzSuccessPv: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>试驾成功后触发的成功PV, 如:<span class="text-muted"> 威朗GS X 理想家H5-难不倒-视频页-提交试驾-成功浮层</span></li>
                 </ul>
               <h4>返回:</h4>
               无
@@ -229,7 +240,11 @@ hylink.setTestdriveSuccessPV("威朗GS X 理想家H5-难不倒-视频页-提交�
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.setCookie(name, value, expiredays)</li>
+              <li>hylink.getCookie(name)</li>
+              <li>hylink.getQueryString(name)</li>
+            </ul>
           <section>
             <div>
               <h2>hylink.setCookie(name, value, expiredays)</h2>
