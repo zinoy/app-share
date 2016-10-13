@@ -1,0 +1,189 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ApiController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+      <h2>上汽通用别克&雪佛兰 监测方法接口</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="api.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>mz ga tracking</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>因为移动端与PC端监测代码有所区别, 所以分别对移动端与PC端监测代码进行封装, 引用以下js文件时, 不要搞混了。</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 别克 移动端监测代码JS -->
+&lt;script type="text/javascript" src="//m.buick.com.cn/js/mz_ga_code.min.js">&lt;/script>
+  
+&lt;!-- 别克 PC端监测代码JS -->
+&lt;script type="text/javascript" src="//www.buick.com.cn/js/mz_ga_code.min.js">&lt;/script></ui-codemirror>
+            <br/>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 雪佛兰 移动端监测代码JS -->
+&lt;script type="text/javascript" src="//m.chevrolet.com.cn/js/mz_ga_code.min.js">&lt;/script>
+  
+&lt;!-- 雪佛兰 PC端监测代码JS -->
+&lt;script type="text/javascript" src="//www.chevrolet.com.cn/js/mz_ga_code.min.js">&lt;/script></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox api-spec">
+          <div class="ibox-title">
+            <h5>API 说明</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.trackPV(mzPage, gaPage)</li>
+              <li>hylink.trackEvent(mzBtn, category, action, label)</li>
+              <li>hylink.setGaPath(path)</li>
+              <li>hylink.trackLeads(name, mobile, leadsId)</li>
+            </ul>
+            <section>
+            <div>
+              <h2>hylink.trackPV(mzPage, gaPage)</h2>
+              
+              <p>触发一次PV tracking</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>mzPage: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>PV名称 如:<span class="text-muted"> 威朗GS X 理想家H5-首页</span></li>
+                  <li><code>gaPage: String</code> <abbr title="Google Analytics 监测">ga</abbr>PV名称 如:<span class="text-muted"> /home</span></li>
+                </ul>
+              <h4>返回: String</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//触发一次PV
+hylink.trackPV("威朗GS X 理想家H5-首页", "/home");</ui-codemirror>
+            </section>
+            <section>
+            <div>
+              <h2>hylink.trackEvent(mzBtn, category, action, label)</h2>
+              
+              <p>触发一次Event tracking</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>mzBtn: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>按键名称 如:<span class="text-muted"> 威朗GS X 理想家H5-返回首页</span></li>
+                  <li><code>category: String</code> <abbr title="Google Analytics 监测">ga</abbr>类别名称 如:<span class="text-muted"> 顶部导航, 侧导航</span></li>
+                  <li><code>action: String</code> <abbr title="Google Analytics 监测">ga</abbr>操作名称 如:<span class="text-muted"> 点击, 播放</span></li>
+                  <li><code>label: String</code> <abbr title="Google Analytics 监测">ga</abbr>标签(按键)名称 如:<span class="text-muted"> 返回首页, 开始游戏</span></li>
+                </ul>
+              <h4>返回: String</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//触发一次点击事件
+hylink.trackEvent("威朗GS X 理想家H5-返回首页", "顶部导航", "点击", "返回首页");</ui-codemirror>
+            </section>
+            <section>
+            <div>
+              <h2>hylink.setGaPath(path)</h2>
+              
+              <p>设定<abbr title="Google Analytics 监测">ga</abbr> PV tracking路径(PV值的前缀), 同一页面只需定义一次前缀。<br/>
+                <mark>注: </mark>默认会获取当前<code>URL</code>所在路径名称, 除非需要tracking <abbr title="Google Analytics 监测">ga</abbr>的PV路径不是当前<code>URL</code>所在位置, 才需要用此方法去调用。</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>path: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>PV名称 如:<span class="text-muted"> 威朗GS X 理想家H5-首页</span></li>
+                 
+                </ul>
+              <h4>返回: String</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//定义ga tracking pv值的前缀
+hylink.setGaPath("/2014promotion/excellent");</ui-codemirror>
+            </section>
+            <section>
+            <div>
+              <h2>hylink.trackLeads(name, mobile, leadsId)</h2>
+              
+              <p>当用户提交试驾数据成功后, 后台程序会返回leadsId, 这时需要把<code>name</code>, <code>mobile</code>, <code>leadsId</code>交到<abbr title="MiaoZhen 秒针监测">mz</abbr> 记录一次tracking。<br/>
+                <mark>注: </mark>此方法已整合到testdrive接口, 所以不再需要单独调用。</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>name: String</code> 试驾者的名字, 如:<span class="text-muted"> Zino</span></li>
+                  <li><code>mobile: String</code> 试驾者的手机号码, 如:<span class="text-muted"> 19461041344</span></li>
+                  <li><code>leadsId: String</code> 由后台程序返回的id, 如:<span class="text-muted"> CH47330</span></li>
+                </ul>
+              <h4>返回: String</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//定义ga tracking leads值的前缀
+hylink.trackLeads("zino", "19461041344", "CH47330");</ui-codemirror>
+            </section>
+          </div>
+        </div>
+        <div class="ibox api-spec">
+          <div class="ibox-title">
+            <h5>实例</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+  
+            <section>
+            <div>
+              <p>Account或PM会提供类似下图的excel文件, 按此文件上的代码添加既可。</p>
+              <ol>
+                <li>图片下方黄色代码部分不需要理会, 这部分代码已整合至<code>mz_ga_code.min.js</code>当中。</li>
+                <li><mark >页面名称</mark> 是<abbr title="MiaoZhen 秒针监测"> mz </abbr>监测名称。</li>
+                <li><mark >监测类型</mark> 有三种: pv, 点击, leads。</li>
+                <li><mark >所在页面地址</mark> 这个可以忽略, 只做参考。</li>
+                <li><mark >GA</mark> 是<abbr title="Google Analytics 监测"> ga </abbr>监测名称。添加代码时, 请不要把<code>pv:/{countdown}</code>或<code>pv:/{PATH}</code>这部分算到<abbr title="Google Analytics 监测"> ga </abbr> PV值中去。</li>
+              </ol>
+              <img src="assets/images/tracking-map.png" style="width: 100%;">
+            </div>
+            </section>
+            <section>
+            <div>
+            <h2>在HTML页面上引用JS代码</h2>
+            <p>根据不同的品牌(别克&雪佛兰)与PC站或移动站 引用不同的JS代码</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 雪佛兰 移动端监测代码JS -->
+&lt;script type="text/javascript" src="//m.chevrolet.com.cn/js/mz_ga_code.min.js">&lt;/script></ui-codemirror>
+            </div>
+            </section>
+            <section>
+            <div>
+            <h2>添加一条PV代码</h2>
+            <img src="assets/images/tracking-map-pv.png" style="width: 100%;">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//页面上触发一次PV
+hylink.trackPV("Mobile端-乐风RV倒计时页面-loading", "/loading");</ui-codemirror>
+            </div>
+            </section>
+            <section>
+            <div>
+            <h2>添加一条Event代码</h2>
+            <img src="assets/images/tracking-map-event.png" style="width: 100%;">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//在按键上触发一次Event
+hylink.trackEvent("Mobile端-乐风RV倒计时页面-第三页-答案", "第三页", "点击", "答案");</ui-codemirror>
+            </div>
+            </section>
+            <section>
+            <div>
+            <h2>添加一条Leads代码</h2>
+            
+            <img src="assets/images/tracking-map-leads.png" style="width: 100%;">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//在按键上触发一次PV与leads
+hylink.trackPV("Mobile端-乐风RV倒计时页面-试驾页面-预约试驾成功", "/testdrive-succeed");
+hylink.trackLeads("zino", "19461041344", "CH47330");</ui-codemirror><br/>
+<p>如果使用<code>testdrive.js</code>来提交试驾数据, 此方法已整合进<code>testdrive.js</code>, 所以你可以完全忽略上边两行代码, 只需要定义<code>hylink.setTestdriveSuccessPV()</code>方法既可</p>
+<ui-codemirror ui-codemirror-opts="share.jsOptions">//如果使用testdrive.js来提交数据, 请忽略上边两行代码, 使用以下代码来定义既可
+hylink.setTestdriveSuccessPV("Mobile端-乐风RV倒计时页面-试驾页面-预约试驾成功");</ui-codemirror>
+            </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

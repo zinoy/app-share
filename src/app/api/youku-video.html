@@ -32,7 +32,12 @@
             <li>Buick: <u>http://www.buick.com.cn/getvideo/youku/getvideo.ashx?iswebserice=1&vid=xxxxxxxx</u></li>
             <li>Chevy: <u>http://www.chevrolet.com.cn/chevy-api/getvideo.ashx?iswebserice=1&vid=xxxxxxx</u></li>
             </ul>
-            <mark>注: </mark>当参数不正确或视频不存在，则会显示雪花底的404视频。</p>
+            <dl class="dl-horizontal">
+              <dt style="width: 32px"><mark>注: </mark></dt>
+              <dd style="margin-left: 40px">1. 当参数不正确或视频不存在，则会显示雪花底的404视频。</dd>
+              <dd style="margin-left: 40px">2. 对于PC网站, 为了向下兼容IE8浏览器, 建议结合<a href="http://videojs.com/" target="_blank" title="http://videojs.com/">VideoJS</a>一起使用。</dd>
+            </dl>
+            <br/></p>
             <h5>参数说明:</h5>
             <ul>
               <li><strong>vid : </strong>youku视频的vid, 一般Account会提供vid, 如:XOTI5NzMwMjky。</li>
@@ -45,7 +50,7 @@
             <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- *******************别克 调用Youku视频代码******************** -->
 &lt;!--方式一:
 2016年后的Youku视频, 请在接口后增加iswebserice=1参数, 通过调用新的Youku接口获取动态视频地址。-->
-&lt;video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?vid=XMTczMjkzMDk3Mg==&iswebserice=1" controls>
+&lt;video src="//www.buick.com.cn/getvideo/youku/getvideo.ashx?iswebserice=1&vid=XMTUxMDcyNzk0MA==" controls>
     您的浏览器不支持 video 标签。
 &lt;/video>
 &lt;!--方式二:
@@ -58,7 +63,7 @@
 &lt;!-- ******************雪佛兰 调用Youku视频代码******************* -->
 &lt;!--方式一:
 2016年后的Youku视频, 请在接口后增加iswebserice=1参数, 通过调用新的Youku接口获取动态视频地址。-->
-&lt;video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?vid=XMTczMjkzMDk3Mg==&iswebserice=1" controls>
+&lt;video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?iswebserice=1&vid=XMTczMjkzMDk3Mg==" controls>
     您的浏览器不支持 video 标签。
 &lt;/video>
 &lt;!--方式二:
@@ -67,7 +72,12 @@
 &lt;video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?vid=XOTI5NzMwMjky&year=2015" controls>
     您的浏览器不支持 video 标签。
 &lt;/video></ui-codemirror>
+            <br/>
+            <p class="text-muted">附Youku接口地址:<br/>
+              Youku新接口: <small>http://events.youku.com/2015/video-source/api/soap/video-files-service.php</small><br/>
+              Youku旧接口: <small>http://events.youku.com/2015/misc/api/video-files.php?vid=XOTI5NzMwMjky</small>
             
+            </p>
           </div>
         </div>
         <div class="ibox">

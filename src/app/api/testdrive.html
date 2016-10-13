@@ -1,13 +1,13 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="ApiController as share">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-      <h2>在微信中配置分享</h2>
+      <h2>别克&雪佛兰 - 预约试驾</h2>
       <ol class="breadcrumb">
         <li>
           <a ui-sref="api.index">Home</a>
         </li>
         <li class="active">
-            <strong>Wechat</strong>
+            <strong>testdrive</strong>
         </li>
       </ol>
     </div>
@@ -21,132 +21,281 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" ng-model="share.outputCode[0]"></ui-codemirror>
+            <p>移动端与PC端都引用同一个js文件，不做区分。</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 别克 试驾接口JS -->
+&lt;script type="text/javascript" src="//www.buick.com.cn/buick-api/testdrive.js">&lt;/script></ui-codemirror><br/>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- 雪佛兰 试驾接口JS -->
+&lt;script type="text/javascript" src="//www.chevrolet.com.cn/chevy-api/testdrive.js">&lt;/script></ui-codemirror>
+            
           </div>
         </div>
-        <div class="ibox">
+        <div class="ibox api-spec">
           <div class="ibox-title">
-            <h5>Javascript</h5>
+            <h5>主要方法</h5>
             <!-- <label>
               <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
             </label> -->
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <div global-alert></div>
-            <p>首先定义配置的回调方法，需要注意的是，示例中只请求了两个接口，如果项目需要调用<a href="http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E9.99.84.E5.BD.952-.E6.89.80.E6.9C.89JS.E6.8E.A5.E5.8F.A3.E5.88.97.E8.A1.A8" target="_blank">更多接口</a>（如：扫描二维码、录音等），则需要修改<code>jsApiList</code>参数以获得对应的权限。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
-    config.debug = false;
-    config.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
-    wx.config(config);
-    wx.ready(function() {
-        console.info('wx_ok');
-        wxShare(); // 配置默认分享内容
-    });
-    wx.error(function(res) {
-        console.error("wx err: " + res.errMsg);
-    });
-}</ui-codemirror>
-            <p class="m-t-sm">然后定义分享方法，如需要临时改变分享内容（如分享游戏结果）时可重复调用。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxShare() {
-    // 可添加定制化分享文案代码，如加入比分、排名等信息
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.testdrive(cbFunc, name, mobile, car)</li>
+              <li>hylink.testdrive(cbFunc, name, mobile, car, buyPlan)</li>
+              <li>hylink.testdrive(cbFunc, name, mobile, car, buyPlan, dealerCode)</li>
+              <li>hylink.testdrive(cbFunc, name, mobile, car, buyPlan, exObj)</li>
+            </ul>
+          <section>
+            <div>
+              <h2 >hylink.testdrive(cbFunc, name, mobile, [car, buyPlan, exObj])</h2>
+              
+              <p>别克&雪佛兰 试驾方法</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>cbFunc: Function</code> 提交数据后的回调函数, 参数obj为Object对象, {status, msg, leadId}, 如:<span class="text-muted"> function(obj){...}</span></li>
+                  <li><code>name: String</code> 试驾者的名字, 如:<span class="text-muted"> Zino</span></li>
+                  <li><code>mobile: String</code> 试驾者的手机号码, 如:<span class="text-muted"> 19461041344</span></li>
+                  <li><code>car: String</code> [可选] 车型中文名称, <span class="text-danger">注意: 车型名称不要搞混了! </span> 具体名称参考下方<span class="bg-primary">蓝底车型</span>中文名称, 如:<span class="text-muted"> 昂科威, 科帕奇</span></li>
+                  <li><code>buyPlan: String</code> [可选] 意向购车时间, 值只能为["三个月内","三到六个月","三到六个月"], 如:<span class="text-muted"> 三个月内</span></li>
+                   <li><code>exObj: String | Object</code> [可选] 额外参数, 具体参数下方的例子代码, 如:<span class="text-muted">"CH1101" | {dealer:"CH1101", isdown:1}</span></li>
+                </ul>
+              <h4>返回:</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//最常用的调用方式一: {名字, 手机, 车型名称}
+hylink.testdrive(function(obj){
+        if(obj.status=="suc"){//status的值有"suc", "fal", "err"三种
+            console.log("申请试驾成功, 返回leadId: "+obj.leadId);//**NOTE: 当提交成功后，不需要再tracking秒针leadId，这方法已整合在JS里。
+        }else{
+            console.log("申请试驾失败, 原因: "+obj.msg);
+        }
+        return false;//也可以不用写return. 如果返回true, 则中止默认tracking。
+    }, "申请者名字", "19461041344", "全新科鲁兹");
+  });</ui-codemirror>
 
-    wx.onMenuShareTimeline({
-        title: __sharDef.title, // 分享标题
-        desc: __sharDef.title, // 分享描述
-        link: __sharDef.url, // 分享链接
-        imgUrl: __sharDef.img, // 分享图标
-        type: '', // 分享类型,music、video或link，不填默认为link
-        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-        success: function() {
-            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
-        },
-        cancel: function() {
-            // 用户取消分享后执行的回调函数
+            <ul class="list-inline" style="margin-top:6px;margin-bottom:4px;">
+                <li class="bg-primary" style="margin-left: 13px;">别克车型: </li>
+                <li>昂科雷</li><li>昂科威</li><li>昂科拉</li><li>GL8商务车</li><li>全新一代君越</li><li>君威</li><li>威朗</li><li>威朗两厢</li><li>全新英朗</li>
+            </ul>
+            <ul class="list-inline">
+                <li class="bg-primary">雪佛兰车型: </li>
+                <li>科帕奇</li><li>创酷</li><li>赛欧3</li><li>科迈罗</li><li>第六代科迈罗</li><li>全新科鲁兹</li><li>经典科鲁兹</li><li>科鲁兹掀背车</li><li>迈锐宝</li><li>迈锐宝XL</li><li>科沃兹</li><li>乐风 RV</li>
+            </ul>
+            <br/>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//调用方式二: {名字, 手机, 车型名称, 意向购车时间}
+hylink.testdrive(function(obj){
+        //callback code here ...
+    }, "申请者名字", "19461041344", "经典科鲁兹", "三到六个月");
+  });</ui-codemirror>
+            <br/>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//调用方式三: {名字, 手机, 车型名称, 意向购车时间, 经销商Code}
+hylink.testdrive(function(obj){
+        //callback code here ...
+    }, "申请者名字", "19461041344", "经典科鲁兹", "三到六个月", "CH1101");
+  });</ui-codemirror>
+            <br/>
+            <h4>exObj参数: {"isdown","email", "dealer", "province", "city", "source", "campaign", "medium", "term", "content"}</h4>
+                <ul>
+                  <li><code>isdown</code> 是否下发到CCC, 1:是, 0:否, 默认为1 </li>
+                  <li><code>email</code> 用户邮箱地址, 只有<mark>雪佛兰</mark>的接口有此参数</li>
+                  <li><code>channelsource</code> 只有<mark>别克</mark>的接口有此参数</li>
+                  <li><code>dealer</code> 经销商code, 如:<span class="text-muted"> "CH1101"</span> </li>
+                  <li><code>province</code> 经销商所在省份 </li>
+                  <li><code>city</code> 经销商所在城市 </li>
+                  <li><code>source</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 来源 </li>
+                  <li><code>campaign</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 活动名称 </li>
+                  <li><code>medium</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 媒介 </li>
+                  <li><code>term</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 关键字 </li>
+                  <li><code>content</code> <abbr title="Google Analytics 监测">ga</abbr>utm参数, 内容 </li>
+                </ul>
+                <p><mark>注: </mark>非exObj规定的指定参数不会提交到后台程序, 如有特殊要求, 请参照<code>testdrive</code>高级调用方式(调用方式五)</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//调用方式四: {名字, 手机, 车型名称, 意向购车时间, 其它参数}
+var exObj = {"isdown":1,"email":"test@test.com", "dealer":"CH1101", "province":"上海市", 
+            "city":"长宁区", "source":"baidu", "campaign":"promotion-campaign-name", 
+            "medium":"banner", "term":"utm_term", "content":"utm_content"};
+hylink.testdrive(function(obj){
+        //callback code here ...
+    }, "申请者名字", "19461041344", "经典科鲁兹", "三到六个月", exObj);
+  });</ui-codemirror>
+            <br/>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//调用方式五: (高级调用方式, 可对数据做特殊处理)
+//定义回调方法
+var callbackFnObj = {completeFn:function(obj){
+        if(obj.status=="suc"){//status的值有"suc", "fal", "err"三种
+            console.log("申请试驾成功");
+        }else{
+            console.log("申请试驾失败, 原因: "+obj.msg);
         }
-    });
-    wx.onMenuShareAppMessage({
-        title: __sharDef.title, // 分享标题
-        desc: __sharDef.desc, // 分享描述
-        link: __sharDef.url, // 分享链接
-        imgUrl: __sharDef.img, // 分享图标
-        type: '', // 分享类型,music、video或link，不填默认为link
-        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-        success: function() {
-            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
-        },
-        cancel: function() {
-            // 用户取消分享后执行的回调函数
-        }
-    });
-}</ui-codemirror>
-            <p class="m-t-sm">最后，通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里。下面代码以别克为例，不同的客户需使用各自的签名接口URL。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">if(window.wx){//如果wx对象存在
-    $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
-        signurl: window.location.href.replace(/#.*$/ig, "")
-    }, 'json').done(wxConfig);
-}</ui-codemirror>
+        return false;//也可以不用写return. 如果返回true, 则中止默认tracking。
+    },
+    beforeSubmitFn:function(params){//在提交接口前调用此方法，并把要提交到后台的参数传递进来，
+        params.buyPlan = "更长时间";//修改提交参数，
+        params.userID = "用户身份证号";//默认是不能传递其它参数到试驾接口的，但通过此方式可以额外增加其它参数。
+        params._ok_ = true;//这个会在提交前删除此属性，不会提交到后台程序
+        return false;//也可以不用写return. 如果返回true, 则中止提交程序。
+    }};
+};
+
+//把callbackFnObj做为参数进行调用
+hylink.testdrive(callbackFnObj, "申请者名字", "19461041344", "创酷");</ui-codemirror>
+            </section>
+
+            
           </div>
         </div>
-        <div class="ibox">
+        <div class="ibox api-spec">
           <div class="ibox-title">
-            <h5>完整代码示例（以别克为例）</h5>
+            <h5>常规辅助方法</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
-    config.debug = false;
-    config.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"];
-    wx.config(config);
-    wx.ready(function() {
-        console.info('wx_ok');
-        wxShare();
-    });
-    wx.error(function(res) {
-        console.error("wx err: " + res.errMsg);
-    });
-}
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.checkMobile(mobile)</li>
+              <li>hylink.setTestdriveClickEvent(mzClickName, gaCatalog, gaAction, gaLabel)</li>
+              <li>hylink.setTestdriveSuccessPV(mzSuccessPv)</li>
+              <li>hylink.setTestdriveApiPath(path, [filename])</li>
+            </ul>
+          <section>
+            <div>
+              <h2>hylink.checkMobile(mobile)</h2>
+              
+              <p>校验手机号码是否正确, 包括上汽通用测试手机号码段194</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>mobile: String</code> 手机号码, 如:<span class="text-muted"> 19461041344</span></li>
+                </ul>
+              <h4>返回:</h4>
+              如果手机号码合法, 返回<code>true</code>, 反之返回<code>false</code>
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//校验手机格式合法性
+if(!hylink.checkMobile("19461041344")){
+    console.warn("手机格式不正确");
+    return;
+}</ui-codemirror>
+            </section>
 
-function wxShare() {
-    wx.onMenuShareTimeline({
-        title: __sharDef.title,
-        desc: __sharDef.title,
-        link: __sharDef.url,
-        imgUrl: __sharDef.img,
-        type: '',
-        dataUrl: '',
-        success: function() {
-            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
-        }
-    });
-    wx.onMenuShareAppMessage({
-        title: __sharDef.title,
-        desc: __sharDef.desc,
-        link: __sharDef.url,
-        imgUrl: __sharDef.img,
-        type: '',
-        dataUrl: '',
-        success: function() {
-            // hylink.trackEvent("右上角分享", "右上角", "点击", "分享");
-        }
-    });
-}
+            <section>
+            <div>
+              <h2>hylink.setTestdriveClickEvent(mzClickName, gaCatalog, gaAction, gaLabel)</h2>
+              
+              <p>预定义点击试驾<code>Button</code>时触发的<abbr title="MiaoZhen 秒针监测">mz</abbr>与<abbr title="Google Analytics 监测">ga</abbr>点击事件, 此方法可以不用定义在<code>click</code>事件内, 只需要<code>click</code>事件外定义一次既可。<br/>
+              <span class="bg-primary">TIPS:</span> 如果一个页面有多个试驾<code>Button</code>, 且不同的试驾<code>Button</code>对应不一样的点击事件名称, 则需要把此方法定义到<code>click</code>事件内。</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>mzClickName: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>点击事件名称, 如: <span class="text-muted">威朗GS X 理想家H5-难不倒-视频页-提交试驾</span></li>
+                  <li><code>gaCatalog: String</code> <abbr title="Google Analytics 监测">ga</abbr>点击事件类别名称, 如:<span class="text-muted"> 难不倒</span></li>
+                  <li><code>gaAction: String</code> <abbr title="Google Analytics 监测">ga</abbr>点击事件动作名称, 如:<span class="text-muted"> 点击</span></li>
+                  <li><code>gaLabel: String</code> <abbr title="Google Analytics 监测">ga</abbr>点击事件标签名称, 一般为按键名称, 如:<span class="text-muted"> 提交试驾</span></li>
+                </ul>
+              <h4>返回:</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//定义mz与ga点击事件
+hylink.setTestdriveClickEvent("威朗GS X 理想家H5-难不倒-视频页-提交试驾", "难不倒", "点击", "提交试驾");</ui-codemirror>
+            </section>
 
-if(window.wx){//如果wx对象存在
-    $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
-        signurl: window.location.href.replace(/#.*$/ig, "")
-    }, 'json').done(wxConfig);
-}
-</ui-codemirror>
+            <section>
+            <div>
+              <h2>hylink.setTestdriveSuccessPV(mzSuccessPv)</h2>
+              
+              <p>预定义用户试驾成功后触发的<abbr title="MiaoZhen 秒针监测">mz</abbr>成功PV, <abbr title="Google Analytics 监测">ga</abbr>成功PV被默认定义为<code>/testdrive-success</code><br/>
+              <span class="bg-primary">TIPS:</span> 如果一个页面有多个试驾<code>Button</code>, 且不同的试驾成功PV名称不一样, 则需要把此方法定义到<code>click</code>事件内。</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>mzSuccessPv: String</code> <abbr title="MiaoZhen 秒针监测">mz</abbr>试驾成功后触发的成功PV, 如:<span class="text-muted"> 威朗GS X 理想家H5-难不倒-视频页-提交试驾-成功浮层</span></li>
+                </ul>
+              <h4>返回:</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//定义试驾成功mz成功PV
+hylink.setTestdriveSuccessPV("威朗GS X 理想家H5-难不倒-视频页-提交试驾-成功浮层");</ui-codemirror>
+            </section>
+
+            <section>
+            <div>
+              <h2>hylink.setTestdriveApiPath(path, [filename])</h2>
+              
+              <p>一般不用定义, 默认调用当前页面路径下的ajaxget.aspx或testdrive.aspx, 别克试驾接口一般为ajaxget.aspx, 雪佛兰试驾接口为testdrive.aspx。<br/>
+                  当试驾接口与页面不在同一路径下时, 需要调用此方法重新定义后台接口地址与文件名。</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>path: String</code> 后台接口所在路径, 如:<span class="text-muted"> /encroe/2016-promotion/</span></li>
+                  <li><code>filename: String</code> [可选] 后台接口文件名, 留空会使用默认接口名称, 如:<span class="text-muted"> testdrive.php</span></li>
+                </ul>
+              <h4>返回:Boolean</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">hylink.setTestdriveApiPath("http://webtest.chevrolet.com.cn/chevy-api/");//重新定义试驾接口路径</ui-codemirror>
+            </section>
           </div>
         </div>
-        <div class="ibox">
+        <div class="ibox api-spec">
           <div class="ibox-title">
-            <h5>APP判断脚本</h5>
+            <h5>其它辅助方法</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isWechat = /MicroMessenger/i.test(window.navigator.userAgent);</ui-codemirror>
+            <ul class="alert alert-info list-unstyled" role="alert">
+              <li>hylink.setCookie(name, value, expiredays)</li>
+              <li>hylink.getCookie(name)</li>
+              <li>hylink.getQueryString(name)</li>
+            </ul>
+          <section>
+            <div>
+              <h2>hylink.setCookie(name, value, expiredays)</h2>
+              
+              <p>把名称与值写入cookie, <br/>
+                  <span class="bg-primary">TIPS:</span> 此cookie写入<code>domain</code>为chevrolet.com.cn或buick.com.cn主域名, <code>Path</code>为"/"(根目录),  </p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>name: String</code> cookie名称, 如:<span class="text-muted"> myName</span></li>
+                  <li><code>value: String</code> cookie名称对应的值, 如:<span class="text-muted"> Wally</span></li>
+                  <li><code>expiredays: Number</code> cookie保存的天数, 如:<span class="text-muted"> 30</span></li>
+                </ul>
+              <h4>返回:</h4>
+              无
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//把值写入cookie保存30天
+hylink.setCookie("myName", "Wally", 30);</ui-codemirror>
+            </section>
+
+            <section>
+            <div>
+              <h2>hylink.getCookie(name)</h2>
+              
+              <p>读取指定名称的cookie值</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>name: String</code> 读取的cookie名称, 如: <span class="text-muted">myName</span></li>
+                </ul>
+              <h4>返回: String</h4>
+              如果无此cookie名称, 返回<code>null</code>, 否则返回对应的值
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//读取cookie值
+var myName = hylink.getCookie("myName");</ui-codemirror>
+            </section>
+
+            <section>
+            <div>
+              <h2>hylink.getQueryString(name)</h2>
+              
+              <p>获取URL问号后的<code>QueryString</code>参数</p>
+              <h4>参数:</h4>
+                <ul>
+                  <li><code>name: String</code> <code>QueryString</code>名称 如:<span class="text-muted"> utm_source</span></li>
+                </ul>
+              <h4>返回: String</h4>
+              如果无此<code>QueryString</code>名称, 返回<code>null</code>, 否则返回对应的值
+            </div>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//获取QueryString 参数 utm_source的值
+var source = hylink.getQueryString("utm_source");</ui-codemirror>
+            </section>
+
           </div>
         </div>
       </div>
