@@ -33,6 +33,11 @@
             "title": "Momo"
         },
         {
+            "key": "tencent-mobile-web",
+            "name": "腾讯移动WEB",
+            "title": "tencent mobile web"
+        },
+        {
             "key": "qq",
             "name": "手机QQ",
             "title": "QQ"
@@ -46,6 +51,11 @@
             "key": "qzone",
             "name": "QQ空间",
             "title": "Qzone"
+        },
+        {
+            "key": "qqbrowser",
+            "name": "QQ手机浏览器",
+            "title": "QQbrowser"
         },
         {
             "key": "uc",
@@ -131,7 +141,7 @@
         var state = {
             url: "/" + value.key,
             templateUrl: "app/share/" + value.key + ".html",
-            data: { pageTitle: '在' + value.name + '中配置分享' }
+            data: { pageTitle: '在' + value.name + '中配置分享',title:value.title }
           };
         $stateProvider.state('share.' + value.key, state);
       });
@@ -141,7 +151,7 @@
         var state = {
             url: "/" + key,
             templateUrl: "app/api/" + key + ".html",
-            data: { pageTitle: '在' + value.name + '中配置分享' }
+            data: { pageTitle: '' + value.name + '', title:value.title }
           };
         $stateProvider.state('api.' + key, state);
       }

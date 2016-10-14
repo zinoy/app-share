@@ -1,0 +1,92 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="share.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox" global-alert>
+          <!-- include app/share/global.html-->
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用QQ分享JS -->
+&lt;script src="//jsapi.cs0309.imtt.qq.com/get?api=app.isInstallApk,app.share,env.*">&lt;/script></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            
+            <p>在<strong>手机QQ浏览器</strong>内自定义分享代码, 不需要引用任何JS</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//qq手机浏览器分享代码
+browser.app.share({url:__sharDef.url,
+                  title:__sharDef.title,
+                  description:__sharDef.desc,
+                  img_url:__sharDef.img,
+                  to_app:0,
+                  img_title:"",
+                  cus_txt:""});</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//TODO 需要补上</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>官方API说明文档</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <img src="assets/images/QQ-browser-app-share.jpeg" atl="qq手机浏览器 官方API说明文档" title="QQ手机浏览器 官方API说明文档">
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>别克S弯 2016 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_qqbrowser/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_qqbrowser/</a></li>
+              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionqqbrowser/" target="_blank">http://m.buick.com.cn/act/happypromotionqqbrowser/</a></li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

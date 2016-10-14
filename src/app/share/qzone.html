@@ -1,13 +1,13 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-      <h2>在QQ空间中配置分享</h2>
+      <h2>{{$state.current.data.pageTitle}}</h2>
       <ol class="breadcrumb">
         <li>
           <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
-            <strong>Qzone</strong>
+            <strong>{{$state.current.data.title}}</strong>
         </li>
       </ol>
     </div>
@@ -28,7 +28,7 @@
           </div>
           <div class="ibox-content">
             
-            <p>在分享按钮的Click/Tap事件中，触发分享代码。</p>
+          <p>在分享按钮的Click/Tap事件中，触发分享代码。<a href="http://open.mobile.qq.com/api/qzone/index#Share" target="_blank">官方说明文档</a></p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//给QQ好友分享内容
 mqq.invoke("share", "toQQ", {
         imgUrl: __sharDef.img,
