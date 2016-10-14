@@ -1,81 +1,95 @@
 (function() {
-  'use strict';
-  var appShareJson = {
-              "wechat": {
-                  "name": "微信",
-                  "title": "Wechat"
-              },
-              "douban": {
-                  "name": "豆瓣",
-                  "title": "Douban"
-              },
-              "douyu": {
-                  "name": "斗鱼",
-                  "title": "Douyu"
-              },
-              "eleme": {
-                  "name": "饿了么",
-                  "title": "Eleme"
-              },
-              "kuwo": {
-                  "name": "酷我音乐盒",
-                  "title": "Kuwo"
-              },
-              "momo": {
-                  "name": "陌陌",
-                  "title": "Momo"
-              },
-              "qq": {
-                  "name": "手机QQ",
-                  "title": "QQ"
-              },
-              "qqmusic": {
-                  "name": "QQ音乐",
-                  "title": "QQ Music"
-              },
-              "qzone": {
-                  "name": "QQ空间",
-                  "title": "Qzone"
-              },
-              "uc": {
-                  "name": "UC浏览器",
-                  "title": "UC"
-              },
-              "baidu": {
-                  "name": "百度手机浏览器",
-                  "title": "Baidu"
-              },
-              "ideat": {
-                  "name": "IDEAT理想家",
-                  "title": "Ideat"
-              },
-              "yidian": {
-                  "name": "一点资讯媒体",
-                  "title": "Yidian"
-              }
-          };
+    'use strict';
 
-  var apiJson = {
-              "testdrive": {
-                  "name": "别克&雪佛兰 - 预约试驾",
-                  "title": "别克&雪佛兰-试驾接口"
-              },
-              "mz-ga-tracking": {
-                  "name": "别克&雪佛兰 - 监测方法",
-                  "title": "别克&雪佛兰 - 监测方法"
-              },
-              "youku-video": {
-                  "name": "别克&雪佛兰 - Youku视频",
-                  "title": "别克&雪佛兰-Youku视频"
-              }
-            }
+    var appShareJson = [
+        {
+            "key": "wechat",
+            "name": "微信",
+            "title": "Wechat"
+        },
+        {
+            "key": "douban",
+            "name": "豆瓣",
+            "title": "Douban"
+        },
+        {
+            "key": "douyu",
+            "name": "斗鱼",
+            "title": "Douyu"
+        },
+        {
+            "key": "eleme",
+            "name": "饿了么",
+            "title": "Eleme"
+        },
+        {
+            "key": "kuwo",
+            "name": "酷我音乐盒",
+            "title": "Kuwo"
+        },
+        {
+            "key": "momo",
+            "name": "陌陌",
+            "title": "Momo"
+        },
+        {
+            "key": "qq",
+            "name": "手机QQ",
+            "title": "QQ"
+        },
+        {
+            "key": "qqmusic",
+            "name": "QQ音乐",
+            "title": "QQ Music"
+        },
+        {
+            "key": "qzone",
+            "name": "QQ空间",
+            "title": "Qzone"
+        },
+        {
+            "key": "uc",
+            "name": "UC浏览器",
+            "title": "UC"
+        },
+        {
+            "key": "baidu",
+            "name": "百度手机浏览器",
+            "title": "Baidu"
+        },
+        {
+            "key": "ideat",
+            "name": "IDEAT理想家",
+            "title": "Ideat"
+        },
+        {
+            "key": "yidian",
+            "name": "一点资讯",
+            "title": "Yidian"
+        }
+    ];
+
+    var apiJson = {
+        "testdrive": {
+            "name": "别克&雪佛兰 - 预约试驾",
+            "title": "别克&雪佛兰-试驾接口"
+        },
+        "mz-ga-tracking": {
+            "name": "别克&雪佛兰 - 监测方法",
+            "title": "别克&雪佛兰 - 监测方法"
+        },
+        "youku-video": {
+            "name": "别克&雪佛兰 - Youku视频",
+            "title": "别克&雪佛兰-Youku视频"
+        }
+    }; 
 
   angular
     .module('inspinia')
     .config(routerConfig);
 
   /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider) {
+  function routerConfig($windowProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('index', {
         abstract: true,
@@ -113,15 +127,14 @@
         data: { pageTitle: '全局变量' }
       });
       //app share
-      for(var key in appShareJson){
-        var value = appShareJson[key];
+      angular.forEach(appShareJson, function(value, key) {
         var state = {
             url: "/" + key,
             templateUrl: "app/share/" + key + ".html",
             data: { pageTitle: '在' + value.name + '中配置分享' }
           };
         $stateProvider.state('share.' + key, state);
-      }
+      });
       //api
       for(var key in apiJson){
         var value = apiJson[key];
@@ -135,10 +148,13 @@
       
     $urlRouterProvider.otherwise('/');
 
-    window.$stateProviderRef = $stateProvider;
-    window.$urlRouterProviderRef = $urlRouterProvider;
-    window.$appShareJsonRef = appShareJson;
-    window.$apiJsonRef = apiJson;
+    $locationProvider.html5Mode(true);
+
+    var $window = $windowProvider.$get();
+    $window.$stateProviderRef = $stateProvider;
+    $window.$urlRouterProviderRef = $urlRouterProvider;
+    $window.$appShareJsonRef = appShareJson;
+    $window.$apiJsonRef = apiJson;
   }
 
 })();

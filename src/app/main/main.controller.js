@@ -2,13 +2,13 @@
 
 angular.module('inspinia')
 
-.controller('MainController', ['$http', '$urlRouter', '$state', '$stateParams',  function($http, $urlRouter, $state, $stateParams, runtimeStates) {
+.controller('MainController', ['$http', '$filter', '$urlRouter', '$stateParams',  function($http, $filter, $urlRouter, $stateParams, runtimeStates) {
     var vm = this;
 
     vm.clearData = function() {
         vm.data = {};
     };
-    vm.data = window.$appShareJsonRef;
+    vm.data = $filter('orderBy')(window.$appShareJsonRef, 'name');
     vm.dataApi = window.$apiJsonRef;
-   
+
 }]);
