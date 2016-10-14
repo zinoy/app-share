@@ -1,0 +1,95 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="share.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox" global-alert>
+          <!-- include app/share/global.html-->
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用微信JS -->
+&lt;script src="//qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js">&lt;/script></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            
+          <p>在腾讯移动WEB平台定义分享代码。<a href="http://open.mobile.qq.com/api/component/share" target="_blank">官方说明文档</a><br/>
+          可在页面中定制微信，手机QQ，QQ空间APP内的分享内容。<br/>
+          <mark>注：</mark>由于手机QQ限制，分享URL必须与页面URL同一域名，否则设置不生效。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//定制接口一
+setShareInfo({
+    title: __sharDef.title, // 分享标题
+    summary:__sharDef.desc, // 分享内容
+    pic:__sharDef.img, // 分享图片
+    url:__sharDef.url, // 分享链接
+});</ui-codemirror>
+<ui-codemirror ui-codemirror-opts="share.jsOptions">//定制接口二, TODO 需要测试是不是可以在微信上分享
+//别克微信分享地址: http://www.buick.com.cn/weixinjssign/getbuicksign.aspx
+$.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx", 
+        {signurl: window.location.href.replace(/#.*$/ig, "")}, “json”).done(
+        function(config){
+          config.swapTitleInWX = true;// 是否标题内容互换（仅朋友圈，因朋友圈内只显示标题）
+          setShareInfo({
+              title: __sharDef.title, // 分享标题
+              summary:__sharDef.desc, // 分享内容
+              pic:__sharDef.img, // 分享图片
+              url:__sharDef.url, // 分享链接
+              // 微信权限验证配置信息，若不在微信传播，可忽略
+              WXconfig: config
+          });
+        });
+</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isQzone = !!window.mqq;
+// or
+var isQzone = window.navigator.userAgent.indexOf("Qzone/") !== -1;</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>别克英朗 樱桃的滋味 <a href="http://m.buick.com.cn/act/excellegt/mangzhong_qzone/" target="_blank">http://m.buick.com.cn/act/excellegt/mangzhong_qzone/</a></li>
+              <li>别克英朗 我和我的大朋友 <a href="http://m.buick.com.cn/act/excellegt/bigfriendqzone/" target="_blank">http://m.buick.com.cn/act/excellegt/bigfriendqzone/</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

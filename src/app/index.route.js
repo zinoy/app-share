@@ -33,6 +33,11 @@
             "title": "Momo"
         },
         {
+            "key": "tencent-mobile-web",
+            "name": "腾讯移动WEB",
+            "title": "tencent mobile web"
+        },
+        {
             "key": "qq",
             "name": "手机QQ",
             "title": "QQ"
