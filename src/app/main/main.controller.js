@@ -8,7 +8,7 @@ angular.module('inspinia')
     vm.clearData = function() {
         vm.data = {};
     };
-    vm.data = $filter('orderBy')(window.$appShareJsonRef, 'name');
+    vm.data = $filter('orderBy')(window.$appShareJsonRef, 'key');
     vm.dataApi = window.$apiJsonRef;
 
 }]);
