@@ -1,13 +1,13 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-      <h2>在豆瓣中配置分享</h2>
+      <h2>{{$state.current.data.pageTitle}}</h2>
       <ol class="breadcrumb">
         <li>
           <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
-            <strong>Douban</strong>
+            <strong>{{$state.current.data.title}}</strong>
         </li>
       </ol>
     </div>
@@ -37,6 +37,17 @@
           </div>
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//TODO</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>别克S弯 2016 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_yidian/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_yidian/</a></li>
+            </ul>
           </div>
         </div>
       </div>

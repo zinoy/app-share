@@ -48,6 +48,11 @@
             "title": "Qzone"
         },
         {
+            "key": "qqbrowser",
+            "name": "QQ手机浏览器",
+            "title": "QQbrowser"
+        },
+        {
             "key": "uc",
             "name": "UC浏览器",
             "title": "UC"
@@ -131,7 +136,7 @@
         var state = {
             url: "/" + value.key,
             templateUrl: "app/share/" + value.key + ".html",
-            data: { pageTitle: '在' + value.name + '中配置分享' }
+            data: { pageTitle: '在' + value.name + '中配置分享',title:value.title }
           };
         $stateProvider.state('share.' + value.key, state);
       });
@@ -141,7 +146,7 @@
         var state = {
             url: "/" + key,
             templateUrl: "app/api/" + key + ".html",
-            data: { pageTitle: '在' + value.name + '中配置分享' }
+            data: { pageTitle: '' + value.name + '', title:value.title }
           };
         $stateProvider.state('api.' + key, state);
       }

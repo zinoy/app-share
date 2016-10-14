@@ -1,13 +1,13 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
   <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-      <h2>在陌陌中配置分享</h2>
+      <h2>{{$state.current.data.pageTitle}}</h2>
       <ol class="breadcrumb">
         <li>
           <a ui-sref="share.index">Home</a>
         </li>
         <li class="active">
-            <strong>Momo</strong>
+            <strong>{{$state.current.data.title}}</strong>
         </li>
       </ol>
     </div>
@@ -67,6 +67,19 @@ setTimeout( function (){
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// 可用来检查是否在陌陌中
 var is_momo_webview = /momoWebView/.test(window.navigator.userAgent);</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>别克S弯 2016年 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_momo/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_momo/</a></li>
+              <li>别克威朗GS Bilibili 合体拯救二次元世界 <a href="http://m.buick.com.cn/act/veranogs/bilibili_momo/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_momo/</a></li>
+              <li>别克威朗GS 释梦记 <a href="http://m.buick.com.cn/act/veranogs/dreamexplanation_momo/" target="_blank">http://m.buick.com.cn/act/veranogs/dreamexplanation_momo/</a></li>
+            </ul>
           </div>
         </div>
       </div>
