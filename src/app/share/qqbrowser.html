@@ -24,8 +24,10 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用QQ分享JS -->
-&lt;script src="//jsapi.cs0309.imtt.qq.com/get?api=app.isInstallApk,app.share,env.*">&lt;/script></ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用QQ分享JS （测试接口） -->
+&lt;script src="//jsapi.cs0309.imtt.qq.com/get?api=app.isInstallApk,app.share,app.setShareInfo,env.*">&lt;/script>
+&lt;!-- 在页面中引用QQ分享JS （正式接口） -->
+&lt;script src="//jsapi.qq.com/get?api=app.isInstallApk,app.share,app.setShareInfo,env.*">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -37,16 +39,32 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            
-            <p>在<strong>手机QQ浏览器</strong>内自定义分享代码, 不需要引用任何JS</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">//qq手机浏览器分享代码
-browser.app.share({url:__sharDef.url,
-                  title:__sharDef.title,
-                  description:__sharDef.desc,
-                  img_url:__sharDef.img,
-                  to_app:0,
-                  img_title:"",
-                  cus_txt:""});</ui-codemirror>
+            <p>初始化分享内容</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var params_qb_share = {
+    /*
+    {String} url 分享后点击的页面url
+    {String} title 分享界面的标题
+    {String} description 分享界面的描述
+    {Number} to_app 0:其他设备,1:微信,2:腾讯微博,3:qq空间,4:qq好友,5:系统(仅android支持),6:微收藏(仅android支持),7:二维码,8:朋友圈,10:复制链接,11:新浪微博,12:话题圈,13:创意截图
+    {String} img_url 分享内容插图
+    {String} img_title 分享内容插图的标题
+    {String} cus_txt 本地sharewindow编辑框中默认填写的内容
+    */
+    url: __shareDef.url,
+    title: __shareDef.title,
+    description: __shareDef.desc,
+    img_url: __shareDef.img,
+    img_title: '',
+    cus_txt: ''
+};
+//设置QB内的分享内容
+if (window.browser && browser.app && browser.app.setShareInfo) {
+    browser.app.setShareInfo(params_qb_share, function(result) {
+        console.log(result);
+    });
+}</ui-codemirror>
+            <p class="m-t-sm">按钮点击事件，调出分享面板</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">browser.app.share(params_qb_share);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
