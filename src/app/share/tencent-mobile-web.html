@@ -48,6 +48,7 @@ setShareInfo({
     pic:__sharDef.img, // 分享图片
     url:__sharDef.url, // 分享链接
 });</ui-codemirror>
+<br/>
 <ui-codemirror ui-codemirror-opts="share.jsOptions">//定制接口二, TODO 需要测试是不是可以在微信上分享
 //别克微信分享地址: http://www.buick.com.cn/weixinjssign/getbuicksign.aspx
 $.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx", 
@@ -74,7 +75,9 @@ $.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx",
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var isQzone = !!window.mqq;
 // or
-var isQzone = window.navigator.userAgent.indexOf("Qzone/") !== -1;</ui-codemirror>
+var isQzone = window.navigator.userAgent.indexOf("Qzone/") !== -1;
+
+var isQQ = !!window.navigator.userAgent.match(/QQ\/([\d\.]+)/);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">

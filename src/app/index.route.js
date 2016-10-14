@@ -38,11 +38,6 @@
             "title": "tencent mobile web"
         },
         {
-            "key": "qq",
-            "name": "手机QQ",
-            "title": "QQ"
-        },
-        {
             "key": "qqmusic",
             "name": "QQ音乐",
             "title": "QQ Music"
