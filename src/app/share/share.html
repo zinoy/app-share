@@ -7,55 +7,55 @@
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
       <div class="col-lg-2">
-        <div class="ibox" ng-repeat="(key, value) in main.data" ng-if="$index % 6 == 0">
+        <div class="ibox" ng-repeat="item in main.data" ng-if="$index % 6 == 0">
           <div class="ibox-content">
-            <a ui-sref="share.{{ key }}" class="btn-link">
-              <h3>{{ value.name }}</h3>
+            <a ui-sref="share.{{ item.key }}" class="btn-link">
+              <h3>{{ item.name }}</h3>
             </a>
           </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="ibox" ng-repeat="(key, value) in main.data" ng-if="$index % 6 == 1">
+        <div class="ibox" ng-repeat="item in main.data" ng-if="$index % 6 == 1">
           <div class="ibox-content">
-            <a ui-sref="share.{{ key }}" class="btn-link">
-              <h3>{{ value.name }}</h3>
+            <a ui-sref="share.{{ item.key }}" class="btn-link">
+              <h3>{{ item.name }}</h3>
             </a>
           </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="ibox" ng-repeat="(key, value) in main.data" ng-if="$index % 6 == 2">
+        <div class="ibox" ng-repeat="item in main.data" ng-if="$index % 6 == 2">
           <div class="ibox-content">
-            <a ui-sref="share.{{ key }}" class="btn-link">
-              <h3>{{ value.name }}</h3>
+            <a ui-sref="share.{{ item.key }}" class="btn-link">
+              <h3>{{ item.name }}</h3>
             </a>
           </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="ibox" ng-repeat="(key, value) in main.data" ng-if="$index % 6 == 3">
+        <div class="ibox" ng-repeat="item in main.data" ng-if="$index % 6 == 3">
           <div class="ibox-content">
-            <a ui-sref="share.{{ key }}" class="btn-link">
-              <h3>{{ value.name }}</h3>
+            <a ui-sref="share.{{ item.key }}" class="btn-link">
+              <h3>{{ item.name }}</h3>
             </a>
           </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="ibox" ng-repeat="(key, value) in main.data" ng-if="$index % 6 == 4">
+        <div class="ibox" ng-repeat="item in main.data" ng-if="$index % 6 == 4">
           <div class="ibox-content">
-            <a ui-sref="share.{{ key }}" class="btn-link">
-              <h3>{{ value.name }}</h3>
+            <a ui-sref="share.{{ item.key }}" class="btn-link">
+              <h3>{{ item.name }}</h3>
             </a>
           </div>
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="ibox" ng-repeat="(key, value) in main.data" ng-if="$index % 6 == 5">
+        <div class="ibox" ng-repeat="item in main.data" ng-if="$index % 6 == 5">
           <div class="ibox-content">
-            <a ui-sref="share.{{ key }}" class="btn-link">
-              <h3>{{ value.name }}</h3>
+            <a ui-sref="share.{{ item.key }}" class="btn-link">
+              <h3>{{ item.name }}</h3>
             </a>
           </div>
         </div>

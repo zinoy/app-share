@@ -127,13 +127,13 @@
         data: { pageTitle: '全局变量' }
       });
       //app share
-      angular.forEach(appShareJson, function(value, key) {
+      angular.forEach(appShareJson, function(value) {
         var state = {
-            url: "/" + key,
-            templateUrl: "app/share/" + key + ".html",
+            url: "/" + value.key,
+            templateUrl: "app/share/" + value.key + ".html",
             data: { pageTitle: '在' + value.name + '中配置分享' }
           };
-        $stateProvider.state('share.' + key, state);
+        $stateProvider.state('share.' + value.key, state);
       });
       //api
       for(var key in apiJson){
