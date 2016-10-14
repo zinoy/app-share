@@ -80,7 +80,7 @@ mqq.invoke("share", "toTL", {
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isQzone = mqq && true;
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isQzone = !!window.mqq;
 // or
 var isQzone = window.navigator.userAgent.indexOf("Qzone/") !== -1;</ui-codemirror>
           </div>
