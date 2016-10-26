@@ -50,10 +50,10 @@
             <ui-codemirror ui-codemirror-opts="share.jsOptions">if (window.g_inQQmusic && window.g_brige) {
     //分享数据
     var data = {
-        "img_url": __sharDef.img,
-        "link": __sharDef.url,
-        "desc": __sharDef.desc,
-        "title": __sharDef.title
+        "img_url": __shareDef.img,
+        "link": __shareDef.url,
+        "desc": __shareDef.desc,
+        "title": __shareDef.title
     };
     // alert('页面调用callshare并传送数据 ： '+JSON.stringify(data)+' 给客户端');
     g_brige.callHandler('callshare', data, function(ret) {

@@ -71,6 +71,11 @@
             "key": "yidian",
             "name": "一点资讯",
             "title": "Yidian"
+        },
+        {
+            "key": "youdao",
+            "name": "有道词典",
+            "title": "Youdao"
         }
     ];
 

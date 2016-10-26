@@ -31,30 +31,30 @@
           <p>在分享按钮的Click/Tap事件中，触发分享代码。<a href="http://open.mobile.qq.com/api/qzone/index#Share" target="_blank">官方说明文档</a></p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//给QQ好友分享内容
 mqq.invoke("share", "toQQ", {
-        imgUrl: __sharDef.img,
-        title: __sharDef.title,
-        desc: __sharDef.desc,
-        link: __sharDef.url
+        imgUrl: __shareDef.img,
+        title: __shareDef.title,
+        desc: __shareDef.desc,
+        link: __shareDef.url
     }, function(evt) {
         console.log(JSON.stringify(evt.data));
     }
 );
 //分享内容到QQ空间
 mqq.invoke("share", "toQzone", {
-        imgUrl: __sharDef.img,
-        title: __sharDef.title,
-        desc: __sharDef.desc,
-        link: __sharDef.url
+        imgUrl: __shareDef.img,
+        title: __shareDef.title,
+        desc: __shareDef.desc,
+        link: __shareDef.url
     }, function(evt) {
         console.log(JSON.stringify(evt.data));
     }
 );
 //给微信好友分享内容
 mqq.invoke("share", "toWX", {
-        title: __sharDef.title, 
-        desc: __sharDef.desc, 
-        link: __sharDef.url,
-        imgUrl: __sharDef.img,
+        title: __shareDef.title, 
+        desc: __shareDef.desc, 
+        link: __shareDef.url,
+        imgUrl: __shareDef.img,
         type: '', 
         dataUrl: '' 
     }, function(evt) {
@@ -63,10 +63,10 @@ mqq.invoke("share", "toWX", {
 );
 //分享内容到微信朋友圈
 mqq.invoke("share", "toTL", {
-        title: __sharDef.title, 
-        desc: __sharDef.title, 
-        link: __sharDef.url,
-        imgUrl: __sharDef.img,
+        title: __shareDef.title, 
+        desc: __shareDef.title, 
+        link: __shareDef.url,
+        imgUrl: __shareDef.img,
 
     }, function(evt) {
         console.log(JSON.stringify(evt.data));

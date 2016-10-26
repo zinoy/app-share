@@ -51,10 +51,10 @@
 //如需要临时改变分享内容（如分享游戏结果）时可重复调用。
 function wxShare() {
     wx.onMenuShareTimeline({
-        title: __sharDef.title,
-        desc: __sharDef.title,
-        link: __sharDef.url,
-        imgUrl: __sharDef.img,
+        title: __shareDef.title,
+        desc: __shareDef.title,
+        link: __shareDef.url,
+        imgUrl: __shareDef.img,
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function() {
@@ -63,10 +63,10 @@ function wxShare() {
         cancel: function() {/* 用户取消分享后执行的回调函数 */}
     });
     wx.onMenuShareAppMessage({
-        title: __sharDef.title,
-        desc: __sharDef.desc,
-        link: __sharDef.url,
-        imgUrl: __sharDef.img,
+        title: __shareDef.title,
+        desc: __shareDef.desc,
+        link: __shareDef.url,
+        imgUrl: __shareDef.img,
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function() {
