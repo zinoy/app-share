@@ -43,10 +43,10 @@
           <mark>注：</mark>由于手机QQ限制，分享URL必须与页面URL同一域名，否则设置不生效。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//定制接口一
 setShareInfo({
-    title: __sharDef.title, // 分享标题
-    summary:__sharDef.desc, // 分享内容
-    pic:__sharDef.img, // 分享图片
-    url:__sharDef.url, // 分享链接
+    title: __shareDef.title, // 分享标题
+    summary:__shareDef.desc, // 分享内容
+    pic:__shareDef.img, // 分享图片
+    url:__shareDef.url, // 分享链接
 });</ui-codemirror>
 <br/>
 <ui-codemirror ui-codemirror-opts="share.jsOptions">//定制接口二, TODO 需要测试是不是可以在微信上分享
@@ -56,10 +56,10 @@ $.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx",
         function(config){
           config.swapTitleInWX = true;// 是否标题内容互换（仅朋友圈，因朋友圈内只显示标题）
           setShareInfo({
-              title: __sharDef.title, // 分享标题
-              summary:__sharDef.desc, // 分享内容
-              pic:__sharDef.img, // 分享图片
-              url:__sharDef.url, // 分享链接
+              title: __shareDef.title, // 分享标题
+              summary:__shareDef.desc, // 分享内容
+              pic:__shareDef.img, // 分享图片
+              url:__shareDef.url, // 分享链接
               // 微信权限验证配置信息，若不在微信传播，可忽略
               WXconfig: config
           });
