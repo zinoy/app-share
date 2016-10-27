@@ -80,14 +80,14 @@ function wxShare() {
 <ui-codemirror ui-codemirror-opts="share.jsOptions">//别克微信签名
 if(window.wx){//如果wx对象存在，
     $.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", 
-        {signurl: window.location.href.replace(/#.*$/ig, "")}, “json”).done(wxConfig);
+        {signurl: window.location.href.replace(/#.*$/ig, "")}, wxConfig, “json”);
 }</ui-codemirror><br/>
 <h3>雪佛兰签名接口</h3>
 
 <ui-codemirror ui-codemirror-opts="share.jsOptions">//雪佛兰微信签名
 if(window.wx){//如果wx对象存在，
     $.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx", 
-        {signurl: window.location.href.replace(/#.*$/ig, "")}, “json”).done(wxConfig);
+        {signurl: window.location.href.replace(/#.*$/ig, "")}, wxConfig, “json”);
 }</ui-codemirror>
           </div>
         </div>

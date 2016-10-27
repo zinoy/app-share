@@ -53,6 +53,11 @@
             "title": "QQbrowser"
         },
         {
+            "key": "qqvideo",
+            "name": "QQ视频",
+            "title": "QQvideo"
+        },
+        {
             "key": "uc",
             "name": "UC浏览器",
             "title": "UC"
@@ -76,6 +81,21 @@
             "key": "youdao",
             "name": "有道词典",
             "title": "Youdao"
+        },
+        {
+            "key": "qdaily",
+            "name": "好奇心日报",
+            "title": "Qdaily"
+        },
+        {
+            "key": "maoyan",
+            "name": "猫眼电影",
+            "title": "Maoyan"
+        },
+        {
+            "key": "weibo",
+            "name": "新浪微博",
+            "title": "Weibo"
         }
     ];
 
