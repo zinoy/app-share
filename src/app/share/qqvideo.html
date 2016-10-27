@@ -25,7 +25,7 @@
           </div>
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用QQ JS -->
-&lt;script src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js">&lt;/script></ui-codemirror>
+&lt;script src="http://appmedia.qq.com/media/h5e/h5e_v1.4.18.min.js">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -38,22 +38,22 @@
           </div>
           <div class="ibox-content">
             
-            <p>定义微信分享配置的回调方法。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">function wxConfig(config) {
-    config.swapTitleInWX = true; // 是否标题内容互换（仅朋友圈，因朋友圈内只显示标题）
-    setShareInfo({
-        title: __shareDef.title, // 分享标题
-        summary: __shareDef.desc, // 分享内容
-        pic: __shareDef.img, // 分享图片
-        url: __shareDef.url, // 分享链接
-        // 微信权限验证配置信息，若不在微信传播，可忽略
-        WXconfig: config
-    });
-}</ui-codemirror>
-            <p class="m-t-sm">通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里。下面代码以别克为例，不同的客户需使用各自的签名接口URL。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">$.post("http://www.buick.com.cn/weixinjssign/getbuicksign.aspx", {
-    signurl: window.location.href.replace(/#.*$/ig, "")
-}, 'json').done(wxConfig);</ui-codemirror>
+            <p>在QQ视频平台定义分享代码。<a href="http://h5e.qq.com/component.html?alias=share" target="_blank">官方说明文档</a></p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//定义QQ视频分享代码
+var h5e_share = {
+  title: __shareDef.title,
+  desc: __shareDef.desc,
+  timeLineTitle: __shareDef.title,
+  img: __shareDef.img,
+  url: __shareDef.url,
+  onSuccess: function(res){
+    // alert('从' + res.from + '到' + res.to + '分享成功！');
+  },
+  onCancel: function (res) {
+    // alert('从' + res.from + '到' + res.to + '分享取消！');
+  }
+};
+h5e.share.init(h5e_share);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -62,7 +62,18 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isQQ = !!window.navigator.userAgent.match(/QQ\/([\d\.]+)/);</ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//TODO</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>别克英朗 我和我的大朋友 <a href="http://m.buick.com.cn/act/excellegt/bigfriendqqvideo/" target="_blank">http://m.buick.com.cn/act/excellegt/bigfriendqqvideo/</a></li>
+            </ul>
           </div>
         </div>
       </div>

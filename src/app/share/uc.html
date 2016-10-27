@@ -33,7 +33,7 @@
               </div>
             </div>
             <p>如果是单页面的H5网站, 直接把JS代码复制拷贝到<code>&lt;script>/*copy & paste*/&lt;/script></code>标签内既可。<br/>也可将以下代码保存为独立的js文件（<code>uc_jssdk_cn-1.8.6.js</code>）然后在HTML中引用。</p>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">//created:  2016-09-03 11:58:31   ./release/jssdk_cn-1.8.6.js
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//created:  2016-09-03 11:58:31   ./release/uc_jssdk_cn-1.8.6.js
 (function (context) {
 var require,define;
 (function(){function f(b){var d=b.factory;b.exports={};delete b.factory;d(function(g){var c=g;"."===g.charAt(0)&&(c=b.id.slice(0,b.id.lastIndexOf("."))+"."+g.slice(2));return require(c)},b.exports,b);return b.exports}var d={},l=[],k={};require=function(b){if(!d[b])throw"module "+b+" not found";if(b in k)throw"Cycle in require graph: "+(l.slice(k[b]).join("->")+"->"+b);if(d[b].factory)try{return k[b]=l.length,l.push(b),f(d[b])}finally{delete k[b],l.pop()}return d[b].exports};define=function(b,h){if(d[b])throw"module "+
