@@ -112,7 +112,7 @@
             "name": "别克&雪佛兰 - Youku视频",
             "title": "别克&雪佛兰-Youku视频"
         },
-        "chevy-wx-auth": {
+        "sgm-wx-auth": {
             "name": "别克&雪佛兰 - 微信授权",
             "title": "别克&雪佛兰 - 微信授权"
         }
