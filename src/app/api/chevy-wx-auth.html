@@ -1,0 +1,95 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ApiController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="api.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>API 说明</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            
+            <p>上汽通用别克&雪佛兰不同的H5使用接口都由后台开发人员单独提供，所以调用的地址与项目地址相关，但参数名称都是一样的。</p>
+            <h5>参数说明:</h5>
+            <ul>
+              <li><strong>redirect_uri : </strong>[可选，默认值为空] 授权成功后回调的地址（http开头的绝对路径），默认值为回跳当前项目地址。</li>
+              <li><strong>scope : </strong>[可选, 默认值为snsapi_base] 视频类型, 可取值为:<code>snsapi_base</code>, <code>snsapi_userinfo</code>等。</li>
+              <li><strong>debug : </strong>[可选, 默认值false] 是否为Debug方式，如果<code>true</code>，不会直接去授权，直接返回openid等测试用户信息，方便在电脑上测试。</li>
+            </ul>
+            <br/>
+            <h5>回调返回参数说明:</h5>
+            <ul>
+              <li><strong>openid : </strong>微信用户的openid。</li>
+              <li><strong>nickname : </strong>微信用户名称。</li>
+              <li><strong>headimage : </strong>微信用户头像地址，通常为 640x640。</li>
+              <li><strong>sex : </strong>微信用户性别，1：男性，2：女性，0：未知。</li>
+              <li><strong>province : </strong>微信用户省份。</li>
+              <li><strong>city : </strong>微信用户城市。</li>
+            </ul>
+            <p>下方代码放在<code>&lt;head></code>内最靠前位置，授权完成后，微信用户信息保存在<code>window.WX_userInfo</code><br/>
+              退出（离开）微信浏览器后，<code>sessionStorage</code>会被清空，再次进入会重新授权。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">&lt;script>
+// 调用 微信授权 接口。
+(function(){
+  var isDebug = qs("debug")=="true";// 根据url后的debug参数来判断是否为debug模式。
+  var REDIRECT_URI = "";// 默认为当前项目地址
+  var SCOPE = "snsapi_base";// 默认为 snsapi_base，也可以为 snsapi_userinfo
+  var AUTH_PATH = "./websiteinterface/Auth.aspx";//授权地址，可根据实际情况做修改。
+
+  var uInfoJ = sessionStorage.WX_userInfo;
+  if(uInfoJ!=null && !isDebug){//取session里的值，如果之前有保存过，则不再授权。
+    var uInfo = null;
+    try{uInfo=JSON.parse(uInfoJ);}catch(err){}
+    if(uInfo){window.WX_userInfo = uInfo;return;}
+  }
+  var obj = {openid:qs("openid"),nickname:qs("nickname"),headimage:qs("headimage"),sex:qs("sex"),province:qs("province"),city:qs("city")};
+  if(obj.openid==null || obj.openid==""){window.location.href = AUTH_PATH+"?redirect_uri="+REDIRECT_URI+"&scope="+SCOPE+"&debug="+isDebug;return;}
+  window.WX_userInfo = obj;//用户信息保存在WX_userInfo对象里。
+  if(isDebug) sessionStorage.removeItem("WX_userInfo");//如果是调试模式，则删除session，同时不保存session
+  else sessionStorage.WX_userInfo = JSON.stringify(obj);//把用户信息保存在浏览器本地session里。
+  function qs(name, url) {
+    url = url||window.location.href;name = name.replace(/[\[\]]/g, "\\$&");
+    var re = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),r = re.exec(url);
+    if (!r) return null;if (!r[2]) return "";return decodeURIComponent(r[2].replace(/\+/g, " "));
+  }
+})();
+&lt;/script></ui-codemirror>
+            <br/>
+            
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Demo</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          
+          <div class="ibox-content">
+           <ul>
+             <li>雪佛兰授权测试地址：<a href="http://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true" target="_blank">http://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true</a></li>
+             <li>雪佛兰 科沃兹中秋iWow：<a href="http://m.chevrolet.com.cn/act/cavalier/iwow-hand/" target="_blank">http://m.chevrolet.com.cn/act/cavalier/iwow-hand/</a></li>
+           </ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
