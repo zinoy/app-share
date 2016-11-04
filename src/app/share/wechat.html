@@ -76,6 +76,7 @@ function wxShare() {
     });
 }</ui-codemirror><br/>
     <h3>别克签名接口</h3>
+    <p>接口返回<code>state</code> 0：成功，1：签名url为空，2：签名的URL中的#后面部分不需要，3：异常操作，4：签名失败。</p>
     <p>通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里</p>
 <ui-codemirror ui-codemirror-opts="share.jsOptions">//别克微信签名
 if(window.wx){//如果wx对象存在，
@@ -83,10 +84,15 @@ if(window.wx){//如果wx对象存在，
         {signurl: window.location.href.replace(/#.*$/ig, "")}, wxConfig, “json”);
 }</ui-codemirror><br/>
 <h3>雪佛兰签名接口</h3>
-
 <ui-codemirror ui-codemirror-opts="share.jsOptions">//雪佛兰微信签名
 if(window.wx){//如果wx对象存在，
     $.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx", 
+        {signurl: window.location.href.replace(/#.*$/ig, "")}, wxConfig, “json”);
+}</ui-codemirror><br/>
+<h3>诚新二手车签名接口</h3>
+<ui-codemirror ui-codemirror-opts="share.jsOptions">//诚新二手车微信签名
+if(window.wx){//如果wx对象存在，
+    $.post("http://chengxinmobile.saic-gm.com/api/wexinsign.aspx", 
         {signurl: window.location.href.replace(/#.*$/ig, "")}, wxConfig, “json”);
 }</ui-codemirror>
           </div>
