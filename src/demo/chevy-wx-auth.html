@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>微信授权</title>
+<script>
+// 调用雪佛兰 微信授权 接口。
+(function(){
+  var isDebug = qs("debug")=="true";// 根据url后的debug参数来判断是否为debug模式。
+  var redirect_uri = "";// 默认为当前项目地址
+  var scope = "snsapi_base";// 默认为 snsapi_base，也可以为snsapi_userinfo。
+  var uInfoJ = sessionStorage.WX_userInfo;
+  if(uInfo!=null && !isDebug){//取session里的值，如果之前有保存过，则不再授权。
+    var uInfo = null;
+    try{uInfo=JSON.parse(uInfoJ);}catch(err){}
+    if(uInfo){window.WX_userInfo = uInfo;return;}
+  }
+  var obj = {openid:qs("openid"),nickname:qs("nickname"),headimage:qs("headimage"),sex:qs("sex"),province:qs("province"),city:qs("city")};
+  if(obj.openid==null || obj.openid==""){
+    window.location.href = "websiteinterface/Auth.aspx?redirect_uri=&scope=&debug="+isDebug;//请根据实际情况修改地址与参数
+    return;
+  }
+  window.WX_userInfo = obj;//用户信息保存在WX_userInfo对象里。
+  if(isDebug) 
+    sessionStorage.removeItem("WX_userInfo");//如果是调试模式，则删除session，同时不保存session
+  else
+    sessionStorage.WX_userInfo = JSON.stringify(obj);//把用户信息保存在浏览器本地session里。
+  function qs(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+  }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+</head>
+<body>
+<div id="userInfo"></div>
+<script type="text/javascript">
+$("#userInfo").text(JSON.stringify(window.WX_userInfo));
+
+</script>
+</body>
+</html>

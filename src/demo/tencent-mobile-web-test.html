@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>腾讯移动 分享代码</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+</head>
+<body>
+tencent mobile web code
+<button >使用微信签名的方式</button>
+<script type="text/javascript">
+
+////////定义全局分享内容
+window.__shareDef = {base_url:window.location.href.match(/http[\w:\.\/-]+\w\//)[0]};
+__shareDef.title  = "这是自定义分享的标题"; // 分享标题
+__shareDef.desc   = "这里是自定义分享的描述"; // 分享描述
+__shareDef.img    = __shareDef.base_url + "img/share.jpg"; // 分享图标
+__shareDef.url    = "" || __shareDef.base_url; // 分享链接
+
+setShareInfo({
+    title: __shareDef.title, // 分享标题
+    summary:__shareDef.desc, // 分享内容
+    pic:__shareDef.img, // 分享图片
+    url:__shareDef.url, // 分享链接
+});
+
+$("button").on("click", function () {
+    __shareDef.title  = "WX-这是自定义分享的标题"; // 分享标题
+    __shareDef.desc   = "WX-这里是自定义分享的描述"; // 分享描述
+    $.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx", 
+        {signurl: window.location.href.replace(/#.*$/ig, "")}, function(config){
+          config.swapTitleInWX = true;// 是否标题内容互换（仅朋友圈，因朋友圈内只显示标题）
+          config.debug = true;
+          config.appId = config.appid;
+          setShareInfo({
+              title: __shareDef.title, // 分享标题
+              summary:__shareDef.desc, // 分享内容
+              pic:__shareDef.img, // 分享图片
+              url:__shareDef.url, // 分享链接
+              // 微信权限验证配置信息，若不在微信传播，可忽略
+              WXconfig: config
+          });
+        }, "json");
+
+});
+</script>
+</body>
+</html>
