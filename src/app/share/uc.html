@@ -20,7 +20,7 @@
         </div>
         <div class="ibox">
           <div class="ibox-title">
-            <h5>引用JS</h5>
+            <h5>Library</h5>
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
@@ -32,7 +32,6 @@
                 <p>目前UC提供的文档及DEMO均无法使用，请参照本页面示例进行开发。</p>
               </div>
             </div>
-            <p>如果是单页面的H5网站, 直接把JS代码复制拷贝到<code>&lt;script>/*copy & paste*/&lt;/script></code>标签内既可。<br/>也可将以下代码保存为独立的js文件（<code>uc_jssdk_cn-1.8.6.js</code>）然后在HTML中引用。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//created:  2016-09-03 11:58:31   ./release/uc_jssdk_cn-1.8.6.js
 (function (context) {
 var require,define;
@@ -49,6 +48,7 @@ d,k.ALL)},onShare:function(b){h.onEvent("biz.onShare",b,k.ALL)}}}});define("apiC
 b.platform.ANDROID?(a.sourceUrl?(a.url=a.sourceUrl,delete a.sourceUrl):a.screenshotHtmlNodeId&&(""!=a.screenshotHtmlNodeId?(f=h.getNodePosById(a.screenshotHtmlNodeId),""!=f&&(f=f.join(",")),a.share_rect=f):a.disableTarget&&(a.visible_platforms=a.disableTarget,delete a.disableTarget),delete a.screenshotHtmlNodeId),window.ucweb.startRequest("shell.share",[JSON.stringify(a)])):(a.screenshotHtmlNodeId?(a.htmlNode=a.screenshotHtmlNodeId,delete a.screenshotHtmlNodeId):a.target&&(f=hareTarget[a.target],
 void 0!==f&&""!==f&&(a.target=f)),ucbrowser.web_shareEX(JSON.stringify(a))),f=!0):f=!1,f||g.exec(c,a,d))):h.log(c,"should load in UCBrowser")}});var apiDef=require("apidef"),util=require("util");window.ucapi&&window.ucapi.debug&&(window.onerror=function(f){util.debugLog("onerror:"+f)});window.ucapi?extenducapi():window.ucapi=apiDef.ucapi;function extenducapi(){var f=apiDef.ucapi,d;for(d in f)window.ucapi[d]=f[d]};
 }(window));</ui-codemirror>
+            <p>如果是简单的网站，可直接把以上代码复制到 <code>&lt;script&gt;</code> 标签中，同时忽略下面的HTML配置。</p>
           </div>
         </div>
         <div class="ibox">
@@ -106,7 +106,7 @@ if (isUC) {
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionuc/" target="_blank">http://m.buick.com.cn/act/happypromotionuc/</a></li>
+              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionuc/" target="_blank">http://m.buick.com.cn/act/happypromotionuc/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

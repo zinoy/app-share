@@ -20,11 +20,10 @@
         </div>
         <div class="ibox">
           <div class="ibox-title">
-            <h5>引用JS</h5>
+            <h5>Library</h5>
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <p>如果是单页面的H5网站, 直接把JS代码复制拷贝到<code>&lt;script>/*copy & paste*/&lt;/script></code>标签内既可。<br/>也可将以下代码保存为独立的js文件（<code>share-kit.js</code>）然后在HTML中引用。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// ./js/share-kit.js
 /**
  * [function ShareKit]
@@ -32,6 +31,7 @@
  * @return {[instance]}         [对象实例]
  */
 var ShareKit=function(t){var e={api:"imeituan://www.meituan.com/share"};for(var i in t)e[i]=t[i];return this.options=e,this};ShareKit.channels={WEIBO:1,QZONE:2,TENCENT:4,RENREN:8,KAIXIN:16,SMS:32,EMAIL:64,WECHAT:128,MOMENTS:256,QQ:512},ShareKit.prototype.params=function(t){var e=[];for(var i in t)e.push([i,encodeURIComponent(t[i])].join("="));return e.join("&")},ShareKit.prototype.share=function(t){return t=t||{},this.options.shareData={title:t.title||"",imageURL:t.image||"",detailURL:t.url||""},t.content&&(this.options.shareData["content_-1"]=t.content),this},ShareKit.prototype.content=function(t,e){if("object"==typeof t){for(var i in t)this.content(i,t[i]);return this}return t=ShareKit.channels[t.toUpperCase()],this.options.shareData["content_"+t]=e,this},ShareKit.prototype.to=function(t){switch(typeof t){case"string":t=t.split(",");case"object":var e,i;for(var n in t)i=t[n].toUpperCase(),e|=ShareKit.channels[i.trim()];t=e;break;case"undefined":t=-1}this.options.shareData.channel=t;var a=this.params(this.options.shareData);window.location.href=[this.options.api,a].join("?")},ShareKit.prototype.mge=function(t,e){this.options.shareData.act=t,this.options.shareData.val=e},"function"==typeof define&&define.amd?define([],function(){return ShareKit}):"undefined"!=typeof module&&module.exports?module.exports=ShareKit:this.ShareKit=ShareKit;</ui-codemirror>
+            <p>如果是简单的网站，可直接把以上代码复制到 <code>&lt;script&gt;</code> 标签中，同时忽略下面的HTML配置。</p>
           </div>
         </div>
         <div class="ibox">
@@ -41,7 +41,7 @@ var ShareKit=function(t){var e={api:"imeituan://www.meituan.com/share"};for(var 
           </div>
           <div class="ibox-content">
             <p>在页面中引用上面的代码。</p>
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用UC浏览器JS -->
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用猫眼JS -->
 &lt;script src="./js/share-kit.js">&lt;/script></ui-codemirror>
           </div>
         </div>
@@ -62,7 +62,7 @@ new ShareKit().share({
     comment: __shareDef.title,
     image: __shareDef.img,
     url: __shareDef.url,
-  }).to([ 'WEIBO', 'MOMENTS', 'WECHAT' ]);</ui-codemirror>
+}).to(['WEIBO', 'MOMENTS', 'WECHAT']);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -81,8 +81,8 @@ new ShareKit().share({
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克 我和我的大朋友 <a href="http://m.buick.com.cn/act/excellegt/bigfriendmaoyan/" target="_blank">http://m.buick.com.cn/act/excellegt/bigfriendmaoyan/</a></li>
-              <li> <a href="./assets/docs/sharekit-master_猫眼.zip" target="_blank" title="sharekit-master_猫眼.zip">下载</a>官方Demo</li>
+              <li>别克 我和我的大朋友 <a href="http://m.buick.com.cn/act/excellegt/bigfriendmaoyan/" target="_blank">http://m.buick.com.cn/act/excellegt/bigfriendmaoyan/ <i class="fa fa-external-link"></i></a></li>
+              <li><a href="./assets/docs/sharekit-master_猫眼.zip" target="_blank" title="sharekit-master_猫眼.zip"><i class="fa fa-download"></i> 官方Demo</a></li>
             </ul>
           </div>
         </div>

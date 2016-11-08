@@ -25,17 +25,79 @@
           </div>
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用新浪微博JS -->
-&lt;script src=http://tjs.sjs.sinajs.cn/open/thirdpart/js/jsapi/mobile.js charset=utf-8>&lt;/script></ui-codemirror>
+&lt;script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/jsapi/mobile.js" charset="utf-8">&lt;/script></ui-codemirror>
           </div>
         </div>
-        
         <div class="ibox">
           <div class="ibox-title">
-            <h5>完整代码示例（以别克为例）</h5>
+            <h5>签名接口</h5>
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-          <p>首先定义配置的回调方法，<a href="http://open.weibo.com/wiki/%E8%BD%BB%E5%BA%94%E7%94%A8H5%E6%96%B0%E7%89%88JS" target="_blank">官方说明文档</a></p>
+            <p>通过AJAX访问接口来获取签名，一般放置在jQuery/Zepto的ready事件里。常用签名接口如下：</p>
+            <h4>别克签名接口</h4>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//别克新浪微博签名
+$.post("http://www.buick.com.cn/weixinjssign/weibosign.aspx", {
+        key: "YOUR_WEIBO_APPKEY",
+        signurl: window.location.href.replace(/#.*$/ig, "")
+    }, weiboConfig, 'json');</ui-codemirror>
+            <h4>雪佛兰签名接口</h4>
+            <p>暂无</p>
+            <hr />
+            <h3>接口说明</h3>
+            <p>参数：</p>
+            <ul>
+              <li><b>key</b>: <code>String</code> 微博轻应用的AppKey<br /><small>每个H5应用对应不同的AppKey，需向对应的人员（通常是后台开发）获取。</small></li>
+              <li><b>signurl</b>: <code>String</code> 请求签名的URL<br /><small>URL中不能包含锚点，但GET参数需要保留。 </small></li>
+            </ul>
+            <p>返回：</p>
+            <div class="row">
+              <div class="col-lg-5">
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>返回值</th>
+                    <th>说明</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>0</td>
+                    <td>成功</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>参数 <code>url</code> 或 <code>key</code> 为空</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>签名URL中不能包含锚点（即删除 # 和后面部分）</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>异常操作</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>签名失败</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>未找到与参数 <code>key</code> 对应的Serecrt</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+          <p>定义配置的回调方法，<a href="http://open.weibo.com/wiki/%E8%BD%BB%E5%BA%94%E7%94%A8H5%E6%96%B0%E7%89%88JS" target="_blank">官方说明文档 <i class="fa fa-external-link"></i></a></p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">function weiboConfig(data) {data.appkey=data.appId;data.noncestr=data.nonceStr;
   data.debug = false;
   data.scope = ['setMenuItems','setSharingContent'];
@@ -51,18 +113,7 @@ function wbShare() {
         title: __shareDef.title,
         desc: __shareDef.desc
       }, function(params){/* callback function here */});
-}</ui-codemirror><br/>
-    <h3>别克签名接口</h3>
-    <p>通过AJAX获取签名，一般放置在jQuery/Zepto的ready事件里</p>
-    <p><code>key</code> 每个H5应用对应不一样的key，具体咨询后台开发人员。</p>
-    <p>接口返回<code>state</code> 0：成功，1：签名url和key为空，2：签名的URL中的#后面部分不需要，3：异常操作，4：签名失败，5：key 和serecrt不对应。</p>
-<ui-codemirror ui-codemirror-opts="share.jsOptions">//别克新浪微博签名
-$.post("http://www.buick.com.cn/weixinjssign/weibosign.aspx", {
-        key: "YOUR_WEIBO_APPKEY",
-        signurl: window.location.href.replace(/#.*$/ig, "")
-    }, weiboConfig, 'json');</ui-codemirror><br/>
-<h3>雪佛兰签名接口</h3>
-<p>暂无</p>
+}</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -84,7 +135,7 @@ $.post("http://www.buick.com.cn/weixinjssign/weibosign.aspx", {
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克威朗 bilibili带感合体 <a href="http://m.buick.com.cn/act/veranogs/bilibili_sina/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_sina/</a></li>
+              <li>别克威朗 bilibili带感合体 <a href="http://m.buick.com.cn/act/veranogs/bilibili_sina/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_sina/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

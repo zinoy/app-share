@@ -138,7 +138,7 @@
       .state('share', {
         abstract: true,
         url: "/share",
-        templateUrl: "app/components/common/content.html"
+        templateUrl: "app/components/common/share.html"
       })
       .state('share.index', {
         url: "",

@@ -28,7 +28,7 @@
           </div>
           <div class="ibox-content">
             
-            <p>配置分享数据。</p>
+            <p>配置分享内容。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// ########### 要分享出去的数据 ########### //
 var douyu_shareObj = {
     "from": 'douyu',
@@ -57,7 +57,7 @@ window.getShareData = function() {
 if (_browser.isDyAndroid) {
     window.Command.setShareContent(JSON.stringify(douyu_shareObj));
 }</ui-codemirror>
-            <p class="m-t-sm">在分享按钮的Click/Tap事件中，触发内置的分享浮层。</p>
+            <p>在分享按钮的Click/Tap事件中，触发内置的分享浮层。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// IOS
 if (_browser.isDyIOS) {
     if (window.WebViewJavascriptBridge) {
@@ -99,8 +99,8 @@ if (_browser.isDyAndroid) {
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克 蟹先生和他的前任们 <a href="http://m.buick.com.cn/act/excellegt/elemehanludouyu/" target="_blank">http://m.buick.com.cn/act/excellegt/elemehanludouyu/</a></li>
-              <li>别克 英朗处暑食堂今日菜单 <a href="http://m.buick.com.cn/act/excellegt/elemechushudouyu/" target="_blank">http://m.buick.com.cn/act/excellegt/elemechushudouyu/</a></li>
+              <li>别克 蟹先生和他的前任们 <a href="http://m.buick.com.cn/act/excellegt/elemehanludouyu/" target="_blank">http://m.buick.com.cn/act/excellegt/elemehanludouyu/ <i class="fa fa-external-link"></i></a></li>
+              <li>别克 英朗处暑食堂今日菜单 <a href="http://m.buick.com.cn/act/excellegt/elemechushudouyu/" target="_blank">http://m.buick.com.cn/act/excellegt/elemechushudouyu/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

@@ -10,7 +10,7 @@ angular.module('inspinia')
 .directive('staticOnly', function globalAlert() {
     return {
         restrict: 'A',
-        template: '<p class="alert alert-info">此配置方式无法动态修改分享内容。</p>'
+        template: '<p class="alert alert-info"><i class="fa fa-info-circle"></i> 此配置方式无法动态修改分享内容。</p>'
     };
 })
 .controller('ShareController', ["$scope", function($scope) {

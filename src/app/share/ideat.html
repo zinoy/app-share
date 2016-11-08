@@ -28,17 +28,23 @@
           </div>
           <div class="ibox-content">
             
-            <p>在<strong>IDEAT理想家</strong>内自定义分享代码, 不需要引用任何JS</p>
+            <p>在<strong>IDEAT理想家</strong>内自定义分享代码，不需要引用任何JS。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var shareInfo = {
-  url: encodeURIComponent(__shareDef.url), 
-  wechat: {
-    title: encodeURIComponent(__shareDef.title), 
-    image: encodeURIComponent(__shareDef.img)
-  }
+    url: encodeURIComponent(__shareDef.url), 
+    wechat: {
+        title: encodeURIComponent(__shareDef.title), 
+        image: encodeURIComponent(__shareDef.img)
+    }
 };
 //不是很明白为什么要把href变量定义在setTimeout方法外边? 包括shareInfo变量.
 var href = 'com.mm.ideat://event/share/' + JSON.stringify(shareInfo);
-setTimeout(function() {  var iframe = document.createElement('IFRAME'); iframe.setAttribute('src', href); document.body.appendChild(iframe);iframe.parentNode.removeChild(iframe);iframe = null;}, 10);</ui-codemirror>
+setTimeout(function() {
+    var iframe = document.createElement('IFRAME');
+    iframe.setAttribute('src', href);
+    document.body.appendChild(iframe);
+    iframe.parentNode.removeChild(iframe);
+    iframe = null;
+}, 10);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -52,7 +58,7 @@ setTimeout(function() {  var iframe = document.createElement('IFRAME'); iframe.s
         </div>
         <div class="ibox">
           <div class="ibox-title">
-            <h5>案例:</h5>
+            <h5>案例</h5>
             <!-- <label>
               <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
             </label> -->
@@ -60,7 +66,7 @@ setTimeout(function() {  var iframe = document.createElement('IFRAME'); iframe.s
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克 威朗GS生活哲学 <a href="http://m.buick.com.cn/act/veranogs/ideat/" target="_blank">http://m.buick.com.cn/act/veranogs/ideat/</a></li>
+              <li>别克 威朗GS生活哲学 <a href="http://m.buick.com.cn/act/veranogs/ideat/" target="_blank">http://m.buick.com.cn/act/veranogs/ideat/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

@@ -22,12 +22,15 @@
           </div>
           <div class="ibox-content">
             <div static-only></div>
-            <p>好奇心日报APP 自动从<code>HTML</code>里提取的网页<code>Title</code>做分享的标题和描述，第一个<code>img</code>标签做的分享图片，示例如下：</p>
+            <p>好奇心日报APP会自动从HTML中抓取 <code>&lt;title&gt;</code> 的内容作为分享的文案，第一个 <code>&lt;img&gt;</code> 标签作为分享图片。为了防止抓取失败，分享图片的最小尺寸为300x300。代码示例如下：</p>
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中直接配置好奇心日报分享内容 -->
+&lt;head>
 &lt;title>当你和机器合二为一，前方二次元高能预警！&lt;/title>
 &lt;/head>
 &lt;body>
-&lt;img src="img/share_suc.jpg" style="left:-9999px;position:absolute;top:-9999px"></ui-codemirror>
+&lt;img src="img/share.jpg" style="left:-9999px;position:absolute;top:-9999px" />
+&lt;!-- 页面内容 -->
+&lt;/body></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -46,7 +49,7 @@
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克威朗 Bilibili <a href="http://m.buick.com.cn/act/veranogs/bilibili_qdaily/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_qdaily/</a></li>
+              <li>别克威朗 Bilibili <a href="http://m.buick.com.cn/act/veranogs/bilibili_qdaily/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_qdaily/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

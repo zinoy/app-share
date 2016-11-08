@@ -46,14 +46,14 @@ var shareConfig = {
     pic: __shareDef.img,
     url: __shareDef.url,
     text: __shareDef.desc,
-    callback:''
+    callback: ''
 };
 setTimeout( function (){
     $('.pageall , body , html').height($(window).height());
-    mm.init( { 
-        enable:{share:1},
+    mm.init({ 
+        enable: {share:1},
         share: shareConfig, 
-        ui_btn: {title:'', dropdown:0, buttons: [ {text:'分享', action:1, param:shareConfig}]}
+        ui_btn: {title:'', dropdown:0, buttons: [{text:'分享', action:1, param:shareConfig}]}
     });
 }, 1000);</ui-codemirror>
 
@@ -66,7 +66,7 @@ setTimeout( function (){
           </div>
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// 可用来检查是否在陌陌中
-var is_momo_webview = /momoWebView/.test(window.navigator.userAgent);</ui-codemirror>
+var is_momo_webview = /momoWebView/i.test(window.navigator.userAgent);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -76,9 +76,9 @@ var is_momo_webview = /momoWebView/.test(window.navigator.userAgent);</ui-codemi
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克S弯 2016年 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_momo/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_momo/</a></li>
-              <li>别克威朗GS Bilibili 合体拯救二次元世界 <a href="http://m.buick.com.cn/act/veranogs/bilibili_momo/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_momo/</a></li>
-              <li>别克威朗GS 释梦记 <a href="http://m.buick.com.cn/act/veranogs/dreamexplanation_momo/" target="_blank">http://m.buick.com.cn/act/veranogs/dreamexplanation_momo/</a></li>
+              <li>别克S弯 2016年 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_momo/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_momo/ <i class="fa fa-external-link"></i></a></li>
+              <li>别克威朗GS Bilibili 合体拯救二次元世界 <a href="http://m.buick.com.cn/act/veranogs/bilibili_momo/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_momo/ <i class="fa fa-external-link"></i></a></li>
+              <li>别克威朗GS 释梦记 <a href="http://m.buick.com.cn/act/veranogs/dreamexplanation_momo/" target="_blank">http://m.buick.com.cn/act/veranogs/dreamexplanation_momo/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

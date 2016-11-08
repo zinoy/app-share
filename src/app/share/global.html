@@ -1,10 +1,9 @@
-
 <div class="ibox-title">
   <h5>定义全局变量</h5>
   <div ibox-tools control="iboxTools"></div>
 </div>
 <div class="ibox-content" >
-  <p>定义了4个全局变量，并使用当前的URL进行赋值，开发中可根据实际需要进行修改。</p>
+  <p>在全局变量中定义了4个属性，分享图片与链接默认使用当前的URL进行赋值，开发中需根据实际情况进行修改。</p>
   <ui-codemirror ui-codemirror-opts="share.jsOptions">/***********定义__shareDef全局变量**************/
 window.__shareDef = {base_url:window.location.href.match(/http[\w:\.\/-]+\w\//)[0]};
 __shareDef.title  = ""; // 自定义分享标题

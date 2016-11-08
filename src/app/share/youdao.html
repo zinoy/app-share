@@ -38,22 +38,22 @@
           </div>
           <div class="ibox-content">
             
-            <p>在<strong>手机百度浏览器</strong>内自定义分享代码, 不需要引用任何JS, 只限于手机百度浏览器有效, <a href="assets/docs/有道词典YDK_for_第三方合作开发者.pdf" target="_blank" title="有道词典YDK_for_第三方合作开发者.pdf">官方说明文档</a></p>
+            <p>在<strong>有道词典</strong>内自定义分享代码, 不需要引用任何JS。<a href="assets/docs/有道词典YDK_for_第三方合作开发者.pdf" target="_blank" title="有道词典YDK_for_第三方合作开发者.pdf"><i class="fa fa-file-pdf-o"></i> 官方说明文档</a></p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// 在 ydk.config 执行前，所有其它的 ydk api 都不会真正调用
 ydk.config({ debug : false,
-  jsApiList : ['checkJsApi', 'share'],
-  success : function() {/* your code here. */}
+    jsApiList: ['checkJsApi', 'share'],
+    success: function() {/* your code here. */}
 });
 // 分享到微信朋友圈的例子
 ydk.share({
-  silence: true, // 具体参考 官方说明文档
-  type: "wechat_moments", // qq|qq_zone|weibo|wechat|wechat_moments|yixin|yixinquan
-  title: __shareDef.title, 
-  desc: __shareDef.desc, 
-  imgUrl: __shareDef.img, 
-  link : __shareDef.url,
-  success : function(res){/* your code here. */} 
-  // 其它fail, complete, cancel回调函数，参考 官方说明文档
+    silence: true, // 具体参考 官方说明文档
+    type: "wechat_moments", // 为空则弹出分享浮层，可用的值有：qq|qq_zone|weibo|wechat|wechat_moments|yixin|yixinquan
+    title: __shareDef.title, 
+    desc: __shareDef.desc, 
+    imgUrl: __shareDef.img, 
+    link: __shareDef.url,
+    success: function(res) {/* your code here. */} 
+    // 其它fail, complete, cancel回调函数，参考 官方说明文档
 });</ui-codemirror>
           </div>
         </div>
@@ -76,8 +76,8 @@ ydk.share({
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克威朗 bilibili带感合体 <a href="http://m.buick.com.cn/act/veranogs/bilibili_youdao/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_youdao/</a></li>
-              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionyoudao/" target="_blank">http://m.buick.com.cn/act/happypromotionyoudao/</a></li>
+              <li>别克威朗 bilibili带感合体 <a href="http://m.buick.com.cn/act/veranogs/bilibili_youdao/" target="_blank">http://m.buick.com.cn/act/veranogs/bilibili_youdao/ <i class="fa fa-external-link"></i></a></li>
+              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionyoudao/" target="_blank">http://m.buick.com.cn/act/happypromotionyoudao/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>

@@ -24,6 +24,7 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
+            <p>引用链接中的参数 <code>api</code> 为需要调用接口的列表，未在此请求权限的接口将无法调用。</p>
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用QQ分享JS （测试接口） -->
 &lt;script src="//jsapi.cs0309.imtt.qq.com/get?api=app.isInstallApk,app.share,app.setShareInfo,env.*">&lt;/script>
 &lt;!-- 在页面中引用QQ分享JS （正式接口） -->
@@ -39,7 +40,7 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <p>初始化分享内容</p>
+            <p>初始化分享内容。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var params_qb_share = {
     /*
     {String} url 分享后点击的页面url
@@ -63,7 +64,7 @@ if (window.browser && browser.app && browser.app.setShareInfo) {
         console.log(result);
     });
 }</ui-codemirror>
-            <p class="m-t-sm">按钮点击事件，调出分享面板</p>
+            <p>按钮点击事件，调出分享面板。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">browser.app.share(params_qb_share);</ui-codemirror>
           </div>
         </div>
@@ -98,8 +99,8 @@ if (window.browser && browser.app && browser.app.setShareInfo) {
           </div>
           <div class="ibox-content">
             <ul>
-              <li>别克S弯 2016 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_qqbrowser/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_qqbrowser/</a></li>
-              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionqqbrowser/" target="_blank">http://m.buick.com.cn/act/happypromotionqqbrowser/</a></li>
+              <li>别克S弯 2016 绕桩游戏 <a href="http://m.buick.com.cn/act/brand/scurveracing_qqbrowser/" target="_blank">http://m.buick.com.cn/act/brand/scurveracing_qqbrowser/ <i class="fa fa-external-link"></i></a></li>
+              <li>别克 人生的不同打开方式 <a href="http://m.buick.com.cn/act/happypromotionqqbrowser/" target="_blank">http://m.buick.com.cn/act/happypromotionqqbrowser/ <i class="fa fa-external-link"></i></a></li>
             </ul>
           </div>
         </div>
