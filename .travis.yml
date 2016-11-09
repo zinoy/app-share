@@ -4,6 +4,9 @@ node_js:
 sudo: true
 addons:
   ssh_known_hosts: 45.79.82.57
+branches:
+  only:
+  - master
 cache:
   directories:
   - node_modules
