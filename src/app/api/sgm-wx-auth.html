@@ -29,7 +29,7 @@
             <p>上汽通用别克&雪佛兰不同的H5使用接口都由后台开发人员单独提供，所以调用的地址与项目地址相关，但参数名称都是一样的。</p>
             <h5>参数说明:</h5>
             <ul>
-              <li><strong>redirect_uri : </strong>[可选，默认值为空] 授权成功后回调的地址（http开头的绝对路径），默认值为回跳当前项目地址。</li>
+              <li><strong>redirect_uri : </strong>授权成功后回调的地址（http开头的绝对路径）。</li>
               <li><strong>scope : </strong>[可选, 默认值为snsapi_base] 视频类型, 可取值为:<code>snsapi_base</code>, <code>snsapi_userinfo</code>等。</li>
               <li><strong>debug : </strong>[可选, 默认值false] 是否为Debug方式，如果<code>true</code>，不会直接去授权，直接返回openid等测试用户信息，方便在电脑上测试。</li>
             </ul>
@@ -49,9 +49,13 @@
 // 调用 微信授权 接口。
 (function(){
   var isDebug = qs("debug")=="true";// 根据url后的debug参数来判断是否为debug模式。
-  var REDIRECT_URI = "";// 默认为当前项目地址
+  if(!isDebug && !/MicroMessenger/i.test(navigator.userAgent)){// 非Debug模式及非微信浏览器下，
+    //location.href = "./your-non-wechat-verison-moible-site/"+location.search+location.hash;// 也可以跳转到非微信版本。
+    return;// 或忽略以下微信授权代码，直接访问浏览。
+  }
+  var REDIRECT_URI = location.href;// 默认为当前项目地址
   var SCOPE = "snsapi_base";// 默认为 snsapi_base，也可以为 snsapi_userinfo
-  var AUTH_PATH = "./websiteinterface/Auth.aspx";//授权地址，可根据实际情况做修改。
+  var AUTH_PATH = "http://m.chevrolet.com.cn/Auth/Auth.aspx";//授权地址，可根据实际情况做修改。
 
   var uInfoJ = sessionStorage.WX_userInfo;
   if(uInfoJ!=null && !isDebug){//取session里的值，如果之前有保存过，则不再授权。
@@ -60,7 +64,7 @@
     if(uInfo){window.WX_userInfo = uInfo;return;}
   }
   var obj = {openid:qs("openid"),nickname:qs("nickname"),headimage:qs("headimage"),sex:qs("sex"),province:qs("province"),city:qs("city")};
-  if(obj.openid==null || obj.openid==""){window.location.href = AUTH_PATH+"?redirect_uri="+REDIRECT_URI+"&scope="+SCOPE+"&debug="+isDebug;return;}
+  if(obj.openid==null || obj.openid==""){window.location.href = AUTH_PATH+"?redirect_uri="+encodeURIComponent(REDIRECT_URI)+"&scope="+SCOPE+"&debug="+isDebug;return;}
   window.WX_userInfo = obj;//用户信息保存在WX_userInfo对象里。
   if(isDebug) sessionStorage.removeItem("WX_userInfo");//如果是调试模式，则删除session，同时不保存session
   else sessionStorage.WX_userInfo = JSON.stringify(obj);//把用户信息保存在浏览器本地session里。
