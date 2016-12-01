@@ -130,11 +130,6 @@
         url: "/",
         templateUrl: "app/components/common/content.html"
       })
-      .state('index.share', {
-        url: "",
-        templateUrl: "app/share/share.html",
-        data: { pageTitle: 'APP 分享代码' }
-      })
       .state('share', {
         abstract: true,
         url: "/share",
@@ -180,7 +175,7 @@
         $stateProvider.state('api.' + key, state);
       }
       
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/share');
 
     $locationProvider.html5Mode(true);
 
