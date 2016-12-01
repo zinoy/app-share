@@ -28,6 +28,11 @@
             "title": "Kuwo"
         },
         {
+            "key": "kugou",
+            "name": "酷狗音乐",
+            "title": "Kugou"
+        },
+        {
             "key": "momo",
             "name": "陌陌",
             "title": "Momo"
