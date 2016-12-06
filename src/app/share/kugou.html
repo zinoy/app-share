@@ -25,21 +25,17 @@
           </div>
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用酷狗音乐JS -->
-&lt;script src="http://m.kugou.com/static/js/mobilecall-2.2.min.js">&lt;/script>
-</ui-codemirror>
+&lt;script src="http://m.kugou.com/static/js/mobilecall-2.2.min.js">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
           <div class="ibox-title">
             <h5>Javascript</h5>
-            <!-- <label>
-              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
-            </label> -->
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
             
-            <p>在分享按钮的Click/Tap事件中，触发内置的分享浮层。</p>
+            <p>在分享按钮的Click/Tap事件中，点击后定义分享内容。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">if(window.KgMobileCall && KgMobileCall.isInClient()){
   KgMobileCall.share({
     "shareName" : _shareDef.title,
@@ -58,6 +54,22 @@
     "filename" : "",
     "duration": 0
   });
+}</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            
+            <p>酷狗音乐会在下方有个音乐条，通过此代码可以隐藏音乐条，并暂停播放音乐。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">if(window.KgMobileCall && KgMobileCall.isInClient()) {
+  KgMobileCall.showHideBar({state: 0});
+  KgMobileCall.playOrPause({type: 3}, function(){
+      KgMobileCall.showHideBar({state: 0});
+    });
 }</ui-codemirror>
           </div>
         </div>
