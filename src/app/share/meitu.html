@@ -1,0 +1,133 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="share.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox" global-alert>
+          <!-- include app/share/global.html-->
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Library</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">/* 初始APP实现的功能：
+ * SPA,配置DEF.anchor 
+ * 客户端分享、微信内分享提示，传入btnShare
+ * 分享数统计 shareJson.successCallback  
+ * 页面加载loading，可根据实际使用情况修改 APP.pageLoaded 
+ * 初始分享图路径：/images/share.jpg
+ * 图片上传至7牛，配置DEF.uploadTaregt 以及妆容参数等 （分是否有妆容处理，通过配置DEF.makeupType）
+*/
+ 
+/*
+ * 获取设备判断：APP.browser={ isWeixin:false,isIOS:false,isAndroid:false,isMobile:false}
+ * 是否被嵌入客户端 APP.fromClient  //默认==0
+ * 字符串转为对象: APP.getUrlParams(str)
+ * 切换页面: APP.switchPage(id) 页面切换动画，通过修改Jpageshow样式
+ * 加载中：APP.loading('正在为您跳转')  APP.loading().show()  APP.loading().hide()
+ * 图片预加载: APP.preloadImg(arr,cbk)
+ * cookie操作： APP.setCookie(name,value,days)  APP.getCookie(name)
+ * base64_encode: APP.base64_encode(str)
+*/
+
+!function(e,n,i,t){function a(e){o=i.extend(o,e),this.fromClient=o.fromClient,this.init(),console.log(o)}var s=location.origin+location.pathname.replace("index.html","");s="/"==s.substr(s.length-1,1)?s:s+"/";var o=(i(document.body),{appName:"5555",anchor:["pageIndex","pageResult","pageShare"],btnShare:i(".btnShare"),fromClient:location.search.indexOf("fromClient")==-1?0:1,thumbImg:"!thumb600",imgDomain:"http://mtapplet.meitudata.com/",wxConfig:{debug:!1,jsApiList:["onMenuShareTimeline","onMenuShareAppMessage","onMenuShareQQ","onMenuShareWeibo","onMenuShareQZone"]},prefixUrl:"https://xiuxiu.huodong.meitu.com",dataType:"jsonp",shareJson:{title:"\u5206\u4eab\u6587\u6848",link:s,imgUrl:s+"images/share.jpg",successCallback:function(e){(new Image).src=o.prefixUrl+"/public/index/statistics?type="+e+"&appid="+o.appName}},pageInit:function(){}}),r={pages:i(".Jpage"),pageLoading:i("#pageLoading"),loading:i("#loadingWrap"),loadingText:i("#loadingText"),shareInClient:i("#shareInClient"),shareMask:i("#shareMask"),shareLink:i("#shareInClient .JshareItem")};n.wxShare=function(e){wx.ready(function(){wx.onMenuShareTimeline({title:e.title,link:e.link,imgUrl:e.imgUrl,success:function(){e.successCallback("weixinCircle")}}),wx.onMenuShareAppMessage({title:e.title,link:e.link,imgUrl:e.imgUrl,success:function(){e.successCallback("weixin")}}),wx.onMenuShareQQ({title:e.title,link:e.link,imgUrl:e.imgUrl,success:function(){e.successCallback("qq")}})})},a.prototype={init:function(){this.pageLoaded(),this.wxInit().bindEvent()},bindEvent:function(){var e=this;return o.btnShare.on("touchend",function(n){n.preventDefault(),o.fromClient?"undefined"!=typeof WebviewJsBridge&&"function"==typeof WebviewJsBridge.onSharePageInfo&&"function"==typeof WebviewJsBridge.callSharePageInfo?(WebviewJsBridge.onSharePageInfo({title:o.shareJson.title,image:o.shareJson.imgUrl,description:o.shareJson.description,link:o.shareJson.link,success:function(){o.shareJson.successCallback(type)}}),WebviewJsBridge.callSharePageInfo()):(r.shareInClient.addClass("Jshow"),e._shareLinkInClient()):r.shareMask.show()}),r.shareMask.on("tap",function(){i(this).hide()}),r.shareInClient.find(".Jmask").on("tap",function(){r.shareInClient.removeClass("Jshow")}),this},pageLoaded:function(){var e=this;window.addEventListener("load",function(){r.pageLoading.hide(),o.pageInit(),e.hashChange(),o.cnzzId&&setTimeout(function(){var e=document.createElement("script");e.src="https://w.cnzz.com/c.php?id="+o.cnzzId,document.body.appendChild(e)},500)},!1)},pageResult:function(){},onHashChange:function(){var e=this;return window.addEventListener("hashchange",function(){e.hashChange()},!1),this},hashChange:function(){var e=location.hash.substr(2),n=this.getUrlParams(e),t=i.inArray(n.hash,o.anchor)>-1?n.hash:o.anchor[0];return this.switchPage(t),this},switchPage:function(e){r.pages.removeClass("Jpageshow").css("display","block"),i("#"+e).css("display","block"),i("#"+e).addClass("Jpageshow"),o[e]?o[e](o):""},wxInit:function(){return i.ajax({url:"http://xiuxiu.huodong.meitu.com/public/index/wx_token?"+(new Date).getTime(),data:{url:location.href.split("#")[0]},dataType:o.dataType,success:function(e){o.wxConfig=i.extend(o.wxConfig,e),wx.config(o.wxConfig),n.wxShare(o.shareJson)}}),this},_shareLinkInClient:function(){var e=r.shareLink,n=o.shareJson.imgUrl,t=encodeURIComponent(o.shareJson.link),a=encodeURIComponent(o.shareJson.title);i.each(e,function(e,i){var s=i.getAttribute("type"),o="mtcommand://share?type="+s+"&content="+a+"&imageurl="+n+"&link="+t;i.setAttribute("href",o)}),e.on("click",function(){var e=i(this).attr("type");o.shareJson.successCallback(e)})},getUrlParams:function(e){var n=decodeURIComponent(e),i={};n&&(n=n.split("&"));for(var t=0,a=n.length;t&lt;a;t++){var s=n[t].split("=");i[s[0]]=s[1]}return i}},n.APP=a}(document,window,Zepto);</ui-codemirror>
+
+            <p>将以上代码保存为<code>meitu-app.js</code>备用。</p>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>在页面中引用上面的代码以及<a href="http://zeptojs.com/" target="_blank">Zepto <i class="fa fa-external-link"></i></a>。</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用美图秀秀JS -->
+&lt;script src="js/meitu-app.js">&lt;/script>
+&lt;!-- 在页面中引用ZeptoJS 以及 Touch 插件 -->
+&lt;script src="js/zepto.min.js">&lt;/script>
+&lt;script src="js/zepto.touch.js">&lt;/script>
+&lt;!-- 在页面中引用微信JS -->
+&lt;script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js">&lt;/script></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>在页面中添加配置代码。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//美图秀秀分享代码示例
+var homepage = location.origin + location.pathname.replace('index.html', '');
+homepage = homepage.substr(homepage.length - 1, 1) == '/' ? homepage : homepage + '/'
+var config = {
+
+    btnShare: $('.btn-share'), //分享按钮
+
+    prefixUrl: 'http://xiuxiu.huodong.meitu.com', //接口 json/jsonp方式
+    dataType: 'jsonp',
+    makeupType: '',
+    thumbImg: '!thumb320',
+    shareJson: { //分享相关
+        title: __shareDef.title,
+        link: __shareDef.url,
+        description: __shareDef.desc,
+        imgUrl: __shareDef.img, //分享图片
+        successCallback: function (shareTo) {
+            new Image().src = 'http://xiuxiu.huodong.meitu.com/public/index/statistics?type=' + shareTo + '&appid=' + config.appName;
+
+        }
+    },
+
+    pageResult: function () {
+        //可调用window.wxShare(config.shareJson) 重置分享
+        config.shareJson.title = '我是结果页的分享';
+        window.wxShare(config.shareJson);
+    }
+
+}
+var app = new APP(config);</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//TBA</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>别克 冬至，忆露馅 <a href="http://m.buick.com.cn/act/excellegt/elemedongzhimeitu/" target="_blank">http://m.buick.com.cn/act/excellegt/elemedongzhimeitu/ <i class="fa fa-external-link"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

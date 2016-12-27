@@ -101,6 +101,11 @@
             "key": "weibo",
             "name": "新浪微博",
             "title": "Weibo"
+        },
+        {
+            "key": "meitu",
+            "name": "美图秀秀",
+            "title": "Meitu"
         }
     ];
 
