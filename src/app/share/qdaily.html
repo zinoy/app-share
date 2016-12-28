@@ -15,22 +15,62 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="wrapper wrapper-content">
+        <div class="ibox" global-alert></div>
         <div class="ibox">
           <div class="ibox-title">
             <h5>HTML</h5>
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <div static-only></div>
-            <p>好奇心日报APP会自动从HTML中抓取 <code>&lt;title&gt;</code> 的内容作为分享的文案，第一个 <code>&lt;img&gt;</code> 标签作为分享图片。为了防止抓取失败，分享图片的最小尺寸为300x300。代码示例如下：</p>
-            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中直接配置好奇心日报分享内容 -->
-&lt;head>
-&lt;title>当你和机器合二为一，前方二次元高能预警！&lt;/title>
-&lt;/head>
-&lt;body>
-&lt;img src="img/share.jpg" style="left:-9999px;position:absolute;top:-9999px" />
-&lt;!-- 页面内容 -->
-&lt;/body></ui-codemirror>
+            <div http-only></div>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用好奇心日报SDK -->
+&lt;script src="http://app.qdaily.com/jssdk/v1.0.0/qdaily/injection/jsbridge.js">&lt;/script>
+&lt;script src="http://app.qdaily.com/jssdk/v1.0.0/qdaily_sdk.js">&lt;/script></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Javascript</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            
+            <p>配置方式见代码中的注释。</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">/**
+ * 分享数据初始化
+ * 初始化成功后，点击好奇心日报APP底部的原生分享按钮即可唤起自定义分享
+ * 适用场景：
+ * 1. 页面加载结束之后，初始化分享数据
+ */
+QdailySDK.init({
+  share: {
+    title: __shareDef.title,
+    description: __shareDef.desc,
+    url: __shareDef.url,
+    pic: __shareDef.img
+  }
+});
+/**
+ * 分享数据动态设置
+ * 按需唤起好奇心日报分享功能，特殊情况使用
+ * 适用场景：
+ * 1. 想要通过点击H5广告页面的某个按钮唤起分享
+ * 2. 某些逻辑执行结束之后唤起分享，比如浏览完整个页面就自动触发分享
+ */
+QdailySDK.bridgeCall({
+  name: 'qdaily::toNative::share',
+  data: {
+    title: __shareDef.title,
+    text: __shareDef.desc,
+    imageUrl: __shareDef.img,
+    image: __shareDef.img,
+    url: __shareDef.url
+  }
+});</ui-codemirror>
+
           </div>
         </div>
         <div class="ibox">
