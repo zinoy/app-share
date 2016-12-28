@@ -92,11 +92,21 @@ if (isUC) {
         </div>
         <div class="ibox">
           <div class="ibox-title">
+            <h5>Test</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>测试时，需在URL后添加 <code>?uc_biz_str=S:custom|C:iflow_ad|N:true</code> 参数，如 http://m.buick.com.cn/act/happypromotionuc/?uc_biz_str=S:custom|C:iflow_ad|N:true。若无此参数在UC浏览器中将不会显示分享按钮。</p>
+            <p>由于在UC浏览器中存在不确定的缓存因素，应避免在正式地址进行测试，建议在每次测试前先修改测试站点的URL以确保没有缓存的影响。</p>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
             <h5>APP判断脚本</h5>
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isUC = window.UCShellJava || window.__BrowserJSBridgeObj || false;</ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var isUC = !!(window.UCShellJava || window.__BrowserJSBridgeObj);</ui-codemirror>
           </div>
         </div>
         <div class="ibox">

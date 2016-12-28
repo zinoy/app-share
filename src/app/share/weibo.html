@@ -25,7 +25,7 @@
           </div>
           <div class="ibox-content">
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用新浪微博JS -->
-&lt;script src="http://tjs.sjs.sinajs.cn/open/thirdpart/js/jsapi/mobile.js" charset="utf-8">&lt;/script></ui-codemirror>
+&lt;script src="//tjs.sjs.sinajs.cn/open/thirdpart/js/jsapi/mobile.js" charset="utf-8">&lt;/script></ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -51,12 +51,19 @@ $.post("http://www.buick.com.cn/weixinjssign/weibosign.aspx", {
               <li><b>signurl</b>: <code>String</code> 请求签名的URL<br /><small>URL中不能包含锚点，但GET参数需要保留。 </small></li>
             </ul>
             <p>返回：</p>
+            <ul>
+              <li><b>status</b>: <code>Integer</code> 返回状态，可能的状态值参见<cite>表 1</cite></li>
+              <li><b>timestamp</b>: <code>String</code> 签名使用的时间戳</li>
+              <li><b>nonceStr</b>: <code>String</code> 签名使用的随机字符串（注，微博初始化使用的是全小写的字段名：noncestr）</li>
+              <li><b>signature</b>: <code>String</code> 计算出的签名</li>
+            </ul>
             <div class="row">
               <div class="col-lg-5">
+                <p><span class="label label-primary">表 1</span></p>
                 <table class="table table-bordered">
                   <thead>
                   <tr>
-                    <th>返回值</th>
+                    <th>status</th>
                     <th>说明</th>
                   </tr>
                   </thead>
@@ -97,7 +104,7 @@ $.post("http://www.buick.com.cn/weixinjssign/weibosign.aspx", {
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-          <p>定义配置的回调方法，<a href="http://open.weibo.com/wiki/%E8%BD%BB%E5%BA%94%E7%94%A8H5%E6%96%B0%E7%89%88JS" target="_blank">官方说明文档 <i class="fa fa-external-link"></i></a></p>
+          <p>定义配置的回调方法。<a href="http://open.weibo.com/wiki/%E8%BD%BB%E5%BA%94%E7%94%A8H5%E6%96%B0%E7%89%88JS" target="_blank">官方说明文档 <i class="fa fa-external-link"></i></a></p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">function weiboConfig(data) {data.appkey=data.appId;data.noncestr=data.nonceStr;
   data.debug = false;
   data.scope = ['setMenuItems','setSharingContent'];
