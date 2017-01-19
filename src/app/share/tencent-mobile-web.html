@@ -48,8 +48,8 @@
     url: __shareDef.url, // 分享链接
 });</ui-codemirror>
           <p>或者，使用方法二（此方法同时兼容微信APP，可省略<a ui-sref="share.wechat">微信</a>的配置代码）</p>
-          <ui-codemirror ui-codemirror-opts="share.jsOptions">//首先，同微信的配置方式一样，需获取微信的签名。注：别克微信分享地址为：http://www.buick.com.cn/weixinjssign/getbuicksign.aspx
-$.post("http://www.chevrolet.com.cn/chevy-api/getsign.aspx", {signurl: window.location.href.replace(/#.*$/ig, "")}, function(config){
+          <ui-codemirror ui-codemirror-opts="share.jsOptions">//首先，同微信的配置方式一样，需获取微信的签名。注：别克微信分享地址为：https://www.buick.com.cn/weixinjssign/getbuicksign.aspx
+$.post("//www.chevrolet.com.cn/chevy-api/getsign.aspx", {signurl: window.location.href.replace(/#.*$/ig, "")}, function(config){
     config.swapTitleInWX = true;// 朋友圈中是否将标题和内容对调（根据实际需要修改）
     setShareInfo({
         title: __shareDef.title, // 分享标题

@@ -37,7 +37,7 @@
             <p>通过AJAX访问接口来获取签名，一般放置在jQuery/Zepto的ready事件里。常用签名接口如下：</p>
             <h4>别克签名接口</h4>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">//别克新浪微博签名
-$.post("http://www.buick.com.cn/weixinjssign/weibosign.aspx", {
+$.post("//www.buick.com.cn/weixinjssign/weibosign.aspx", {
         key: "YOUR_WEIBO_APPKEY",
         signurl: window.location.href.replace(/#.*$/ig, "")
     }, weiboConfig, 'json');</ui-codemirror>
