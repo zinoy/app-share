@@ -100,7 +100,7 @@ gulp.task('demo', function () {
     path.join(conf.paths.src, '/demo/**/*'),
   ])
     .pipe(fileFilter)
-    .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/demo/')));
 });
 
 gulp.task('clean', function () {
