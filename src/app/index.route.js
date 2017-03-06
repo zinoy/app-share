@@ -125,6 +125,10 @@
         "sgm-wx-auth": {
             "name": "别克&雪佛兰&诚新 - 微信授权",
             "title": "别克&雪佛兰&诚新 - 微信授权"
+        },
+        "filelist-node": {
+            "name": "Nodejs小工具 - 文件列表输出",
+            "title": "Nodejs小工具 - 文件列表输出"
         }
     }; 
 

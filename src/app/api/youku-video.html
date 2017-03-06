@@ -26,58 +26,40 @@
           </div>
           <div class="ibox-content">
             
-            <p>上汽通用别克&雪佛兰网站上使用的视频, 基本上都是存在放在youku服务器上, 视频由客服人员上传到youku服务器上, 并把视频加入Youku白名单中(视频上无广告与youku水印logo). 再通过youku提供的api接口, 可获取动态视频地址.
-            <br>通过调用以下接口地址, 可直接得到youku视频地址:
-            <ul>
-            <li>Buick: <u>//www.buick.com.cn/getvideo/youku/getvideo.ashx?iswebserice=1&vid=xxxxxxxx</u></li>
-            <li>Chevy: <u>//www.chevrolet.com.cn/chevy-api/getvideo.ashx?iswebserice=1&vid=xxxxxxx</u></li>
-            </ul>
+            <p>上汽通用别克&雪佛兰网站上使用的视频, 基本上都是存在放在Youku服务器上, 视频由客服人员上传到Youku服务器上, 并把视频加入Youku白名单中(视频上无广告与Youku水印logo). 再通过youku提供的api接口, 可获取动态视频地址.
+            <br>从2017年2月28日开始，Youku视频已不能通过之前动态程序调用返回mp4 URL地址了，现改为调用Youku视频播放器来播放视频。
+            
             <dl class="dl-horizontal">
               <dt style="width: 32px"><mark>注: </mark></dt>
-              <dd style="margin-left: 40px">1. 当参数不正确或视频不存在，则会显示雪花底的404视频。</dd>
-              <dd style="margin-left: 40px">2. 对于PC网站, 为了向下兼容IE8浏览器, 建议结合<a href="http://videojs.com/" target="_blank" title="http://videojs.com/">VideoJS</a>一起使用。</dd>
+              <dd style="margin-left: 40px">1. 优点：使用方法更简单了，且不会再占用服务器资源。</dd>
+              <dd style="margin-left: 40px">2. 缺点：使用受限，播放器样式不能再定义，还有些bugs。</dd>
             </dl>
-            <br/></p>
+            <br/>为了方便调用，已把youku播放器的API方法封装在testdrive.js里，引入testdrive.js就可以了。
+            </p>
             <h5>参数说明:</h5>
             <ul>
               <li><strong>vid : </strong>youku视频的vid, 一般Account会提供vid, 如:XOTI5NzMwMjky。</li>
-              <li><strong>type : </strong>[可选, 默认值为mp4] 视频类型, 可取值为:mp4, flv, hd2等。</li>
-              <li><strong>iswebserice : </strong>[可选, 默认值为0] 是否为Youku webservice接口, 1:是, 0:否。<sup>*1</sup></li>
-              <li><strong>year : </strong>[可选]年份, 如果iswebserice=1, 则不用传year这参数. 如:2015。</li>
+              <li><strong>poster : </strong>[可选, 默认值为空] 定义视频预览图，在PC上使用swf播放器不支持此属性，手机支持。</li>
+              <li><strong>autoplay : </strong>[可选, 默认值为0] 手机不支持此属性。</li>
+              <li><strong>controls : </strong>[可选，默认值为true]手机不支持此属性。</li>
+              <li><strong>rebuild : </strong>[可选，默认值为false]就当前div标签再重新再生成新的视频。</li>
+              <li><strong>preview : </strong>[可选]显示预览图。因为swf播放器不支持poster属性，所以通过此方法来显示预览图，当点击预览图时，才会加载Youku swf播放器。此属性需要配合autoplay=true一起使用。在手机上不需要定义preview属性，否则会产生点击两次才会播放视频。</li>
+              <li><strong>onPlayerReady : </strong>[可选]<code>Function</code> 当播放器初始化完成时。</li>
+              <li><strong>onPlayStart : </strong>[可选]<code>Function</code> 当视频开始播放时。只会执行一次，暂停再播放时不会产生此事件。</li>
+              <li><strong>onPlayEnd : </strong>[可选]<code>Function</code> 当视频播放结束时。</li>
             </ul>
-            <mark>*1: </mark>从2016年开始, youku启用webservice接口方式获取视频地址, 为了向下兼容2015年视频接口, 所以增加iswebserice=1参数, 用于区别新旧youku视频接口。新youku视频接口, 不再需要传递year参数。
+            <mark>*: </mark>因为只能使用Youku视频播放器来播放Youku网站上的视频，所以<code>video</code>标签很多功能不能实现，如果Youku播放器无法实现网站上的功能，请与客服人员说明情况，并把视频放在自己服务器上。
             <br><br>
             <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;!-- *******************别克 调用Youku视频代码******************** -->
-&lt;!--方式一:
-2016年后的Youku视频, 请在接口后增加iswebserice=1参数, 通过调用新的Youku接口获取动态视频地址。-->
-&lt;video src="//www.buick.com.cn/getvideo/youku/getvideo.ashx?iswebserice=1&vid=XMTUxMDcyNzk0MA==" controls>
-    您的浏览器不支持 video 标签。
-&lt;/video>
-&lt;!--方式二:
-通过旧的Youku接口获取动态视频地址, 此方法只2015年上传Youku的视频, 
-2016年后的Youku视频, 带上iswebserice=1参数, 使用Youku新接口来获取动态视频地址。-->
-&lt;video src="//www.buick.com.cn/getvideo/youku/getvideo.ashx?vid=XMTI3NjM5MTA5Ng==&year=2015&newapi=1" controls>
-    您的浏览器不支持 video 标签。
-&lt;/video>
-
-&lt;!-- ******************雪佛兰 调用Youku视频代码******************* -->
-&lt;!--方式一:
-2016年后的Youku视频, 请在接口后增加iswebserice=1参数, 通过调用新的Youku接口获取动态视频地址。-->
-&lt;video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?iswebserice=1&vid=XMTczMjkzMDk3Mg==" controls>
-    您的浏览器不支持 video 标签。
-&lt;/video>
-&lt;!--方式二:
-通过旧的Youku接口获取动态视频地址, 此方法只2015年上传Youku的视频, 
-2016年后的Youku视频, 带上iswebserice=1参数, 使用Youku新接口来获取动态视频地址。-->
-&lt;video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?vid=XOTI5NzMwMjky&year=2015" controls>
-    您的浏览器不支持 video 标签。
-&lt;/video></ui-codemirror>
+&lt;script type="text/javascript" src="//player.youku.com/jsapi">&lt;/script>
+&lt;script type="text/javascript" src="//www.buick.com.cn/buick-api/testdrive.js">&lt;/script>
+&lt;!-- 雪佛兰网站请把上边别克的地址改为"//www.chevrolet.com.cn/chevy-api/testdrive.js" --></ui-codemirror>
             <br/>
-            <p class="text-muted">附Youku接口地址:<br/>
-              Youku新接口: <small>http://events.youku.com/2015/video-source/api/soap/video-files-service.php</small><br/>
-              Youku旧接口: <small>http://events.youku.com/2015/misc/api/video-files.php?vid=XOTI5NzMwMjky</small>
-            
-            </p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//基本调用方式，具体查看下方的Demo
+var player = hylink.videoPlayer("your_div_id",{vid:"XOTI5NzMwMjky"});
+player.playVideo();//播放视频，此方法需要在视频onPlayerReady后方可执行
+player.pauseVideo();//播放视频，此方法需要在视频onPlayerReady后方可执行
+            </ui-codemirror>
           </div>
         </div>
         <div class="ibox">
@@ -87,35 +69,10 @@
           </div>
           
           <div class="ibox-content">
-           
-            <div class="row">
-             <div class="col-lg-6">
-               <h5>调用别克Youku 新接口</h5>
-                <video src="//www.buick.com.cn/getvideo/youku/getvideo.ashx?vid=XMTUxMDcyNzk0MA==&iswebserice=1" controls>
-                    您的浏览器不支持 video 标签。
-                </video>
-             </div>
-              <div class="col-lg-6">
-                <h5>调用别克Youku 旧接口</h5>
-                <video src="//www.buick.com.cn/getvideo/youku/getvideo.ashx?vid=XMTI3NjM5MTA5Ng==&year=2015&newapi=1" controls>
-                    您的浏览器不支持 video 标签。
-                </video>
-             </div>
-            </div>
-            <div class="row">
-             <div class="col-lg-6">
-               <h5>调用雪佛兰Youku 新接口</h5>
-                <video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?vid=XMTczMjkzMDk3Mg==&iswebserice=1" controls>
-                    您的浏览器不支持 video 标签。
-                </video>
-             </div>
-              <div class="col-lg-6">
-                <h5>调用雪佛兰Youku 旧接口</h5>
-                <video src="//www.chevrolet.com.cn/chevy-api/getvideo.ashx?vid=XOTI5NzMwMjky&year=2015" controls>
-                    您的浏览器不支持 video 标签。
-                </video>
-             </div>
-            </div>
+           <ul>
+              <li>在PC上的视频播放Demo <a href="http://webtest.chevrolet.com.cn/youku/pc-demo1.html" target="_blank">http://webtest.chevrolet.com.cn/youku/pc-demo1.html <i class="fa fa-external-link"></i></a></li>
+              <li>在Mobile上的视频播放Demo <a href="http://webtest.chevrolet.com.cn/youku/m-demo1.html" target="_blank">http://webtest.chevrolet.com.cn/youku/m-demo1.html<i class="fa fa-external-link"></i></a></li>
+            </ul>
           </div>
         </div>
       </div>
