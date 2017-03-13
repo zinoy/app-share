@@ -1,0 +1,67 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ApiController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="api.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>API 说明</h5>
+            <!-- <label>
+              <input type="checkbox" class="js-switch" ui-switch="{size: 'small'}" ng-model="share.hideComment" />
+            </label> -->
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            
+            <p>上汽通用别克服务器获取当前服务器时间戳。</p>
+            <h5>参数说明:</h5>
+            <ul>
+              <li><strong>format : </strong>当前可用的值为js，默认是直接显示当前服务器时间戳。</li>
+            </ul>
+            <br/>
+            <h5>回调返回参数说明:</h5>
+            <ul>
+              <li><strong>默认返回 : </strong>时间戳文本，如：1489396722342。</li>
+              <li><strong>format=js : </strong>返回如：var CURRENT_SYSTEM_TIME = new Date(1489396722342);</li>
+            </ul>
+            <h3>方式A（一次获取服务器时间，推荐）：</h3>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions">&lt;script src="//www.buick.com.cn/apinew/timespan.aspx?format=js">&lt;/script>
+&lt;!--返回var CURRENT_SYSTEM_TIME = new Date(1489396722342);，可直接使用CURRENT_SYSTEM_TIME变量--></ui-codemirror>
+            <br/>
+            <h3>方式B（可多次请求获取服务器时间）：</h3>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//通过ajax方式去获取时间。
+$.get("//www.buick.com.cn/apinew/timespan.aspx").done(function(t){
+  console.log(new Date(parseInt(t)));
+}).fail(function(){console.error("timespan.aspx Error!")});</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Demo</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          
+          <div class="ibox-content">
+           <ul>
+             <li>雪佛兰授权测试地址：<a href="http://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true" target="_blank">http://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true</a></li>
+           </ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

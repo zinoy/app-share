@@ -43,8 +43,9 @@
               <li><strong>province : </strong>微信用户省份。</li>
               <li><strong>city : </strong>微信用户城市。</li>
             </ul>
-            <p>下方代码放在<code>&lt;head></code>内最靠前位置，授权完成后，微信用户信息保存在<code>window.WX_userInfo</code><br/>
-              退出（离开）微信浏览器后，<code>sessionStorage</code>会被清空，再次进入会重新授权。</p>
+            <p>下方代码放在<code>&lt;head></code>内最靠前位置，授权完成后，微信用户信息保存在<code>window.WX_userInfo</code>。<br>
+              退出（离开）微信浏览器后，<code>sessionStorage</code>会被清空，再次进入会重新授权。<br>
+              **注意：只有<code>var SCOPE="snsapi_userinfo"</code>时，才会有微信授权框提示及获取得到用户名称及头像等参数。否则只可得到用户的openid。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">&lt;script>
 // 调用 微信授权 接口。
 (function(){
