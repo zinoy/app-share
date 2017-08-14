@@ -1,0 +1,57 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ShareController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="share.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>HTML</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div force-vertical></div>
+            <div static-only></div>
+            <p>通过在 <code>&lt;head&gt;</code> 中的 <code>&lt;meta&gt;</code> 标签来定义分享内容，示例如下：</p>
+            <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中直接配置马蜂窝的分享内容 -->
+&lt;meta property="og:title" content="都市爱情怪谈之『同学会艳遇』" />
+&lt;meta property="og:description" content="李东渊不敢相信那个传言。虽然所有人都信誓旦旦言之凿凿，但那听起来太像一个笑话了。" />
+&lt;meta property="og:image" content="https://img1.doubanio.com/view/note/large/public/p32616267.jpg" />
+&lt;meta property="og:url" content="https://www.douban.com/note/546696546/" /></ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>APP判断脚本</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">//TODO</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>案例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <ul>
+              <li>最美中国 界外寻音 <a href="http://m.chevrolet.com.cn/act/suv/frontierchina-reel-1-h5-mfw/" target="_blank">http://m.chevrolet.com.cn/act/suv/frontierchina-reel-1-h5-mfw/ <i class="fa fa-external-link"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

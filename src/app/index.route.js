@@ -106,6 +106,11 @@
             "key": "meitu",
             "name": "美图秀秀",
             "title": "Meitu"
+        },
+        {
+            "key": "mafengwo",
+            "name": "马蜂窝",
+            "title": "Mafengwo"
         }
     ];
 
@@ -131,7 +136,7 @@
             "title": "获取服务器时间"
         },
         "filelist-node": {
-            "name": "Nodejs小工具 - 文件列表输出",
+            "name": "Nodejs小工具 - 文件列表输出",
             "title": "Nodejs小工具 - 文件列表输出"
         }
     }; 

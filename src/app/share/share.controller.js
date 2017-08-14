@@ -19,6 +19,12 @@ angular.module('inspinia')
         template: '<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 该接口不支持HTTPS协议。</p>'
     };
 })
+.directive('forceVertical', function forceVertical() {
+    return {
+        restrict: 'A',
+        template: '<p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 该APP不支持横屏浏览网页。</p>'
+    };
+})
 .controller('ShareController', ["$scope", function($scope) {
     var vm = this;
     vm.jsOptions = {
