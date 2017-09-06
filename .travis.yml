@@ -33,3 +33,4 @@ deploy:
     $LINODE_URI:/var/www/app-share
   on:
     branch: master
+dist: trusty
