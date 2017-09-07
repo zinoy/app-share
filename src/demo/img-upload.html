@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>图片上传</title>
+  <link rel="stylesheet" href="/app/index.css">
+  <link rel="stylesheet" href="libs/cropper/cropper.min.css">
+  <style>
+    ul.files {
+      clear: both;
+      list-style: none;
+      margin: 0 -15px -15px;
+      overflow: hidden;
+      padding: 0;
+    }
+    .files li {
+      border: solid 1px #999;
+      float: left;
+      height: 80px;
+      margin: 0 15px 15px;
+      overflow: hidden;
+      width: 80px;
+    }
+    .files li canvas {
+      display: block;
+      width: 100%;
+    }
+    .files li.add {
+      border-color: #dfdfdf;
+      cursor: pointer;
+      position: relative;
+    }
+    .files li.add::before,.files li.add::after {
+      background: #dfdfdf;
+      content: "";
+      height: 60%;
+      left: 50%;
+      margin-left: -2px;
+      position: absolute;
+      top: 20%;
+      width: 4px;
+    }
+    .files li.add::after {
+      height: 4px;
+      left: 20%;
+      margin: -2px 0 0;
+      top: 50%;
+      width: 60%;
+    }
+    .cropper {
+      background: rgba(0,0,0,.8);
+      display: none;
+      height: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 5;
+    }
+    .cropper .btn {
+      bottom: 10px;
+      position: absolute;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="page-wraper" class="gray-bg">
+      <div class="wrapper wrapper-content">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="ibox">
+              <div class="ibox-content">
+                <h3 class="m-b">图片上传</h3>
+                <input type="file" id="hidden_file" accept="image/*" style="position:fixed;top:-99999px">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="">上传类型</label>
+                    <div>
+                      <label class="radio-inline">
+                        <input type="radio" name="uptype" id="uptype_file" value="file" checked>
+                        文件
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="uptype" id="uptype_base64" value="base64">
+                        Base64
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="">图片路径</label>
+                    <input type="text" maxlength="20" name="picpath" placeholder="/act/newregal/decode/" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">上传图片</label>
+                    <ul class="files">
+                      <li class="add"></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <button class="btn btn-primary">提交</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cropper">
+      <canvas></canvas>
+      <button class="btn btn-primary"><i class="fa fa-check"></i> OK</button>
+    </div>
+  </div>
+  <script src="libs/jquery/jquery.min.js"></script>
+  <script src="libs/cropper/cropper.min.js"></script>
+  <script src="libs/megapix-image.js"></script>
+  <script>
+    function getOrientation(t){var e=new DataView(t);if(65496!=e.getUint16(0,!1))return-2;for(var n=e.byteLength,i=2;i<n;){var r=e.getUint16(i,!1);if(i+=2,65505==r){if(1165519206!=e.getUint32(i+=2,!1))return-1;var g=18761==e.getUint16(i+=6,!1);i+=e.getUint32(i+4,g);var a=e.getUint16(i,g);i+=2;for(var U=0;U<a;U++)if(274==e.getUint16(i+12*U,g))return e.getUint16(i+12*U+8,g)}else{if(65280!=(65280&r))break;i+=e.getUint16(i,!1)}}return-1}
+    if (!HTMLCanvasElement.prototype.toBlob) {
+      Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+        value: function (callback, type, quality) {
+
+          var binStr = atob( this.toDataURL(type, quality).split(',')[1] ),
+              len = binStr.length,
+              arr = new Uint8Array(len);
+
+          for (var i = 0; i < len; i++ ) {
+            arr[i] = binStr.charCodeAt(i);
+          }
+
+          callback( new Blob( [arr], {type: type || 'image/png'} ) );
+        }
+      });
+    }
+
+    var formData = new FormData();
+    $('.files .add').on('click', function() {
+      $('#hidden_file').trigger('click');
+    });
+    $('#hidden_file').on('change', function(e) {
+      $('[name=uptype]').attr('disabled', 'disabled');
+
+      var file = this.files[0];
+      if (this.files.length > 0) {
+        var type = file.type, reader = new FileReader();
+        reader.onloadend = function() {
+
+          var orientation = getOrientation(reader.result);
+
+          var blob = new Blob([reader.result], {type: "image/jpeg"});
+          var urlCreator = window.URL || window.webkitURL;
+          var imageUrl = urlCreator.createObjectURL(blob);
+
+          var uploadImg = new Image();
+          var uploadSize = {
+            height: 1024,
+            width: 1024
+          };
+          uploadImg.onload = function() {
+              var imageWidth = uploadImg.width, imageHeight = uploadImg.height;
+              var sw = Math.min(imageWidth, imageHeight);
+              var rw = uploadSize.width / imageWidth, rh = uploadSize.height / imageHeight;
+              var ratio = Math.max(rw, rh);
+              var dw = Math.ceil(imageWidth * ratio), dh = Math.ceil(imageHeight * ratio);
+
+                //Create canvas with new image
+                var tmpCanvas = document.createElement('canvas');
+                // tmpCanvas.width = dw;
+                // tmpCanvas.height = dh;
+                if (orientation >= 5) {
+                    rw = uploadSize.width / imageHeight;
+                    rh = uploadSize.height / imageWidth;
+                    ratio = Math.max(rw, rh);
+                    dw = Math.round(imageWidth * ratio);
+                    dh = Math.round(imageHeight * ratio);
+                }
+                var mpImg = new MegaPixImage(uploadImg);
+                mpImg.render(tmpCanvas, {
+                    width : dw,
+                    height : dh,
+                    quality : 0.6,
+                    orientation : orientation
+                });
+
+                if (orientation >= 5) {
+                    var t = dw;
+                    dw = dh;
+                    dh = t;
+                }
+
+                $('.cropper canvas').replaceWith(tmpCanvas);
+                $('.cropper').show();
+                $('.loading').addClass('out').css('opacity', '');
+                $(tmpCanvas).cropper({
+                  viewMode: 1,
+                  dragMode: 'move',
+                  aspectRatio: 1,
+                  guides: false,
+                  center: false,
+                  cropBoxMovable: false,
+                  cropBoxResizable: false,
+                  toggleDragModeOnDblclick: false
+                });
+
+                var rd = uploadImg.width / uploadImg.height;
+                var rc = dw / dh;
+
+                var pw = $('.cropper .board p').width();
+                var ph = $('.cropper .board p').height();
+                var cw, ch, cr;
+
+                if (rd >= rc) {
+                    $(tmpCanvas).css('width', '100%');
+                    cr = pw / dw;
+                    ch = Math.round(cr * dh);
+                    cw = pw;
+                } else {
+                    $(tmpCanvas).css('height', '100%');
+                    cr = ph / dh;
+                    cw = Math.round(cr * dw);
+                    ch = ph;
+                }
+                var sx = (pw - cw) / 2;
+                var sy = (ph - ch) / 2;
+                $('.cropper').data('pos', {
+                    x : pw - cw,
+                    y : ph - ch,
+                    r : cr
+                });
+                $(tmpCanvas).css({
+                    left : sx,
+                    top : sy
+                });
+
+          };
+          uploadImg.src = imageUrl;
+        };
+        reader.readAsArrayBuffer(this.files[0]);
+      }
+    });
+    $('.cropper .btn').on('click', function() {
+      var cvs = $('.cropper canvas').cropper('getCroppedCanvas', {
+        width: 1024,
+        height: 1024
+      });
+      $('.files .add').off('click').append(cvs);
+      if ($('#uptype_base64').get(0).checked) {
+        formData.append('filedata', cvs.toDataURL());
+        $('.cropper').hide();
+        $('.cropper canvas').cropper('destroy');
+        $('.files .add').removeClass('add');
+      } else {
+        $('.cropper canvas').cropper('disable');
+        cvs.toBlob(function(blob) {
+          formData.append('pic[]', blob);
+          $('.files .add').removeClass('add').after($('<li class="add"/>').on('click', function() {
+            $('#hidden_file').trigger('click');
+          }));
+          $('.cropper').hide();
+          $('.cropper canvas').cropper('destroy');
+        });
+      }
+    });
+    $('form').on('submit', function(e) {
+      e.preventDefault();
+      formData.append('uptype', $('[name=uptype]').val());
+      formData.append('picpath', $('[name=picpath]').val());
+      $.ajax('http://webtest.buick.com.cn/picfilesapi/upimgapi.aspx', {
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false
+      }).done(function(data){
+        console.log(data);
+      });
+    });
+  </script>
+</body>
+</html>

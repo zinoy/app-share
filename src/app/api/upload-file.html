@@ -1,0 +1,115 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="ApiController as share">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+      <h2>{{$state.current.data.pageTitle}}</h2>
+      <ol class="breadcrumb">
+        <li>
+          <a ui-sref="api.index">Home</a>
+        </li>
+        <li class="active">
+            <strong>{{$state.current.data.title}}</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="wrapper wrapper-content">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>接口路径</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <h4>别克</h4>
+            <p><code>http://www.buick.com.cn/picfilesapi/</code></p>
+          </div>
+        </div>
+        <div class="ibox api-spec">
+          <div class="ibox-title">
+            <h5>接口文档</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <div class="panel panel-primary">
+              <div class="panel-heading">列表</div>
+              <div class="panel-body">
+                <ul>
+                  <li><a href="#upload-image">图片上传</a></li>
+                </ul>
+              </div>
+            </div>
+            <section id="upload-image">
+              <h2>图片上传</h2>
+              <h3>URL</h3>
+              <p>upimgapi.aspx</p>
+              <h3>方式</h3>
+              <p>POST</p>
+              <h3>参数</h3>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>参数名</th>
+                    <th>类型</th>
+                    <th>默认值</th>
+                    <th>是否必须</th>
+                    <th>说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>picpath</th>
+                    <td>String</td>
+                    <td> </td>
+                    <td>可选</i></td>
+                    <td>图片保存路径，如：<code>/act/newregal/</code></td>
+                  </tr>
+                  <tr>
+                    <th>uptype</th>
+                    <td>String</td>
+                    <td> </td>
+                    <td>必填</i></td>
+                    <td>
+                      <p>上传图片的数据类型，可选值：</p>
+                      <ul>
+                        <li><code>file</code> 二进制文件（支持多文件同时上传）</li>
+                        <li><code>base64</code> Base64编码的二进制字符串</li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>filedata</td>
+                    <td>String</td>
+                    <td> </td>
+                    <td>可选</td>
+                    <td>Base64编码的二进制字符串，当 <b>uptype</b> 为 <code>base64</code> 时为必填项</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3>返回格式</h3>
+              <p>JSON</p>
+              <h3>返回示例</h3>
+              <ui-codemirror ui-codemirror-opts="share.jsOptions">{
+  "status": "1",
+  "message": "上传成功",
+  "picpath": "/uploadfiles/pubapi/2017-09-01/",
+  "pics": ["201709011929324061.png"]
+}</ui-codemirror>
+            </section>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>演示</h5>
+          </div>
+          <div class="ibox-content">
+            <div class="row">
+              <div class="col-md-6"><iframe frameborder="0" width="360" height="540" src="/demo/img-upload.html"></iframe></div>
+              <div class="col-md-6"><img src="http://util.zino.co/php/qrcode.php?chl=http%3A%2F%2Fabcdefg&chs=5&chld=M&cht=qr" alt="qrcode"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
