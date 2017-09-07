@@ -105,7 +105,12 @@
           <div class="ibox-content">
             <div class="row">
               <div class="col-md-6"><iframe frameborder="0" width="360" height="540" src="/demo/img-upload.html"></iframe></div>
-              <div class="col-md-6"><img src="http://util.zino.co/php/qrcode.php?chl=http%3A%2F%2Fabcdefg&chs=5&chld=M&cht=qr" alt="qrcode"></div>
+              <div class="col-md-6">
+                <img src="" alt="qrcode" id="qrcode">
+                <script>
+                  $('#qrcode').attr('src', 'http://util.zino.co/php/qrcode.php?chl=' + encodeURIComponent(location.protocol + '//' + location.host + '/demo/img-upload.html') + '&chs=5&chld=M&cht=qr')
+                </script>
+              </div>
             </div>
           </div>
         </div>
