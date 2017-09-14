@@ -62,7 +62,7 @@
                     <td>String</td>
                     <td> </td>
                     <td>可选</i></td>
-                    <td>图片保存路径，如：<code>/act/newregal/</code></td>
+                    <td><p>图片保存路径，如：<code>/act/newregal/</code></p></td>
                   </tr>
                   <tr>
                     <th>uptype</th>
@@ -100,15 +100,143 @@
         </div>
         <div class="ibox">
           <div class="ibox-title">
+            <h5>兼容性</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>部分低版本的Android中canvas不支持 <code>toBlob()</code> 方法，为了能兼容各主流手机平台，应在JS中插入以下代码：</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">if (!HTMLCanvasElement.prototype.toBlob) {
+  Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+    value: function (callback, type, quality) {
+
+      var binStr = atob( this.toDataURL(type, quality).split(',')[1] ),
+          len = binStr.length,
+          arr = new Uint8Array(len);
+
+      for (var i = 0; i < len; i++ ) {
+        arr[i] = binStr.charCodeAt(i);
+      }
+
+      callback( new Blob( [arr], {type: type || 'image/png'} ) );
+    }
+  });
+}</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>代码示例</h5>
+            <div ibox-tools control="iboxTools"></div>
+          </div>
+          <div class="ibox-content">
+            <p>示例中用到的JS库：</p>
+            <ul class="m-b-md">
+              <li><a href="https://github.com/stomita/ios-imagefile-megapixel" target="_blank">stomita/ios-imagefile-megapixel <i class="fa fa-external-link"></i></a></li>
+            </ul>
+            <h4>图片加载</h4>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">// 检查图片朝向
+function getOrientation(t){var e=new DataView(t);if(65496!=e.getUint16(0,!1))return-2;for(var n=e.byteLength,i=2;i&lt;n;){var r=e.getUint16(i,!1);if(i+=2,65505==r){if(1165519206!=e.getUint32(i+=2,!1))return-1;var g=18761==e.getUint16(i+=6,!1);i+=e.getUint32(i+4,g);var a=e.getUint16(i,g);i+=2;for(var U=0;U&lt;a;U++)if(274==e.getUint16(i+12*U,g))return e.getUint16(i+12*U+8,g)}else{if(65280!=(65280&amp;r))break;i+=e.getUint16(i,!1)}}return-1}
+
+$('#file_input').on('change', function() {
+  var file = this.files[0];
+  if (this.files.length > 0) {
+    var type = file.type, reader = new FileReader();
+    reader.onloadend = function() {
+
+      var orientation = getOrientation(reader.result);
+
+      var blob = new Blob([reader.result], {type: "image/jpeg"});
+      var urlCreator = window.URL || window.webkitURL;
+      var imageUrl = urlCreator.createObjectURL(blob);
+
+      var uploadImg = new Image();
+      var uploadSize = { // 指定上传的图片尺寸
+        height: 1024,
+        width: 1024
+      };
+      uploadImg.onload = function() {
+        var imageWidth = uploadImg.width, imageHeight = uploadImg.height;
+        var sw = Math.min(imageWidth, imageHeight);
+        var rw = uploadSize.width / imageWidth, rh = uploadSize.height / imageHeight;
+        var ratio = Math.max(rw, rh);
+        var dw = Math.ceil(imageWidth * ratio), dh = Math.ceil(imageHeight * ratio);
+
+        // 创建一个临时的canvas
+        var tmpCanvas = document.createElement('canvas');
+        if (orientation >= 5) {
+          rw = uploadSize.width / imageHeight;
+          rh = uploadSize.height / imageWidth;
+          ratio = Math.max(rw, rh);
+          dw = Math.round(imageWidth * ratio);
+          dh = Math.round(imageHeight * ratio);
+        }
+        var mpImg = new MegaPixImage(uploadImg);
+        mpImg.render(tmpCanvas, {
+          width : dw,
+          height : dh,
+          quality : 0.8, // 图片质量
+          orientation : orientation
+        });
+
+        // 初始化图片裁剪
+        $('.cropper canvas').replaceWith(tmpCanvas);
+        $('.cropper').show();
+        $(tmpCanvas).cropper({
+          viewMode: 1,
+          dragMode: 'move',
+          aspectRatio: 1,
+          guides: false,
+          center: false,
+          cropBoxMovable: false,
+          cropBoxResizable: false,
+          toggleDragModeOnDblclick: false
+        });
+      };
+      uploadImg.src = imageUrl;
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+  }
+});</ui-codemirror>
+            <div class="m-b-md"></div>
+            <h4>图片上传</h4>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">var formData = new FormData();
+canvas.toBlob(function(blob) {
+  formData.append('pic[]', blob);
+  $.ajax(apiPath + '/picfilesapi/upimgapi.aspx', {
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: 'json'
+  }).done(function(data) {
+    $('pre code').html(JSON.stringify(data));
+    $('#result').show();
+    $('#form').hide();
+    $('#preview').empty();
+    for (var i=0, len=data.pics.length; i&lt;len; i++) {
+      $('#preview').append('&lt;img src="' + apiPath + data.picpath + data.pics[0] + '">');
+    }
+  }).fail(function(a,b) {
+    console.error(a,b);
+    alert('服务器错误');
+  }).always(function() {
+    waiting = false;
+  });  
+});</ui-codemirror>
+          </div>
+        </div>
+        <div class="ibox">
+          <div class="ibox-title">
             <h5>演示</h5>
           </div>
           <div class="ibox-content">
             <div class="row">
               <div class="col-md-6"><iframe frameborder="0" width="360" height="540" src="/demo/img-upload.html"></iframe></div>
               <div class="col-md-6">
-                <img src="" alt="qrcode" id="qrcode">
+                <p><img src="" alt="qrcode" id="qrcode"></p>
                 <script>
-                  $('#qrcode').attr('src', 'http://util.zino.co/php/qrcode.php?chl=' + encodeURIComponent(location.protocol + '//' + location.host + '/demo/img-upload.html') + '&chs=5&chld=M&cht=qr')
+                  var url = location.protocol + '//' + location.host + '/demo/img-upload.html';
+                  $('#qrcode').attr('src', 'http://util.zino.co/php/qrcode.php?chl=' + encodeURIComponent(url) + '&chs=5&chld=M&cht=qr').parent().after('<p><a href="' + url + '" target="_blank">' + url + ' <i class="fa fa-external-link"></i></a></p>');
                 </script>
               </div>
             </div>
