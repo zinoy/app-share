@@ -7,7 +7,7 @@
           <a ui-sref="api.index">Home</a>
         </li>
         <li class="active">
-            <strong>{{$state.current.data.title}}</strong>
+          <strong>{{$state.current.data.title}}</strong>
         </li>
       </ol>
     </div>
@@ -15,6 +15,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="wrapper wrapper-content">
+        <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 上传接口仍在开发中，请勿在正式环境使用。</div>
         <div class="ibox">
           <div class="ibox-title">
             <h5>接口路径</h5>
@@ -22,7 +23,7 @@
           </div>
           <div class="ibox-content">
             <h4>别克</h4>
-            <p><code>http://www.buick.com.cn/picfilesapi/</code></p>
+            <p><code>http://www.buick.com.cn/apinew/</code></p>
           </div>
         </div>
         <div class="ibox api-spec">
@@ -62,18 +63,12 @@
                     <td>String</td>
                     <td> </td>
                     <td>可选</i></td>
-                    <td><p>图片保存路径，如：<code>/act/newregal/</code></p></td>
-                  </tr>
-                  <tr>
-                    <th>uptype</th>
-                    <td>String</td>
-                    <td> </td>
-                    <td>必填</i></td>
                     <td>
-                      <p>上传图片的数据类型，可选值：</p>
+                      <p>图片保存路径。遵循以下规则：</p>
                       <ul>
-                        <li><code>file</code> 二进制文件（支持多文件同时上传）</li>
-                        <li><code>base64</code> Base64编码的二进制字符串</li>
+                        <li><b>为空</b>：图片将保存至默认目录 <code>/uploadfiles/pubapi/</code></li>
+                        <li><b>相对地址</b> (如 <code>actname/</code>) <i class="fa fa-star" title="推荐"></i>：上传至默认目录下的指定路径 <code>/uploadfiles/pubapi/actname/</code></li>
+                        <li><b>绝对地址</b> (如 <code>/act/brand/img/</code>)：上传至网站根目录下的指定路径，需要接口有对应的权限</li>
                       </ul>
                     </td>
                   </tr>
@@ -82,10 +77,11 @@
                     <td>String</td>
                     <td> </td>
                     <td>可选</td>
-                    <td>Base64编码的二进制字符串，当 <b>uptype</b> 为 <code>base64</code> 时为必填项</td>
+                    <td>Base64编码的二进制字符串，如为空则使用二进制文件。
                   </tr>
                 </tbody>
               </table>
+              <p class="alert">带 <i class="fa fa-star"></i> 的为推荐使用的值或类型。</p>
               <h3>返回格式</h3>
               <p>JSON</p>
               <h3>返回示例</h3>
@@ -113,7 +109,7 @@
           len = binStr.length,
           arr = new Uint8Array(len);
 
-      for (var i = 0; i < len; i++ ) {
+      for (var i = 0; i &lt; len; i++ ) {
         arr[i] = binStr.charCodeAt(i);
       }
 
@@ -199,6 +195,7 @@ $('#file_input').on('change', function() {
 });</ui-codemirror>
             <div class="m-b-md"></div>
             <h4>图片上传</h4>
+            <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 上传接口仍在开发中，请勿在正式环境使用。</div>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var formData = new FormData();
 canvas.toBlob(function(blob) {
   formData.append('pic[]', blob);
@@ -230,6 +227,7 @@ canvas.toBlob(function(blob) {
             <h5>演示</h5>
           </div>
           <div class="ibox-content">
+            <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 上传接口仍在开发中，请勿在正式环境使用。</div>
             <div class="row">
               <div class="col-md-6"><iframe frameborder="0" width="360" height="540" src="/demo/img-upload.html"></iframe></div>
               <div class="col-md-6">
