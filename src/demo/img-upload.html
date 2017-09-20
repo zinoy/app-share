@@ -172,7 +172,7 @@
     }
 
     var formData = new FormData();
-    var apiPath = "http://webtest.buick.com.cn/";
+    var apiPath = "http://webtest.buick.com.cn";
     $('.files .add').on('click', function() {
       $('#hidden_file').trigger('click');
     });
@@ -273,7 +273,7 @@
         formData.append('picpath', $('[name=picpath]').val());
       }
       waiting = true;
-      $.ajax(apiPath + 'apinew/upimgapi.aspx', {
+      $.ajax(apiPath + '/apinew/upimgapi.aspx', {
         method: 'POST',
         data: formData,
         processData: false,

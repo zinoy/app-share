@@ -4,7 +4,12 @@
     var appShareJson = [
         {
             "key": "wechat",
-            "name": "微信",
+            "name": "微信（旧）",
+            "title": "Wechat"
+        },
+        {
+            "key": "wechat-new",
+            "name": "微信（新）",
             "title": "Wechat"
         },
         {
