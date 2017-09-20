@@ -221,12 +221,6 @@
                     orientation : orientation
                 });
 
-                if (orientation >= 5) {
-                    var t = dw;
-                    dw = dh;
-                    dh = t;
-                }
-
                 $('.cropper canvas').replaceWith(tmpCanvas);
                 $('.cropper').show();
                 $('.loading').addClass('out').css('opacity', '');
@@ -253,7 +247,7 @@
         height: 1024
       });
       if ($('#uptype_base64').get(0).checked) {
-        formData.set('filedata', cvs.toDataURL());
+        formData.set('filedata', cvs.toDataURL("image/jpeg"));
         $('.cropper').hide();
         $('.cropper canvas').cropper('destroy');
         $('.files li').html(cvs).removeClass('add');
@@ -267,7 +261,7 @@
           }));
           $('.cropper').hide();
           $('.cropper canvas').cropper('destroy');
-        });
+        }, "image/jpeg");
       }
     });
     var waiting = false;
@@ -279,7 +273,7 @@
         formData.append('picpath', $('[name=picpath]').val());
       }
       waiting = true;
-      $.ajax(apiPath + '/picfilesapi/upimgapi.aspx', {
+      $.ajax(apiPath + 'apinew/upimgapi.aspx', {
         method: 'POST',
         data: formData,
         processData: false,
@@ -287,11 +281,15 @@
         dataType: 'json'
       }).done(function(data) {
         $('pre code').html(JSON.stringify(data));
-        $('#result').show();
-        $('#form').hide();
-        $('#preview').empty();
-        for (var i=0, len=data.pics.length; i<len; i++) {
-          $('#preview').append('<img src="' + apiPath + data.picpath + data.pics[0] + '">');
+        if(data.status==1){
+          $('#result').show();
+          $('#form').hide();
+          $('#preview').empty();
+          data.pics.forEach(function(item,index){
+            $('#preview').append(`<img src="${apiPath + data.picpath + item}">`);//此为ES6字串操作
+          });
+        }else{
+          alert('上传失败：'+data.status);
         }
       }).fail(function(a,b) {
         console.error(a,b);

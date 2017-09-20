@@ -15,7 +15,6 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="wrapper wrapper-content">
-        <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 上传接口仍在开发中，请勿在正式环境使用。</div>
         <div class="ibox">
           <div class="ibox-title">
             <h5>接口路径</h5>
@@ -23,7 +22,15 @@
           </div>
           <div class="ibox-content">
             <h4>别克</h4>
-            <p><code>http://www.buick.com.cn/apinew/</code></p>
+            <p><code>http://webtest.buick.com.cn/apinew/upimgapi.aspx</code>（PC测试）</p>
+            <p><code>https://www.buick.com.cn/apinew/upimgapi.aspx</code>（PC正式）</p>
+            <p><code>http://mobiletest.buick.com.cn/apinew/upimgapi.aspx</code>（移动端测试）</p>
+            <p><code>https://m.buick.com.cn/apinew/upimgapi.aspx</code>（移动端正式）</p>
+            <h4>雪佛兰</h4>
+            <p><code>http://webtest.chevrolet.com.cn/apinew/upimgapi.aspx</code>（PC测试）</p>
+            <p><code>https://www.chevrolet.com.cn/apinew/upimgapi.aspx</code>（PC正式）</p>
+            <p><code>http://mobiletest.chevrolet.com.cn/apinew/upimgapi.aspx</code>（移动端测试）</p>
+            <p><code>https://m.chevrolet.com.cn/apinew/upimgapi.aspx</code>（移动端正式）</p>
           </div>
         </div>
         <div class="ibox api-spec">
@@ -43,7 +50,7 @@
             <section id="upload-image">
               <h2>图片上传</h2>
               <h3>URL</h3>
-              <p>upimgapi.aspx</p>
+              <p>/apinew/upimgapi.aspx</p>
               <h3>方式</h3>
               <p>POST</p>
               <h3>参数</h3>
@@ -77,7 +84,7 @@
                     <td>String</td>
                     <td> </td>
                     <td>可选</td>
-                    <td>Base64编码的二进制字符串，如为空则使用二进制文件。
+                    <td>Base64编码的二进制字符串，如为空则使用二进制文件<i class="fa fa-star" title="推荐"></i>。
                   </tr>
                 </tbody>
               </table>
@@ -89,7 +96,7 @@
   "status": "1",
   "message": "上传成功",
   "picpath": "/uploadfiles/pubapi/2017-09-01/",
-  "pics": ["201709011929324061.png"]
+  "pics": ["6b46772a-14e6-45d2-8745-8768b011891b.png"]
 }</ui-codemirror>
             </section>
           </div>
@@ -127,7 +134,10 @@
           <div class="ibox-content">
             <p>示例中用到的JS库：</p>
             <ul class="m-b-md">
-              <li><a href="https://github.com/stomita/ios-imagefile-megapixel" target="_blank">stomita/ios-imagefile-megapixel <i class="fa fa-external-link"></i></a></li>
+              <li><a href="https://github.com/stomita/ios-imagefile-megapixel" target="_blank">stomita/ios-imagefile-megapixel <i class="fa fa-external-link"></i></a>
+              <span>此插件可优化上传图片大小，提高手机性能。</span></li>
+              <li><a href="https://github.com/fengyuanchen/cropper" target="_blank">fengyuanchen/cropper <i class="fa fa-external-link"></i></a>
+                <span>此插件可对图片放大缩小旋转裁切。</span></li>
             </ul>
             <h4>图片加载</h4>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// 检查图片朝向
@@ -195,11 +205,11 @@ $('#file_input').on('change', function() {
 });</ui-codemirror>
             <div class="m-b-md"></div>
             <h4>图片上传</h4>
-            <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 上传接口仍在开发中，请勿在正式环境使用。</div>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var formData = new FormData();
 canvas.toBlob(function(blob) {
   formData.append('pic[]', blob);
-  $.ajax(apiPath + '/picfilesapi/upimgapi.aspx', {
+  //formData.append('picpath', 'xxxx-folder/');//optional, 传到指定目录下
+  $.ajax(apiPath + 'apinew/upimgapi.aspx', {
     method: 'POST',
     data: formData,
     processData: false,
@@ -207,11 +217,15 @@ canvas.toBlob(function(blob) {
     dataType: 'json'
   }).done(function(data) {
     $('pre code').html(JSON.stringify(data));
-    $('#result').show();
-    $('#form').hide();
-    $('#preview').empty();
-    for (var i=0, len=data.pics.length; i&lt;len; i++) {
-      $('#preview').append('&lt;img src="' + apiPath + data.picpath + data.pics[0] + '">');
+    if(data.status==1){
+      $('#result').show();
+      $('#form').hide();
+      $('#preview').empty();
+      data.pics.forEach(function(item,index){
+        $('#preview').append(`&lt;img src="${apiPath + data.picpath + item}">`);//此$符号为ES6字串操作
+      });
+    }else{
+      alert('上传失败：'+data.status);
     }
   }).fail(function(a,b) {
     console.error(a,b);
@@ -227,7 +241,6 @@ canvas.toBlob(function(blob) {
             <h5>演示</h5>
           </div>
           <div class="ibox-content">
-            <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 上传接口仍在开发中，请勿在正式环境使用。</div>
             <div class="row">
               <div class="col-md-6"><iframe frameborder="0" width="360" height="540" src="/demo/img-upload.html"></iframe></div>
               <div class="col-md-6">
