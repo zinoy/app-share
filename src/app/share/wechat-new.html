@@ -23,46 +23,139 @@
                 </div>
                 <div class="ibox-content">
                   <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用微信JS -->
-&lt;script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js">&lt;/script></ui-codemirror>
+&lt;script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js">&lt;/script></ui-codemirror>
                 </div>
               </div>
-              
+
               <div class="ibox">
-                  <div class="ibox-title">
-                    <h5>Javascript</h5>
-                    <div ibox-tools control="iboxTools"></div>
-                  </div>
-                  <div class="ibox-content">
-                    <ol>
-                        <li>把微信签名接口封装起来，自动根据H5域名调用【别克，雪佛兰，诚新二手车】微信签名接口</li>
-                        <li>不依赖任何第三方JS库，但必须是在引入<code>//res.wx.qq.com/open/js/jweixin-1.0.0.js</code>后执行</li>
-                        <li>复制下方封装的JS代码放到head部分，让签名代码优先执行起来</li>
-                        <li>默认<code>jsApiList</code>只请求了两个接口（<code>["onMenuShareTimeline", "onMenuShareAppMessage"]</code>），如果项目需要调用更多接口（如：扫描二维码、录音等），请参考<a href="http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E9.99.84.E5.BD.952-.E6.89.80.E6.9C.89JS.E6.8E.A5.E5.8F.A3.E5.88.97.E8.A1.A8" target="_blank">官方文档 <i class="fa fa-external-link"></i></a></li>
-                    </ol>
-                    <p>方式一：只需要定义title等</p>
-                    <ui-codemirror ui-codemirror-opts="share.jsOptions">(function(def){if(!/MicroMessenger/i.test(navigator.userAgent)){console.info("非微信浏览器，微信签名不会执行！");return function(){}}var sDef={base_url:location.href.match(/http[\w:\.\/-]+\w\//)[0]};sDef.title=def.title;sDef.title2=def.title2||sDef.title;sDef.desc=def.desc||"\ufff6";sDef.img=isURL(def.img)?def.img:sDef.base_url+(def.img||"images/share.jpg");sDef.img2=def.img2?(isURL(def.img2)?def.img2:sDef.base_url+(def.img2||"images/share.jpg")):sDef.img;sDef.url=def.url||sDef.base_url;sDef.url2=def.url2||sDef.url;sDef.shareCallback=typeof def.shareCallback=="function"?def.shareCallback:function(){};var xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==4&&xhr.status==200){wxConfig(JSON.parse(xhr.responseText))}};if(location.hostname.indexOf("chevrolet.com.cn")!=-1){xhr.open("POST","//www.chevrolet.com.cn/chevy-api/getsign.aspx")}else{if(location.hostname.indexOf("buick.com.cn")!=-1){xhr.open("POST","//www.buick.com.cn/weixinjssign/getbuicksign.aspx")}else{if(location.hostname=="chengxinmobile.saic-gm.com"){xhr.open("POST","//chengxinmobile.saic-gm.com/api/wexinsign.aspx")}}}var formData=new FormData();formData.append("signurl",location.href.replace(/#.*$/ig,""));xhr.send(formData);function isURL(str){return str&&!!str.match(/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g)}function wxConfig(config){config.debug=!!def.debug;config.jsApiList=def.jsApiList||["onMenuShareTimeline","onMenuShareAppMessage"];if(config.debug){alert(JSON.stringify(config))}wx.config(config);wx.ready(function(){wxShare();sDef.shareCallback({"errMsg":"ready:ok"})});wx.error(function(res){sDef.shareCallback({"errMsg":"ready:error"})})}function wxShare(value){value=value||{};var cbFn=typeof value.shareCallback=="function"?value.shareCallback:sDef.shareCallback;var link=value.url||sDef.url;var sObj={title:value.title||sDef.title,desc:value.desc||sDef.desc,link:link,imgUrl:value.img?(isURL(value.img)?value.img:sDef.base_url+value.img):sDef.img,success:cbFn,cancel:cbFn};var url=new URL(link);url.search+="&utm_source=wechat-appMessage";sObj.link=url.href;wx.onMenuShareAppMessage(sObj);var link2=value.url2||link;var sObj2={title:value.title2||sObj.title,link:link2,imgUrl:value.img2?(isURL(value.img2)?value.img2:sDef.base_url+value.img2):sObj.imgUrl,success:cbFn,cancel:cbFn};url=new URL(link2);url.search+="&utm_source=wechat-timeline";sObj2.link=url.href;wx.onMenuShareTimeline(sObj2)}return wxShare})
-({title:"这是默认的分享标题"});
-/*
-title     : 必填 分享好友标题 String
-title2    : 选填 分享朋友圈标题 String (默认值与title一样)
-desc      : 选填 分享描述 String（默认值"\ufff6"空白不可见）只在分享给朋友时有作用。
-img       : 选填 分享好友图片，可用http开头的绝对路径或相对路径 String（默认值是当前目录下的"images/share.jpg"）
-img2      : 选填 分享朋友圈标题 String (默认值与img一样)
-url       : 选填 分享给好友URL String（默认当前URL，如果指定url，此url必须在同一域名下)
-url2      : 选填 分享朋友圈URL String (默认值与url一样)
-debug     : 选填 是否开启调试 Boolean (默认false)
-jsApiList : 选填 权限列表 Array（默认为["onMenuShareTimeline", "onMenuShareAppMessage"]）
-shareCallback : 选填 分享到朋友圈或朋友函数回调 Function(value) value值有ready:ok,ready:error,sendAppMessage:ok,sendAppMessage:cancel,shareTimeline:ok,shareTimeline:cancel，如{"errMsg":"sendAppMessage:ok"}
-*/</ui-codemirror><br>
-<p>方式二：通过定义的返回函数，可以再定义分享的文字与图片等内容</p>
-                    <ui-codemirror ui-codemirror-opts="share.jsOptions">var setWeChatShare = (function(def){if(!/MicroMessenger/i.test(navigator.userAgent)){console.info("非微信浏览器，微信签名不会执行！");return function(){}}var sDef={base_url:location.href.match(/http[\w:\.\/-]+\w\//)[0]};sDef.title=def.title;sDef.title2=def.title2||sDef.title;sDef.desc=def.desc||"\ufff6";sDef.img=isURL(def.img)?def.img:sDef.base_url+(def.img||"images/share.jpg");sDef.img2=def.img2?(isURL(def.img2)?def.img2:sDef.base_url+(def.img2||"images/share.jpg")):sDef.img;sDef.url=def.url||sDef.base_url;sDef.url2=def.url2||sDef.url;sDef.shareCallback=typeof def.shareCallback=="function"?def.shareCallback:function(){};var xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==4&&xhr.status==200){wxConfig(JSON.parse(xhr.responseText))}};if(location.hostname.indexOf("chevrolet.com.cn")!=-1){xhr.open("POST","//www.chevrolet.com.cn/chevy-api/getsign.aspx")}else{if(location.hostname.indexOf("buick.com.cn")!=-1){xhr.open("POST","//www.buick.com.cn/weixinjssign/getbuicksign.aspx")}else{if(location.hostname=="chengxinmobile.saic-gm.com"){xhr.open("POST","//chengxinmobile.saic-gm.com/api/wexinsign.aspx")}}}var formData=new FormData();formData.append("signurl",location.href.replace(/#.*$/ig,""));xhr.send(formData);function isURL(str){return str&&!!str.match(/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g)}function wxConfig(config){config.debug=!!def.debug;config.jsApiList=def.jsApiList||["onMenuShareTimeline","onMenuShareAppMessage"];if(config.debug){alert(JSON.stringify(config))}wx.config(config);wx.ready(function(){wxShare();sDef.shareCallback({"errMsg":"ready:ok"})});wx.error(function(res){sDef.shareCallback({"errMsg":"ready:error"})})}function wxShare(value){value=value||{};var cbFn=typeof value.shareCallback=="function"?value.shareCallback:sDef.shareCallback;var link=value.url||sDef.url;var sObj={title:value.title||sDef.title,desc:value.desc||sDef.desc,link:link,imgUrl:value.img?(isURL(value.img)?value.img:sDef.base_url+value.img):sDef.img,success:cbFn,cancel:cbFn};var url=new URL(link);url.search+="&utm_source=wechat-appMessage";sObj.link=url.href;wx.onMenuShareAppMessage(sObj);var link2=value.url2||link;var sObj2={title:value.title2||sObj.title,link:link2,imgUrl:value.img2?(isURL(value.img2)?value.img2:sDef.base_url+value.img2):sObj.imgUrl,success:cbFn,cancel:cbFn};url=new URL(link2);url.search+="&utm_source=wechat-timeline";sObj2.link=url.href;wx.onMenuShareTimeline(sObj2)}return wxShare})
-({title:"这是默认的分享标题",title2:"这是分享到朋友圈的标题",desc:"这是分享给朋友的描述", img:"images/head3.png", shareCallback:function(value){alert(value.errMsg)});
+                <div class="ibox-title">
+                  <h5>Javascript</h5>
+                  <div ibox-tools control="iboxTools"></div>
+                </div>
+                <div class="ibox-content">
+                  <div class="alert alert-info"><i class="fa fa-info-circle"></i> 不依赖任何第三方JS库，但必须先引用<b>微信JS-SDK</b></div>
+                  <p>把微信签名接口封装起来，自动根据H5域名调用【别克，雪佛兰，诚新二手车】微信签名接口。</p>
+                  <h3>使用方法</h3>
+                  <p>引用微信JS-SDK，然后将下方封装的JS代码复制到<code>&lt;/head&gt;</code>标签前。</p>
+                  <p>默认<code>jsApiList</code>参数只请求了两个接口（<code>onMenuShareTimeline</code>和<code>onMenuShareAppMessage</code>），如果项目需要使用更多方法（如：扫描二维码、录音等），请参考 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115" target="_blank">官方文档 <i class="fa fa-external-link"></i></a> 来请求其他接口的权限。</p>
+                  <h3>封装代码</h3>
+                  <ui-codemirror ui-codemirror-opts="share.jsOptions">(function(e){function i(e){return e&amp;&amp;/(((^https?:(?:\/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))?)$/g.test(e)}function n(i){i.debug=!!e.debug,i.jsApiList=e.jsApiList||["onMenuShareTimeline","onMenuShareAppMessage"],i.debug&amp;&amp;alert(JSON.stringify(i)),wx.config(i),wx.ready(function(){t(),r.shareCallback({errMsg:"ready:ok"})}),wx.error(function(e){r.shareCallback({errMsg:"ready:error"})})}function t(e){e=e||{};var n="function"==typeof e.shareCallback?e.shareCallback:r.shareCallback,t=e.url||r.url,a={title:e.title||r.title,desc:e.desc||r.desc,link:t,imgUrl:e.img?i(e.img)?e.img:r.base_url+e.img:r.img,success:n,cancel:n},s=new URL(t);s.search+="&amp;utm_source=wechat-appMessage",a.link=s.href,wx.onMenuShareAppMessage(a);var l=e.tlUrl||t,c={title:e.timeline||a.title,link:l,imgUrl:e.tlImg?i(e.tlImg)?e.tlImg:r.base_url+e.tlImg:a.imgUrl,success:n,cancel:n};s=new URL(l),s.search+="&amp;utm_source=wechat-timeline",c.link=s.href,wx.onMenuShareTimeline(c)}if(!/MicroMessenger/i.test(navigator.userAgent))return console.warn("\u975e\u5fae\u4fe1\u6d4f\u89c8\u5668\uff0c\u5fae\u4fe1\u7b7e\u540d\u4e0d\u4f1a\u6267\u884c\uff01"),function(){};var a=location.hostname;if(!window.wx)return void(a.indexOf("test")!=-1&amp;&amp;alert("\u786e\u5b9a\u9875\u9762\u5df2\u5f15\u7528'//res.wx.qq.com/open/js/jweixin-1.2.0.js'"));var r={base_url:location.href.match(/http[\w:\.\/-]+\w\//)[0]};r.title=e.title,r.timeline=e.timeline||(r.swap?r.desc:r.title),r.desc=e.desc||"\ufff6",r.img=i(e.img)?e.img:r.base_url+(e.img||"images/share.jpg"),r.tlImg=e.tlImg?i(e.tlImg)?e.tlImg:r.base_url+(e.tlImg||"images/share.jpg"):r.img,r.url=e.url||r.base_url,r.tlUrl=e.tlUrl||r.url,r.shareCallback="function"==typeof e.shareCallback?e.shareCallback:function(){};var s=new XMLHttpRequest;if(s.onreadystatechange=function(){4==s.readyState&amp;&amp;200==s.status&amp;&amp;n(JSON.parse(s.responseText))},a.indexOf("chevrolet.com.cn")!=-1)s.open("POST","//www.chevrolet.com.cn/chevy-api/getsign.aspx");else if(a.indexOf("buick.com.cn")!=-1)s.open("POST","//www.buick.com.cn/weixinjssign/getbuicksign.aspx");else{if("chengxinmobile.saic-gm.com"!=a)return;s.open("POST","//chengxinmobile.saic-gm.com/api/wexinsign.aspx")}var l=new FormData;return l.append("signurl",location.href.replace(/#.*$/gi,"")),s.send(l),t})
+({
+  title: "这是默认的分享标题",
+  shareCallback: function(result) {
+    console.log(JSON.stringify(result));
+  }
+});</ui-codemirror>
+                  <h4>参数说明</h4>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>参数</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>是否必须</th>
+                        <th>说明</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>title</th>
+                        <td>String</td>
+                        <td>无</td>
+                        <td>是</td>
+                        <td>分享给好友的标题，默认情况下作为分享到朋友圈的内容</td>
+                      </tr>
+                      <tr>
+                        <th>desc</th>
+                        <td>String</td>
+                        <td><code>"\ufff6"</code></td>
+                        <td>否</td>
+                        <td>分享给好友的描述，为空则不显示描述</td>
+                      </tr>
+                      <tr>
+                        <th>timeline</th>
+                        <td>String</td>
+                        <td>无</td>
+                        <td>否</td>
+                        <td>分享到朋友圈的内容，如不指定，默认使用 <code>title</code> 参数</td>
+                      </tr>
+                      <tr>
+                        <th>swap</th>
+                        <td>Boolean</td>
+                        <td><code>false</code></td>
+                        <td>否</td>
+                        <td>为 <code>true</code> 时将使用 <code>desc</code> 参数作为 <code>timeline</code> 的默认值</td>
+                      </tr>
+                      <tr>
+                        <th>img</th>
+                        <td>URL</td>
+                        <td><code>"images/share.jpg"</code></td>
+                        <td>否</td>
+                        <td>分享图片</td>
+                      </tr>
+                      <tr>
+                        <th>tlImg</th>
+                        <td>URL</td>
+                        <td>无</td>
+                        <td>否</td>
+                        <td>分享到朋友圈的图片，如不指定，默认使用 <code>img</code> 参数</td>
+                      </tr>
+                      <tr>
+                        <th>url</th>
+                        <td>URL</td>
+                        <td>当前页面</td>
+                        <td>否</td>
+                        <td>分享的URL</td>
+                      </tr>
+                      <tr>
+                        <th>tlUrl</th>
+                        <td>URL</td>
+                        <td>无</td>
+                        <td>否</td>
+                        <td>分享到朋友圈的URL，如不指定，默认使用 <code>url</code> 参数</td>
+                      </tr>
+                      <tr>
+                        <th>debug</th>
+                        <td>Boolean</td>
+                        <td><code>false</code></td>
+                        <td>否</td>
+                        <td>是否开启JS-SDK的调试模式</td>
+                      </tr>
+                      <tr>
+                        <th>jsApiList</th>
+                        <td>Array</td>
+                        <td><code>["onMenuShareTimeline", "onMenuShareAppMessage"]</code></td>
+                        <td>否</td>
+                        <td>请求权限的微信接口列表</td>
+                      </tr>
+                      <tr>
+                        <th>shareCallback</th>
+                        <td>Function</td>
+                        <td>无</td>
+                        <td>否</td>
+                        <td>
+                          <p>回调方法，在每一步完成时均会触发，适合放置监测代码</p>
+                          <p>回调时会传入一个类型为JSON的参数，其包含以下属性：</p>
+                          <ul>
+                            <li><b>errMsg</b> 返回状态信息，可能的值包括：<code>ready:ok</code> <code>ready:error</code> <code>sendAppMessage:ok</code><br><code>sendAppMessage:cancel</code> <code>shareTimeline:ok</code> <code>shareTimeline:cancel</code></li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <h3>修改分享内容</h3>
+                  <p>如果需要动态修改分享的内容，可以使用封装代码<b>返回</b>的函数，并传递一个包含修改内容的Objec对象（属性同上）。</p>
+                  <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> <b>注意</b>：分装的脚本与修改分享内容使用的<b>不是</b>同一个函数。请不要也无需将分装的匿名函数赋值给变量，应直接执行并使用其<b>返回</b>的函数</div>
+                  <h4>示例代码</h4>
+                  <ui-codemirror ui-codemirror-opts="share.jsOptions">var setWeChatShare = (function(e){function i(e){return e&amp;&amp;/(((^https?:(?:\/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))?)$/g.test(e)}function n(i){i.debug=!!e.debug,i.jsApiList=e.jsApiList||["onMenuShareTimeline","onMenuShareAppMessage"],i.debug&amp;&amp;alert(JSON.stringify(i)),wx.config(i),wx.ready(function(){t(),r.shareCallback({errMsg:"ready:ok"})}),wx.error(function(e){r.shareCallback({errMsg:"ready:error"})})}function t(e){e=e||{};var n="function"==typeof e.shareCallback?e.shareCallback:r.shareCallback,t=e.url||r.url,a={title:e.title||r.title,desc:e.desc||r.desc,link:t,imgUrl:e.img?i(e.img)?e.img:r.base_url+e.img:r.img,success:n,cancel:n},s=new URL(t);s.search+="&amp;utm_source=wechat-appMessage",a.link=s.href,wx.onMenuShareAppMessage(a);var l=e.tlUrl||t,c={title:e.timeline||a.title,link:l,imgUrl:e.tlImg?i(e.tlImg)?e.tlImg:r.base_url+e.tlImg:a.imgUrl,success:n,cancel:n};s=new URL(l),s.search+="&amp;utm_source=wechat-timeline",c.link=s.href,wx.onMenuShareTimeline(c)}if(!/MicroMessenger/i.test(navigator.userAgent))return console.warn("\u975e\u5fae\u4fe1\u6d4f\u89c8\u5668\uff0c\u5fae\u4fe1\u7b7e\u540d\u4e0d\u4f1a\u6267\u884c\uff01"),function(){};var a=location.hostname;if(!window.wx)return void(a.indexOf("test")!=-1&amp;&amp;alert("\u786e\u5b9a\u9875\u9762\u5df2\u5f15\u7528'//res.wx.qq.com/open/js/jweixin-1.2.0.js'"));var r={base_url:location.href.match(/http[\w:\.\/-]+\w\//)[0]};r.title=e.title,r.timeline=e.timeline||(r.swap?r.desc:r.title),r.desc=e.desc||"\ufff6",r.img=i(e.img)?e.img:r.base_url+(e.img||"images/share.jpg"),r.tlImg=e.tlImg?i(e.tlImg)?e.tlImg:r.base_url+(e.tlImg||"images/share.jpg"):r.img,r.url=e.url||r.base_url,r.tlUrl=e.tlUrl||r.url,r.shareCallback="function"==typeof e.shareCallback?e.shareCallback:function(){};var s=new XMLHttpRequest;if(s.onreadystatechange=function(){4==s.readyState&amp;&amp;200==s.status&amp;&amp;n(JSON.parse(s.responseText))},a.indexOf("chevrolet.com.cn")!=-1)s.open("POST","//www.chevrolet.com.cn/chevy-api/getsign.aspx");else if(a.indexOf("buick.com.cn")!=-1)s.open("POST","//www.buick.com.cn/weixinjssign/getbuicksign.aspx");else{if("chengxinmobile.saic-gm.com"!=a)return;s.open("POST","//chengxinmobile.saic-gm.com/api/wexinsign.aspx")}var l=new FormData;return l.append("signurl",location.href.replace(/#.*$/gi,"")),s.send(l),t})
+({title:"这是默认的分享标题",timeline:"这是分享到朋友圈的标题",desc:"这是分享给朋友的描述", img:"images/head3.png", shareCallback:function(value){alert(value.errMsg)});
 
 //可再定义分享内容
 setWeChatShare({title:"分享的标题已改变"});
-//setWeChatShare({title:"分享的标题已改变", img:"images/xxxx.jpg"});</ui-codemirror>
-                  </div>
+setWeChatShare({title:"分享的标题已改变", img:"images/xxxx.jpg"});</ui-codemirror>
                 </div>
+              </div>
+
               <div class="ibox">
                 <div class="ibox-title">
                   <h5>APP判断脚本</h5>
@@ -73,17 +166,27 @@ setWeChatShare({title:"分享的标题已改变"});
                 </div>
               </div>
               <div class="ibox">
-                  <div class="ibox-title">
-                    <h5>案例</h5>
-                    <div ibox-tools control="iboxTools"></div>
-                  </div>
-                  <div class="ibox-content">
-                    <ul>
-                      <li>别克微信签名 DEMO <a href="http://mobiletest.buick.com.cn/act/test/demo1.html" target="_blank">http://mobiletest.buick.com.cn/act/test/demo1.html <i class="fa fa-external-link"></i></a></li>
-                      <li>雪佛兰微信签名 DEMO <a href="http://mobiletest.chevrolet.com.cn/act/malibu/malibuxl-perfectlife/demo2.html" target="_blank">http://mobiletest.chevrolet.com.cn/act/malibu/malibuxl-perfectlife/demo2.html <i class="fa fa-external-link"></i></a></li>
-                    </ul>
-                  </div>
+                <div class="ibox-title">
+                  <h5>参考</h5>
+                  <div ibox-tools control="iboxTools"></div>
                 </div>
+                <div class="ibox-content">
+                  <p>关于微信签名接口参见<a href="share/wechat#api">旧文档</a>。</p>
+                  <p>源代码参见<a href="http://git.hylinkers.com/snippets/6" target="_blank">Git <i class="fa fa-external-link"></i></a>。</p>
+                </div>
+              </div>
+              <div class="ibox">
+                <div class="ibox-title">
+                  <h5>案例</h5>
+                  <div ibox-tools control="iboxTools"></div>
+                </div>
+                <div class="ibox-content">
+                  <ul>
+                    <li>别克微信签名 DEMO <a href="http://mobiletest.buick.com.cn/act/test/demo1.html" target="_blank">http://mobiletest.buick.com.cn/act/test/demo1.html <i class="fa fa-external-link"></i></a></li>
+                    <li>雪佛兰微信签名 DEMO <a href="http://mobiletest.chevrolet.com.cn/act/malibu/malibuxl-perfectlife/demo2.html" target="_blank">http://mobiletest.chevrolet.com.cn/act/malibu/malibuxl-perfectlife/demo2.html <i class="fa fa-external-link"></i></a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
