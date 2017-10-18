@@ -3,7 +3,7 @@ node_js:
 - "6"
 sudo: true
 addons:
-  ssh_known_hosts: lin.zino.co
+  ssh_known_hosts: $LINODE_HOST
 branches:
   only:
   - master
@@ -30,7 +30,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script: rsync -re "ssh -p $LINODE_PORT" --delete-after --exclude="vendor" $TRAVIS_BUILD_DIR/dist/
-    $LINODE_URI:/var/www/app-share
+    $LINODE_URI:/usr/share/nginx/app-share
   on:
     branch: master
 dist: trusty
