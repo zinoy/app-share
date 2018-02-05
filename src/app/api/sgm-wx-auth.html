@@ -56,7 +56,7 @@
   }
   var REDIRECT_URI = location.href;// 默认为当前项目地址
   var SCOPE = "snsapi_base";// 默认为 snsapi_base，也可以为 snsapi_userinfo
-  var AUTH_PATH = "//m.chevrolet.com.cn/Auth/Auth.aspx";//授权地址，可根据实际情况做修改。
+  var AUTH_PATH = location.protocol+"//m.chevrolet.com.cn/Auth/Auth.aspx";//授权地址，可根据实际情况做修改。
 
   var uInfoJ = sessionStorage.WX_userInfo;
   if(uInfoJ!=null && !isDebug){//取session里的值，如果之前有保存过，则不再授权。
