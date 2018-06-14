@@ -48,7 +48,7 @@ $.getJSON("https://www.chevrolet.com.cn/apinew/ip_location.aspx").done(function(
 }).fail(function(){console.error("ip_location.aspx Error!")});</ui-codemirror>
           <br/>
           <h3>实现代码：</h3>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">/***************************************根据IP获取城市地址**********************************************************/
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">/*****************************根据IP获取城市地址,定义getUserProvCity()方法***********************************************/
 getUserProvCity = function(cbFn){ //cbFn('广西','柳州');return;
   var prov,city;
   readProvAndCitySession();
@@ -97,7 +97,13 @@ getUserProvCity = function(cbFn){ //cbFn('广西','柳州');return;
       }catch(err){};
     }
   }
-}</ui-codemirror>
+}
+/***************************************结束getUserProvCity()定义***********************************************************/
+
+//调用
+getUserProvCity(function(prov, city){
+  console.log(prov, city);
+});</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
