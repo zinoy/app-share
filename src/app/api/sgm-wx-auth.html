@@ -56,7 +56,7 @@
   }
   var REDIRECT_URI = location.href;// 默认为当前项目地址
   var SCOPE = "snsapi_base";// 默认为 snsapi_base，也可以为 snsapi_userinfo
-  var AUTH_PATH = location.protocol+"//m.chevrolet.com.cn/Auth/Auth.aspx";//授权地址，可根据实际情况做修改。
+  var AUTH_PATH = "https://m.chevrolet.com.cn/Auth/Auth.aspx";//授权地址，可根据实际情况做修改。
 
   var uInfoJ = sessionStorage.WX_userInfo;
   if(uInfoJ!=null && !isDebug){//取session里的值，如果之前有保存过，则不再授权。
@@ -88,9 +88,9 @@
           
           <div class="ibox-content">
            <ul>
-             <li>雪佛兰授权测试地址：<a href="http://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true" target="_blank">http://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true</a></li>
-             <li>别克授权测试地址：<a href="http://m.buick.com.cn/act/brand/reading/juanshu/demo.html?debug=true" target="_blank">http://m.buick.com.cn/act/brand/reading/juanshu/demo.html?debug=true</a></li>
-             <li>雪佛兰 科沃兹中秋iWow：<a href="http://m.chevrolet.com.cn/act/cavalier/iwow-hand/" target="_blank">http://m.chevrolet.com.cn/act/cavalier/iwow-hand/</a></li>
+             <li>雪佛兰授权测试地址：<a href="https://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true" target="_blank">https://m.chevrolet.com.cn/act/cavalier/iwow-hand/chevy-wx-auth.html?debug=true</a></li>
+             <li>别克授权测试地址：<a href="https://m.buick.com.cn/act/brand/reading/juanshu/demo.html?debug=true" target="_blank">https://m.buick.com.cn/act/brand/reading/juanshu/demo.html?debug=true</a></li>
+             <li>雪佛兰 科沃兹中秋iWow：<a href="https://m.chevrolet.com.cn/act/cavalier/iwow-hand/" target="_blank">https://m.chevrolet.com.cn/act/cavalier/iwow-hand/</a></li>
            </ul>
             
           </div>
