@@ -12,8 +12,7 @@ cache:
   - node_modules
   - bower_components
 before_install:
-- openssl aes-256-cbc -K $encrypted_5565d007d299_key -iv $encrypted_5565d007d299_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_350b285dc70d_key -iv $encrypted_350b285dc70d_iv -in deploy_rsa.enc -out deploy_rsa -d
 - sudo apt-get -qq update
 - sudo apt-get install -y make python gcc g++
 install:
@@ -29,8 +28,8 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -re "ssh -p $LINODE_PORT" --delete-after --exclude="vendor" $TRAVIS_BUILD_DIR/dist/
-    $LINODE_URI:/usr/share/nginx/app-share
+  script: rsync -re "ssh -p $ALI_PORT" --delete-after --exclude="vendor" $TRAVIS_BUILD_DIR/dist/
+    $ALI_URI:/usr/share/nginx/app-share
   on:
     branch: master
 dist: trusty
