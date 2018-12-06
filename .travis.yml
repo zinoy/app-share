@@ -3,7 +3,7 @@ node_js:
 - "6"
 sudo: true
 addons:
-  ssh_known_hosts: api.zino.co
+  ssh_known_hosts: sg-1.ali.zino.co
 branches:
   only:
   - master
