@@ -22,6 +22,7 @@
           </div>
           <div class="ibox-content">
             <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> 1.4.0版本的自定义分享功能在旧版本安卓微信端可能无法生效，请谨慎使用</a>。</p>
+            <p class="alert alert-info"><i class="fa fa-info-circle"></i> 如果引用了别克手机官网公共组件 <code>global.js</code>，<b>请勿使用</b>本页面所述配置方式以免产生冲突，应使用global.js内置<a class="alert-link" href="https://git.hylinkers.com/tech/buick-mobile-v4/wikis/components-for-external-use#%E5%88%86%E4%BA%AB" target="_blank">自定义分享 <i class="fa fa-external-link"></i></a>替代。</p>
             <p class="alert alert-info"><i class="fa fa-info-circle"></i> 请注意引用微信 JS-SDK 的版本号。</p>
             <ui-codemirror ui-codemirror-opts="share.htmlOptions" >&lt;!-- 在页面中引用微信JS -->
 &lt;script src="//res.wx.qq.com/open/js/jweixin-1.4.0.js">&lt;/script></ui-codemirror>
@@ -36,6 +37,7 @@
           <div class="ibox-content">
             <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> 新版接口回调方法只表示设置成功，并<b>不会在用户触发分享时/后触发</b>。版本1.4.0不支持判断用户是否点击分享，同时无法得知用户分享成功与否。</p>
             <p>通用微信签名接口封装，根据域名自动调用<b>别克</b>、<b>雪佛兰</b>、<b>诚新二手车</b>微信签名接口。</p>
+            <hr />
             <h3>基本配置</h3>
             <p>引用微信JS-SDK，然后将下方封装代码复制到<code>&lt;/head&gt;</code>标签之前。</p>
             <p>默认情况下<code>jsApiList</code>参数只请求了两个分享接口（<code>updateAppMessageShareData</code>和<code>updateTimelineShareData</code>），如果项目需要使用更多方法（如：扫描二维码、录音等），请参考 <a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115" target="_blank">官方文档 <i class="fa fa-external-link"></i></a> 来请求其他接口的权限。</p>
@@ -147,9 +149,10 @@
               </tbody>
             </table>
             <h3>动态修改分享内容</h3>
-            <p>如果需要动态修改分享的内容，可以使用封装代码<b>返回</b>的函数，并传递一个包含修改内容的Objec对象（属性同上）。</p>
-            <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> <b>注意</b>：封装的脚本与修改分享内容使用的<b>不是</b>同一个函数。请不要也无需将封装的匿名函数赋值给变量，应直接执行并使用其<b>返回</b>的函数</div>
+            <p>如果需要动态修改分享的内容，可以调用封装代码<b>返回</b>的函数，并传递一个包含修改内容的Objec对象（属性同上）。</p>
+            <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> <b>注意</b>：封装的脚本与修改分享内容使用的<b>不是</b>同一个函数，无需将封装的匿名函数赋值给变量，应直接执行并使用其<b>返回</b>的函数。</div>
             <h4>示例代码</h4>
+            <p>全局变量 <code>setWeChatShare</code> 指向的是下面匿名方法执行完成后返回的另一个方法，而不是该匿名方法本身。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">window.setWeChatShare=function(e){function t(e){return e&&/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g.test(e)}function i(t){t.debug=!!e.debug,t.jsApiList=e.jsApiList||["updateAppMessageShareData","updateTimelineShareData"],t.debug&&alert(JSON.stringify(t)),wx.config(t),wx.ready(function(){a(),s.shareCallback({errMsg:"ready:ok"})}),wx.error(function(e){s.shareCallback({errMsg:"ready:error"})})}function a(e){e=e||{};var i="function"==typeof e.shareCallback?e.shareCallback:s.shareCallback,a=e.url||s.url,n={title:e.title||s.title,desc:e.desc||s.desc,link:a,imgUrl:e.img?t(e.img)?e.img:r+e.img:s.img,success:i,cancel:i},l=new URL(a);l.search+="&origin=wechat-appMessage",n.link=l.href,wx.updateAppMessageShareData(n);var c=e.tlUrl||s.tlUrl||a,g={title:e.timeline||s.timeline||n.title,link:c,imgUrl:e.tlImg?t(e.tlImg)?e.tlImg:r+e.tlImg:s.tlImg||n.imgUrl,success:i,cancel:i};l=new URL(c),l.search+="&origin=wechat-timeline",g.link=l.href,wx.updateTimelineShareData(g)}if(!/MicroMessenger/i.test(navigator.userAgent))return console.warn("非微信浏览器，微信签名不会执行！"),function(){};var n=location.hostname;if(!window.wx)return void(n.indexOf("test")!=-1&&alert("确定页面已引用'https://res.wx.qq.com/open/js/jweixin-1.4.0.js'"));var r=location.href.match(/http[\w:\.\/-]+\w\//)[0],s={title:e.title,timeline:e.timeline||(e.swap?e.desc:e.title),desc:e.desc||"￶",img:t(e.img)?e.img:r+(e.img||"images/share.jpg"),tlImg:e.tlImg?t(e.tlImg)?e.tlImg:r+(e.tlImg||"images/share.jpg"):"",url:e.url||r,tlUrl:e.tlUrl||e.url,shareCallback:"function"==typeof e.shareCallback?e.shareCallback:function(){}},l=new XMLHttpRequest;if(l.onreadystatechange=function(){4==l.readyState&&200==l.status&&i(JSON.parse(l.responseText))},n.indexOf("chevrolet.com.cn")!=-1)l.open("POST","https://www.chevrolet.com.cn/chevy-api/getsign.aspx");else if(n.indexOf("buick.com.cn")!=-1)l.open("POST","https://www.buick.com.cn/weixinjssign/getbuicksign.aspx");else{if("chengxinmobile.saic-gm.com"!=n)return;l.open("POST","https://chengxinmobile.saic-gm.com/api/wexinsign.aspx")}var c=new FormData;return c.append("signurl",location.href.replace(/#.*$/gi,"")),l.send(c),a}
 ({title:"这是默认的分享标题",timeline:"这是分享到朋友圈的标题",desc:"这是分享给朋友的描述", img:"images/head3.png", shareCallback:function(value){alert(value.errMsg)}});
 
