@@ -146,15 +146,20 @@
                     </tbody>
                   </table>
                   <h3>修改分享内容</h3>
-                  <p>如果需要动态修改分享的内容，可以调用封装代码<b>返回</b>的函数，并传递一个包含修改内容的Objec对象（属性同上）。</p>
-                  <div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> <b>注意</b>：封装的脚本与修改分享内容使用的<b>不是</b>同一个函数，无需将封装的匿名函数赋值给变量，应直接执行并使用其<b>返回</b>的函数。</div>
+                  <p>如果需要动态修改分享的内容，可以调用封装代码<b>返回</b>的函数，并传递一个包含修改内容的Objec对象（属性同上），需修改的所有字段都应在参数中显式指定新的内容。</p>
+                  <div class="alert alert-warning"><strong><i class="fa fa-exclamation-triangle"></i> 注意</strong><br /><br />
+                    <ol>
+                      <li>封装的脚本与修改分享内容使用的<b>不是</b>同一个函数，无需将封装的匿名函数赋值给变量，应直接执行并使用其<b>返回</b>的函数。</li>
+                      <li>需修改的字段应在参数中显式指定新的值，如不指定则默认使用<b>初始配置参数</b>中指定的默认值，而非当前参数中的默认字段。</li>
+                    </ol>
+                  </div>
                   <h4>示例代码</h4>
                   <p>全局变量 <code>setWeChatShare</code> 指向的是下面匿名方法执行完成后返回的另一个方法，而不是该匿名方法本身。</p>
                   <ui-codemirror ui-codemirror-opts="share.jsOptions">window.setWeChatShare=function(e){function i(e){return e&&/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g.test(e)}function n(i){i.debug=!!e.debug,i.jsApiList=e.jsApiList||["onMenuShareTimeline","onMenuShareAppMessage"],i.debug&&alert(JSON.stringify(i)),wx.config(i),wx.ready(function(){t(),l.shareCallback({errMsg:"ready:ok"})}),wx.error(function(e){l.shareCallback({errMsg:"ready:error"})})}function t(e){e=e||{};var n="function"==typeof e.shareCallback?e.shareCallback:l.shareCallback,t=e.url||l.url,a={title:e.title||l.title,desc:e.desc||l.desc,link:t,imgUrl:e.img?i(e.img)?e.img:r+e.img:l.img,success:n,cancel:n},s=new URL(t);s.search+="&origin=wechat-appMessage",a.link=s.href,wx.onMenuShareAppMessage(a);var c=e.tlUrl||l.tlUrl||t,g={title:e.timeline||l.timeline||a.title,link:c,imgUrl:e.tlImg?i(e.tlImg)?e.tlImg:r+e.tlImg:l.tlImg||a.imgUrl,success:n,cancel:n};s=new URL(c),s.search+="&origin=wechat-timeline",g.link=s.href,wx.onMenuShareTimeline(g)}if(!/MicroMessenger/i.test(navigator.userAgent))return console.warn("非微信浏览器，微信签名不会执行！"),function(){};var a=location.hostname;if(!window.wx)return void(a.indexOf("test")!=-1&&alert("确定页面已引用'//res.wx.qq.com/open/js/jweixin-1.2.0.js'"));var r=location.href.match(/http[\w:\.\/-]+\w\//)[0],l={title:e.title,timeline:e.timeline||(e.swap?e.desc:e.title),desc:e.desc||"￶",img:i(e.img)?e.img:r+(e.img||"images/share.jpg"),tlImg:e.tlImg?i(e.tlImg)?e.tlImg:r+(e.tlImg||"images/share.jpg"):"",url:e.url||r,tlUrl:e.tlUrl||e.url,shareCallback:"function"==typeof e.shareCallback?e.shareCallback:function(){}},s=new XMLHttpRequest;if(s.onreadystatechange=function(){4==s.readyState&&200==s.status&&n(JSON.parse(s.responseText))},a.indexOf("chevrolet.com.cn")!=-1)s.open("POST","https://www.chevrolet.com.cn/chevy-api/getsign.aspx");else if(a.indexOf("buick.com.cn")!=-1)s.open("POST","https://www.buick.com.cn/weixinjssign/getbuicksign.aspx");else{if("chengxinmobile.saic-gm.com"!=a)return;s.open("POST","https://chengxinmobile.saic-gm.com/api/wexinsign.aspx")}var c=new FormData;return c.append("signurl",location.href.replace(/#.*$/gi,"")),s.send(c),t}
 ({title:"这是默认的分享标题",timeline:"这是分享到朋友圈的标题",desc:"这是分享给朋友的描述", img:"images/head3.png", shareCallback:function(value){alert(value.errMsg)}});
 
 //可再定义分享内容
-setWeChatShare({title:"分享的标题已改变"});
+setWeChatShare({title:"分享的标题已改变"}); // 只修改分享给好友的标题，并不会覆盖timeline字段，本例中仍将使用"这是分享到朋友圈的标题"作为朋友圈分享文案
 setWeChatShare({title:"分享的标题已改变", img:"images/xxxx.jpg"});</ui-codemirror>
                 </div>
               </div>
@@ -185,8 +190,8 @@ setWeChatShare({title:"分享的标题已改变", img:"images/xxxx.jpg"});</ui-c
                 </div>
                 <div class="ibox-content">
                   <ul>
-                    <li>别克微信签名 DEMO <a href="http://mobiletest.buick.com.cn/act/test/demo1.html" target="_blank">http://mobiletest.buick.com.cn/act/test/demo1.html <i class="fa fa-external-link"></i></a></li>
-                    <li>雪佛兰微信签名 DEMO <a href="http://mobiletest.chevrolet.com.cn/act/malibu/malibuxl-perfectlife/demo2.html" target="_blank">http://mobiletest.chevrolet.com.cn/act/malibu/malibuxl-perfectlife/demo2.html <i class="fa fa-external-link"></i></a></li>
+                    <li>别克微信签名 DEMO <a href="http://mobiletest.buick.com.cn/act/test/wx-share-1.html" target="_blank">http://mobiletest.buick.com.cn/act/test/wx-share-1.html <i class="fa fa-external-link"></i></a></li>
+                    <li>雪佛兰微信签名 DEMO <a href="http://mobiletest.chevrolet.com.cn/act/test/wx-share-1.html" target="_blank">http://mobiletest.chevrolet.com.cn/act/test/wx-share-1.html <i class="fa fa-external-link"></i></a></li>
                   </ul>
                 </div>
               </div>
