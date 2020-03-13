@@ -20,6 +20,7 @@ install:
 - bower install
 script:
 - gulp build
+- cp -r dist/ docker/
 - docker build -t ccr.ccs.tencentyun.com/zino/app-share ./docker
 deploy:
   provider: script
