@@ -20,7 +20,7 @@ install:
 - bower install
 script:
 - gulp build
-- docker build -t ccr.ccs.tencentyun.com/zino/app-share ./docker
+- docker build -t ccr.ccs.tencentyun.com/zino/app-share --build-arg BUILD_DIR=$TRAVIS_BUILD_DIR ./docker
 deploy:
   provider: script
   skip_cleanup: true
