@@ -14,18 +14,18 @@ angular.element(document).ready(function ($timeout) {
     var wrapperHeigh = angular.element('#page-wrapper').height();
 
     if(navbarHeigh > wrapperHeigh){
-      angular.element('#page-wrapper').css("min-height", navbarHeigh + "px");
+      angular.element('#page-wrapper').css("min-height", navbarHeigh);
     }
 
     if(navbarHeigh < wrapperHeigh){
-      angular.element('#page-wrapper').css("min-height", angular.element(window).height()  + "px");
+      angular.element('#page-wrapper').css("min-height", angular.element(window).height() );
     }
 
     if (angular.element('body').hasClass('fixed-nav')) {
       if (navbarHeigh > wrapperHeigh) {
-        angular.element('#page-wrapper').css("min-height", navbarHeigh - 51 + "px");
+        angular.element('#page-wrapper').css("min-height", navbarHeigh - 51);
       } else {
-        angular.element('#page-wrapper').css("min-height", angular.element(window).height() - 51 + "px");
+        angular.element('#page-wrapper').css("min-height", angular.element(window).height() - 51);
       }
     }
 

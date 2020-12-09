@@ -180,7 +180,9 @@
                 <span>此插件可对图片放大缩小旋转裁切。</span></li>
             </ul>
             <h3>图片加载</h3>
-            <ui-codemirror ui-codemirror-opts="share.jsOptions">// 检查图片朝向
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">/*
+ * 检查图片朝向
+ */
 function getOrientation(t){var e=new DataView(t);if(65496!=e.getUint16(0,!1))return-2;for(var n=e.byteLength,i=2;i&lt;n;){var r=e.getUint16(i,!1);if(i+=2,65505==r){if(1165519206!=e.getUint32(i+=2,!1))return-1;var g=18761==e.getUint16(i+=6,!1);i+=e.getUint32(i+4,g);var a=e.getUint16(i,g);i+=2;for(var U=0;U&lt;a;U++)if(274==e.getUint16(i+12*U,g))return e.getUint16(i+12*U+8,g)}else{if(65280!=(65280&amp;r))break;i+=e.getUint16(i,!1)}}return-1}
 
 $('#file_input').on('change', function() {
@@ -281,8 +283,9 @@ canvas.toBlob(function(blob) {
     waiting = false;
   });  
 });</ui-codemirror>
+            <div class="m-b-md"></div>
             <h3>大文件上传</h3>
-            <p>由于tus协议的复杂性，推荐使用其官方的<a href="https://github.com/tus/tus-js-client" target="_blank">Javascript客户端 <i class="fa fa-external-link"></i></a>。以下为简单的示例：</p>
+            <p>由于tus协议的复杂性，推荐使用其官方的 <a href="https://github.com/tus/tus-js-client" target="_blank">Javascript库 <i class="fa fa-external-link"></i></a>。上传二进制数据（如Canvas对象导出的Blob）可将 <code>tus.Upload(file, options)</code> 第一个参数 <b>file</b> 替换为对应的二进制对象（可为 <code>Blob</code> 或 <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/ReadableStreamDefaultReader" target="_blank">Reader</a></code>）。</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">input.addEventListener("change", function(e) {
   // 从input元素获取文件
   var file = e.target.files[0]
