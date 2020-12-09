@@ -15,24 +15,6 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="wrapper wrapper-content">
-        <div class="ibox">
-          <div class="ibox-title">
-            <h5>接口路径</h5>
-            <div ibox-tools control="iboxTools"></div>
-          </div>
-          <div class="ibox-content">
-            <h4>别克</h4>
-            <p><code>http://webtest.buick.com.cn/apinew/upimgapi.aspx</code>（PC测试）</p>
-            <p><code>https://www.buick.com.cn/apinew/upimgapi.aspx</code>（PC正式）</p>
-            <p><code>http://mobiletest.buick.com.cn/apinew/upimgapi.aspx</code>（移动端测试）</p>
-            <p><code>https://m.buick.com.cn/apinew/upimgapi.aspx</code>（移动端正式）</p>
-            <h4>雪佛兰</h4>
-            <p><code>http://webtest.chevrolet.com.cn/apinew/upimgapi.aspx</code>（PC测试）</p>
-            <p><code>https://www.chevrolet.com.cn/apinew/upimgapi.aspx</code>（PC正式）</p>
-            <p><code>http://mobiletest.chevrolet.com.cn/apinew/upimgapi.aspx</code>（移动端测试）</p>
-            <p><code>https://m.chevrolet.com.cn/apinew/upimgapi.aspx</code>（移动端正式）</p>
-          </div>
-        </div>
         <div class="ibox api-spec">
           <div class="ibox-title">
             <h5>接口文档</h5>
@@ -44,13 +26,23 @@
               <div class="panel-body">
                 <ul>
                   <li><a href="#upload-image">图片上传</a></li>
+                  <li><a href="#upload-file">大文件上传</a></li>
                 </ul>
               </div>
             </div>
             <section id="upload-image">
               <h2>图片上传</h2>
               <h3>URL</h3>
-              <p>/apinew/upimgapi.aspx</p>
+              <h4>别克</h4>
+              <p><code>http://webtest.buick.com.cn/apinew/upimgapi.aspx</code>（PC测试）</p>
+              <p><code>https://www.buick.com.cn/apinew/upimgapi.aspx</code>（PC正式）</p>
+              <p><code>http://mobiletest.buick.com.cn/apinew/upimgapi.aspx</code>（移动端测试）</p>
+              <p><code>https://m.buick.com.cn/apinew/upimgapi.aspx</code>（移动端正式）</p>
+              <h4>雪佛兰</h4>
+              <p><code>http://webtest.chevrolet.com.cn/apinew/upimgapi.aspx</code>（PC测试）</p>
+              <p><code>https://www.chevrolet.com.cn/apinew/upimgapi.aspx</code>（PC正式）</p>
+              <p><code>http://mobiletest.chevrolet.com.cn/apinew/upimgapi.aspx</code>（移动端测试）</p>
+              <p><code>https://m.chevrolet.com.cn/apinew/upimgapi.aspx</code>（移动端正式）</p>
               <h3>方式</h3>
               <p>POST</p>
               <h3>参数</h3>
@@ -84,7 +76,7 @@
                     <td>String</td>
                     <td> </td>
                     <td>可选</td>
-                    <td>Base64编码的二进制字符串，如为空则使用二进制文件<i class="fa fa-star" title="推荐"></i>。
+                    <td>Base64编码的二进制字符串，如为空则使用二进制文件。建议使用二进制传输。</td>
                   </tr>
                 </tbody>
               </table>
@@ -99,6 +91,54 @@
   "pics": ["6b46772a-14e6-45d2-8745-8768b011891b.png"]
 }</ui-codemirror>
             </section>
+            <section id="upload-file">
+              <h2>大文件上传</h2>
+              <p>上传接口使用<a href="https://tus.io/" target="_blank">tus <i class="fa fa-external-link"></i></a>协议，支持断点续传，适合用于上传大文件。</p>
+              <h3>URL</h3>
+              <p><i>待补充</i></p>
+              <h3>meta参数</h3>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>参数名</th>
+                    <th>类型</th>
+                    <th>默认值</th>
+                    <th>是否必须</th>
+                    <th>说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>name</th>
+                    <td>String</td>
+                    <td> </td>
+                    <td>必填</i></td>
+                    <td>文件名</td>
+                  </tr>
+                  <tr>
+                    <th>contentType</td>
+                    <td>String</td>
+                    <td> </td>
+                    <td>必填</td>
+                    <td>文件类型</td>
+                  </tr>
+                  <tr>
+                    <th>path</th>
+                    <td>String</td>
+                    <td> </td>
+                    <td>可选</td>
+                    <td>
+                      <p>图片保存路径。遵循以下规则：</p>
+                      <ul>
+                        <li><b>为空</b>：图片将保存至默认目录 <code>/uploadfiles/pubapi/</code></li>
+                        <li><b>相对地址</b> (如 <code>actname/</code>) <i class="fa fa-star" title="推荐"></i>：上传至默认目录下的指定路径 <code>/uploadfiles/pubapi/actname/</code></li>
+                        <li><b>绝对地址</b> (如 <code>/act/brand/img/</code>)：上传至网站根目录下的指定路径，需要接口有对应的权限</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
           </div>
         </div>
         <div class="ibox">
@@ -107,7 +147,7 @@
             <div ibox-tools control="iboxTools"></div>
           </div>
           <div class="ibox-content">
-            <p>部分低版本的Android中canvas不支持 <code>toBlob()</code> 方法，为了能兼容各主流手机平台，应在JS中插入以下代码：</p>
+            <p>Android浏览器版本<b>50</b>以及iOS<b>11</b>之前的canvas不支持 <code>toBlob()</code> 方法，为了能兼容各主流手机平台，可在JS中插入以下代码：</p>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">if (!HTMLCanvasElement.prototype.toBlob) {
   Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
     value: function (callback, type, quality) {
@@ -139,7 +179,7 @@
               <li><a href="https://github.com/fengyuanchen/cropper" target="_blank">fengyuanchen/cropper <i class="fa fa-external-link"></i></a>
                 <span>此插件可对图片放大缩小旋转裁切。</span></li>
             </ul>
-            <h4>图片加载</h4>
+            <h3>图片加载</h3>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">// 检查图片朝向
 function getOrientation(t){var e=new DataView(t);if(65496!=e.getUint16(0,!1))return-2;for(var n=e.byteLength,i=2;i&lt;n;){var r=e.getUint16(i,!1);if(i+=2,65505==r){if(1165519206!=e.getUint32(i+=2,!1))return-1;var g=18761==e.getUint16(i+=6,!1);i+=e.getUint32(i+4,g);var a=e.getUint16(i,g);i+=2;for(var U=0;U&lt;a;U++)if(274==e.getUint16(i+12*U,g))return e.getUint16(i+12*U+8,g)}else{if(65280!=(65280&amp;r))break;i+=e.getUint16(i,!1)}}return-1}
 
@@ -149,14 +189,21 @@ $('#file_input').on('change', function() {
     var type = file.type, reader = new FileReader();
     reader.onloadend = function() {
 
-      var orientation = getOrientation(reader.result);
+      var uploadImg = new Image();
+      var autoRotated = false;
+      var styles = getComputedStyle(uploadImg);
+      if (styles.getPropertyValue('image-orientation') === 'from-image') {
+        autoRotated = true;
+      }
+      // Chrome 81版本之后默认情况下图片会根据EXIF自动旋转
+      // 增加一个判断，以避免图片被再次转换
+      var orientation = autoRotated ? 1 : getOrientation(reader.result);
 
       var blob = new Blob([reader.result], {type: "image/jpeg"});
       var urlCreator = window.URL || window.webkitURL;
       var imageUrl = urlCreator.createObjectURL(blob);
 
-      var uploadImg = new Image();
-      var uploadSize = { // 指定上传的图片尺寸
+      var uploadSize = { // 指定上传的图片尺寸，建议固定上传尺寸
         height: 1024,
         width: 1024
       };
@@ -204,11 +251,11 @@ $('#file_input').on('change', function() {
   }
 });</ui-codemirror>
             <div class="m-b-md"></div>
-            <h4>图片上传</h4>
+            <h3>图片上传</h3>
             <ui-codemirror ui-codemirror-opts="share.jsOptions">var formData = new FormData();
 canvas.toBlob(function(blob) {
-  formData.append('pic[]', blob);
-  //formData.append('picpath', 'xxxx-folder/');//optional, 传到指定目录下
+  formData.append('pic[]', blob); // 上传至默认目录
+  //formData.append('picpath', 'xxxx-folder/'); // optional, 上传到指定目录下
   $.ajax(apiPath + 'apinew/upimgapi.aspx', {
     method: 'POST',
     data: formData,
@@ -222,10 +269,10 @@ canvas.toBlob(function(blob) {
       $('#form').hide();
       $('#preview').empty();
       data.pics.forEach(function(item,index){
-        $('#preview').append(`&lt;img src="${apiPath + data.picpath + item}">`);//此$符号为ES6字串操作
+        $('#preview').append(`&lt;img src="${apiPath + data.picpath + item}">`); // 此$符号为ES6字串操作
       });
     }else{
-      alert('上传失败：'+data.status);
+      alert('上传失败：' + data.status);
     }
   }).fail(function(a,b) {
     console.error(a,b);
@@ -234,11 +281,42 @@ canvas.toBlob(function(blob) {
     waiting = false;
   });  
 });</ui-codemirror>
+            <h3>大文件上传</h3>
+            <p>由于tus协议的复杂性，推荐使用其官方的<a href="https://github.com/tus/tus-js-client" target="_blank">Javascript客户端 <i class="fa fa-external-link"></i></a>。以下为简单的示例：</p>
+            <ui-codemirror ui-codemirror-opts="share.jsOptions">input.addEventListener("change", function(e) {
+  // 从input元素获取文件
+  var file = e.target.files[0]
+
+  // 创建 tus 上传实例
+  var upload = new tus.Upload(file, { // file 还可以为 Blob 或 Reader 类型
+    endpoint: "http://localhost:1080/files/", // 上传接口URL
+    retryDelays: [0, 3000, 5000, 10000, 20000],
+    metadata: {
+      name: file.name,
+      contentType: file.type || 'application/octet-stream',
+      path: '' // 保存文件的路径（子目录）
+    },
+    onError: function(error) {
+      console.log("Failed because: " + error)
+    },
+    onProgress: function(bytesUploaded, bytesTotal) {
+      var percentage = (bytesUploaded / bytesTotal * 100).toFixed(2)
+      console.log(bytesUploaded, bytesTotal, percentage + "%")
+    },
+    onSuccess: function() {
+      // 上传成功，返回URL
+      console.log("Download %s from %s", upload.file.name, upload.url)
+    }
+  })
+
+  // 开始上传
+  upload.start()
+})</ui-codemirror>
           </div>
         </div>
         <div class="ibox">
           <div class="ibox-title">
-            <h5>演示</h5>
+            <h5>演示（仅图片上传接口）</h5>
           </div>
           <div class="ibox-content">
             <div class="row">
@@ -247,7 +325,7 @@ canvas.toBlob(function(blob) {
                 <p><img src="" alt="qrcode" id="qrcode"></p>
                 <script>
                   var url = location.protocol + '//' + location.host + '/demo/img-upload.html';
-                  $('#qrcode').attr('src', 'http://util.zino.co/php/qrcode.php?chl=' + encodeURIComponent(url) + '&chs=5&chld=M&cht=qr').parent().after('<p><a href="' + url + '" target="_blank">' + url + ' <i class="fa fa-external-link"></i></a></p>');
+                  $('#qrcode').attr('src', 'https://util.zino.co/php/qrcode.php?chl=' + encodeURIComponent(url) + '&chs=5&chld=M&cht=qr').parent().after('<p><a href="' + url + '" target="_blank">' + url + ' <i class="fa fa-external-link"></i></a></p>');
                 </script>
               </div>
             </div>
